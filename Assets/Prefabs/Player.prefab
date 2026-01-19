@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3935682668254790470}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: RightBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6409414751843191403}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: LeftBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
