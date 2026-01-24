@@ -1223,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5075732483330909335, guid: a1c47be59f0315846ac3ae00b457d4d7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6264843159484987108, guid: a1c47be59f0315846ac3ae00b457d4d7, type: 3}
       propertyPath: m_Name
       value: LeftBarrel

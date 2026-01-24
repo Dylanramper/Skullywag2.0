@@ -11,6 +11,8 @@ public class EnemyShip : MonoBehaviour
     protected Rigidbody2D rb;
     protected Transform player;
     
+    //Get the components and set health to max health. 
+    //Find player with the 'Player' tag.
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +23,7 @@ public class EnemyShip : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         MoveForward();
-        FacePlayer();
+        //FacePlayer();
     }
 
     protected virtual void MoveForward()
