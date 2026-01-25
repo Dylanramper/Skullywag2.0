@@ -24,6 +24,8 @@ public class RowboatEnemy : EnemyShip
 
     protected override void Awake()
     {
+        //Add all the properties of the Awake() method in 'EnemyShips.cs'.
+        //Assign variables to the components (spriteRenderer).
         base.Awake();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
@@ -31,7 +33,6 @@ public class RowboatEnemy : EnemyShip
     protected override void FixedUpdate()
     {
         DetectPlayer();
-
         if (playerDetected)
         {
             ChasePlayer();
@@ -40,12 +41,15 @@ public class RowboatEnemy : EnemyShip
 
         MoveForward();
     }
+
+    //Check to see if the player is within the detection radius.
     void DetectPlayer()
     {
         float distance = Vector2.Distance(transform.position, player.position);
         playerDetected = distance <= detectionRange;
     }
 
+    //Rowboat will turn and move towards the player's position.
     void ChasePlayer()
     {
         Vector2 direction = (player.position - transform.position).normalized;
@@ -55,6 +59,7 @@ public class RowboatEnemy : EnemyShip
         rb.angularVelocity = turn * turnSpeed;
     }
 
+    //The Rowboat will wander around if not detecting a player.
     void Wander()
     {
         if(Time.time >= nextWanderTurnTime)
@@ -65,14 +70,7 @@ public class RowboatEnemy : EnemyShip
         }
     }
 
-    protected override void Die()
-    {
-        if(!fuseStarted)
-        {
-            Explode();
-        }
-    }
-
+    //Function to handle explosion.
     void Explode()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, damageLayers);
@@ -86,8 +84,19 @@ public class RowboatEnemy : EnemyShip
         }
         Destroy(gameObject);
     }
+    
+    //Start fuse and countdown before destroying.
+    protected override void Die()
+    {
+        if(!fuseStarted)
+        {
+            Explode();
+        }
+    }
 
-    IEnumerator FuseAndExplosion()
+    //if the fuse is started, start the timer and the rowboat will flash red.
+    //after a short delay the rowboat will explode!
+    IEnumerator FuseAndExplode()
     {
         fuseStarted = true;
 
@@ -106,6 +115,14 @@ public class RowboatEnemy : EnemyShip
         Explode();
     }
 
+    //Debug
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    //when the rowboat collides with the player, start the fuse timer.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (fuseStarted)
@@ -114,6 +131,7 @@ public class RowboatEnemy : EnemyShip
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(FuseAndExplode());
+            Debug.Log("Explode!");
         }
     }
 }

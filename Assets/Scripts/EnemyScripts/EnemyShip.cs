@@ -30,6 +30,7 @@ public class EnemyShip : MonoBehaviour
         rb.linearVelocity = transform.up * moveSpeed;
     }
 
+    //Rotate to face player
     protected virtual void FacePlayer()
     {
         Vector2 dir = (player.position - transform.position).normalized;
