@@ -23,9 +23,8 @@ public class EnemyShip : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         MoveForward();
-        //FacePlayer();
     }
-
+    
     protected virtual void MoveForward()
     {
         rb.linearVelocity = transform.up * moveSpeed;
