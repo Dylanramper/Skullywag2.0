@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using Unity.VisualScripting;
 
 public class RowboatEnemy : EnemyShip
 {
@@ -8,31 +6,27 @@ public class RowboatEnemy : EnemyShip
     public float detectionRange = 6f;
 
     [Header("Wander")]
-    public float wanderTurnInterval = 2f; //Change to random.range();
+    public float wanderTurnInterval = 2f;
     public float wanderTurnAmount = 45f;
+
+    [Header("Power-up Spawning")]
+    public GameObject shieldPowerUpPrefab; // Drag shield prefab here
+    [Range(0f, 1f)]
+    public float dropChance = 0.3f; // 30% chance to drop
+
     private float nextWanderTurnTime;
     private bool playerDetected;
 
-    [Header("Explosion")]
-    public float fuseTime = 1.5f;
-    public float explosionRadius = 1.5f;
-    public int explosionDamage = 1;
-    public LayerMask damageLayers;
-
-    private bool fuseStarted;
-    private SpriteRenderer spriteRenderer;
-
-    protected override void Awake()
+    void Start()
     {
-        //Add all the properties of the Awake() method in 'EnemyShips.cs'.
-        //Assign variables to the components (spriteRenderer).
-        base.Awake();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        // Initialize next wander time
+        nextWanderTurnTime = Time.time + Random.Range(0f, wanderTurnInterval);
     }
 
     protected override void FixedUpdate()
     {
         DetectPlayer();
+
         if (playerDetected)
         {
             ChasePlayer();
@@ -42,16 +36,18 @@ public class RowboatEnemy : EnemyShip
         MoveForward();
     }
 
-    //Check to see if the player is within the detection radius.
     void DetectPlayer()
     {
+        if (player == null) return;
+
         float distance = Vector2.Distance(transform.position, player.position);
         playerDetected = distance <= detectionRange;
     }
 
-    //Rowboat will turn and move towards the player's position.
     void ChasePlayer()
     {
+        if (player == null) return;
+
         Vector2 direction = (player.position - transform.position).normalized;
         float angle = Vector2.SignedAngle(transform.up, direction);
 
@@ -59,10 +55,9 @@ public class RowboatEnemy : EnemyShip
         rb.angularVelocity = turn * turnSpeed;
     }
 
-    //The Rowboat will wander around if not detecting a player.
     void Wander()
     {
-        if(Time.time >= nextWanderTurnTime)
+        if (Time.time >= nextWanderTurnTime)
         {
             float randomTurn = Random.Range(-wanderTurnAmount, wanderTurnAmount);
             rb.angularVelocity = randomTurn;
@@ -70,68 +65,24 @@ public class RowboatEnemy : EnemyShip
         }
     }
 
-    //Function to handle explosion.
-    void Explode()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, damageLayers);
-
-        foreach (Collider2D hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            {
-                Debug.Log("Playerhit");
-            }
-        }
-        Destroy(gameObject);
-    }
-    
-    //Start fuse and countdown before destroying.
+    // This is called when enemy dies (from parent class or however your system works)
     protected override void Die()
     {
-        if(!fuseStarted)
-        {
-            Explode();
-        }
+        // Try to spawn shield power-up
+        TrySpawnShield();
+
+        // Call base method if it exists
+        base.Die();
     }
 
-    //if the fuse is started, start the timer and the rowboat will flash red.
-    //after a short delay the rowboat will explode!
-    IEnumerator FuseAndExplode()
+    void TrySpawnShield()
     {
-        fuseStarted = true;
-
-        float timer = 0f;
-        Color originalColor = spriteRenderer.color;
-
-        while (timer < fuseTime)
+        // Check if we have a shield prefab and random chance succeeds
+        if (shieldPowerUpPrefab != null && Random.value <= dropChance)
         {
-            spriteRenderer.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            spriteRenderer.color = originalColor;
-            yield return new WaitForSeconds(0.1f);
-
-            timer += 0.2f;
-        }
-        Explode();
-    }
-
-    //Debug
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
-
-    //when the rowboat collides with the player, start the fuse timer.
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (fuseStarted)
-            return;
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            StartCoroutine(FuseAndExplode());
-            Debug.Log("Explode!");
+            // Spawn shield at enemy position
+            Instantiate(shieldPowerUpPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Enemy dropped a shield!");
         }
     }
 }
