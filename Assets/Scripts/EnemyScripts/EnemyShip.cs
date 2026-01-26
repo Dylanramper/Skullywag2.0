@@ -23,14 +23,14 @@ public class EnemyShip : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         MoveForward();
-        //FacePlayer();
     }
-
+    
     protected virtual void MoveForward()
     {
         rb.linearVelocity = transform.up * moveSpeed;
     }
 
+    //Rotate to face player
     protected virtual void FacePlayer()
     {
         Vector2 dir = (player.position - transform.position).normalized;
