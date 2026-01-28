@@ -9,11 +9,6 @@ public class RowboatEnemy : EnemyShip
     public float wanderTurnInterval = 2f;
     public float wanderTurnAmount = 45f;
 
-    [Header("Power-up Spawning")]
-    public GameObject shieldPowerUpPrefab; // Drag shield prefab here
-    [Range(0f, 1f)]
-    public float dropChance = 0.3f; // 30% chance to drop
-
     private float nextWanderTurnTime;
     private bool playerDetected;
 
@@ -68,21 +63,8 @@ public class RowboatEnemy : EnemyShip
     // This is called when enemy dies (from parent class or however your system works)
     protected override void Die()
     {
-        // Try to spawn shield power-up
-        TrySpawnShield();
-
+    
         // Call base method if it exists
         base.Die();
-    }
-
-    void TrySpawnShield()
-    {
-        // Check if we have a shield prefab and random chance succeeds
-        if (shieldPowerUpPrefab != null && Random.value <= dropChance)
-        {
-            // Spawn shield at enemy position
-            Instantiate(shieldPowerUpPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Enemy dropped a shield!");
-        }
     }
 }

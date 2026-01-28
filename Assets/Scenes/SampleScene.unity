@@ -1155,6 +1155,14 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4362456908185148667, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+      propertyPath: speedPowerUpPrefab
+      value: 
+      objectReference: {fileID: 998232002606329433, guid: 403182e258d58534bb907fd37801f6c0, type: 3}
+    - target: {fileID: 4362456908185148667, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+      propertyPath: shieldPowerUpPrefab
+      value: 
+      objectReference: {fileID: 998232002606329433, guid: 6d58d1fd3bb93bd4aa24aeb37d099d5f, type: 3}
     - target: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
       propertyPath: m_Name
       value: Rowboat
