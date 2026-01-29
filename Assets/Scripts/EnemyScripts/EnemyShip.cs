@@ -86,4 +86,17 @@ public class EnemyShip : MonoBehaviour
             Instantiate(powerUpToDrop, transform.position, Quaternion.identity);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Cannonball"))
+        {
+            currentHealth -= 1;
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
 }
