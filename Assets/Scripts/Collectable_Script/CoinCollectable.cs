@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class CoinCollectable : Collectable
+{
+    protected override void Start()
+    {
+        // Override base values for coin
+        scoreValue = 5;
+        rotationSpeed = 200f;
+        floatSpeed = 3f;
+        
+        // Optional: Randomize rotation direction
+        if (Random.value > 0.5f)
+        {
+            rotationSpeed = -rotationSpeed;
+        }
+        
+       base.Start();
+    }
+}
