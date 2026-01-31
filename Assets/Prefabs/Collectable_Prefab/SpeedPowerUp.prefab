@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4024572667149015082}
   - component: {fileID: 7091681062855895522}
   - component: {fileID: 687220304914062074}
+  - component: {fileID: 5632964745261869938}
   m_Layer: 0
   m_Name: SpeedPowerUp
   m_TagString: Untagged
@@ -183,3 +184,15 @@ MonoBehaviour:
   floatHeight: 0.3
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
+--- !u!114 &5632964745261869938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998232002606329433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6556dd226e4841ad06dd61591bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
