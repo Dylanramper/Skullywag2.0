@@ -68,24 +68,29 @@ public class BrigEnemy : EnemyShip
     private void BroadsidePlayer()
     {
         Vector2 toPlayer = (player.position - transform.position).normalized;
-        float angle = Vector2.SignedAngle(transform.up, toPlayer);
+        float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
 
-        //Decide which side to broadside
-        float targetAngle = Mathf.Abs(angle - broadsideAngle) < Mathf.Abs(angle + broadsideAngle) ? broadsideAngle : -broadsideAngle;
+        // Desired firing angle (+45 or -45)
+        float targetAngle = Mathf.Abs(angleToPlayer - broadsideAngle) < Mathf.Abs(angleToPlayer + broadsideAngle) ? broadsideAngle : -broadsideAngle;
 
-        float angleDifference = Mathf.DeltaAngle(angle, targetAngle);
-        float turnDirection = Mathf.Sign(angleDifference);
+        float angleDifference = Mathf.DeltaAngle(angleToPlayer, targetAngle);
 
-        //Rotate towards broadside
-        rb.MoveRotation(rb.rotation + turnDirection * turnSpeed * Time.fixedDeltaTime);
+        // Bias toward player so we don't drift away
+        float distance = Vector2.Distance(transform.position, player.position);
+        float distanceBias = Mathf.Clamp(distance - engageBroadsideRange, 0f, 1f);
 
-        //Drift forward
+        // Blend rotation: mostly broadside, slightly toward player
+        float turnDirection = Mathf.Sign(angleDifference) * (1f - distanceBias) + Mathf.Sign(angleToPlayer) * distanceBias;
+
+        rb.MoveRotation(rb.rotation - turnDirection * turnSpeed * Time.fixedDeltaTime);
+
+        // Drift forward
         rb.linearVelocity = transform.up * broadsideSpeed;
 
-        //Fire if aligned and cooldown allows
-        if(Time.time >= nextFireTime && (Mathf.Abs(angle) - 45f) < angleTolerance)
+        // Fire when aligned
+        if (Time.time >= nextFireTime && Mathf.Abs(angleDifference) < angleTolerance)
         {
-            FireBroadside(angle);
+            FireBroadside(targetAngle);
             nextFireTime = Time.time + fireCooldown;
         }
     }

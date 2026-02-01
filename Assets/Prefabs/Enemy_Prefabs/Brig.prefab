@@ -221,6 +221,12 @@ MonoBehaviour:
   moveSpeed: 2
   turnSpeed: 60
   maxHealth: 3
+  shieldPowerUpPrefab: {fileID: 0}
+  speedPowerUpPrefab: {fileID: 0}
+  dropChance: 0.4
+  wanderTurnInterval: 2
+  wanderTurnAmount: 60
+  detectionRange: 6
 --- !u!114 &3623694423586805182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +242,24 @@ MonoBehaviour:
   moveSpeed: 2
   turnSpeed: 60
   maxHealth: 3
-  cannonball: {fileID: 3606931892842474823, guid: 3d81063b1deef8347b14dd28a76bdfdf, type: 3}
-  firepoint: {fileID: 7946939897938403683}
-  coolDown: 2
+  shieldPowerUpPrefab: {fileID: 0}
+  speedPowerUpPrefab: {fileID: 0}
+  dropChance: 0.4
+  wanderTurnInterval: 2
+  wanderTurnAmount: 60
+  detectionRange: 6
+  broadsideSpeed: 2
+  attackRange: 4
+  broadsideAngle: 45
+  angleTolerance: 10
+  engageBroadsideRange: 5
+  disengageBroadsideRange: 7
+  fireCooldown: 2
+  leftCannon:
+  - {fileID: 7946939897938403683}
+  rightCannon:
+  - {fileID: 1270964971650404550}
+  cannonballPrefab: {fileID: 3606931892842474823, guid: d72b3a5a16aa35a48b6e892aaabd3dbb, type: 3}
 --- !u!1 &7741842694849031175
 GameObject:
   m_ObjectHideFlags: 0
