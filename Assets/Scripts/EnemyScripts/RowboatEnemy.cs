@@ -3,14 +3,14 @@ using UnityEngine;
 public class RowboatEnemy : EnemyShip
 {
     [Header("Detection")]
-    public float detectionRange = 6f;
+    public new float detectionRange = 6f;
 
     [Header("Wander")]
-    public float wanderTurnInterval = 2f;
-    public float wanderTurnAmount = 45f;
+    public new float wanderTurnInterval = 2f;
+    public new float wanderTurnAmount = 45f;
 
-    private float nextWanderTurnTime;
-    private bool playerDetected;
+    private new float nextWanderTurnTime;
+    private new bool playerDetected;
 
     void Start()
     {
@@ -27,11 +27,9 @@ public class RowboatEnemy : EnemyShip
             ChasePlayer();
         }
         else { Wander(); }
-
-        MoveForward();
     }
 
-    void DetectPlayer()
+    protected override void DetectPlayer()
     {
         if (player == null) return;
 
@@ -50,7 +48,7 @@ public class RowboatEnemy : EnemyShip
         rb.angularVelocity = turn * turnSpeed;
     }
 
-    void Wander()
+    protected override void Wander()
     {
         if (Time.time >= nextWanderTurnTime)
         {

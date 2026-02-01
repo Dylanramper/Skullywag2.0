@@ -17,6 +17,14 @@ public class EnemyShip : MonoBehaviour
     protected Rigidbody2D rb;
     protected Transform player;
 
+    [Header("Wander")]
+    public float wanderTurnInterval = 2f;
+    public float wanderTurnAmount = 60f;
+
+    protected float nextWanderTurnTime;
+    protected bool playerDetected;
+    public float detectionRange = 6f;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,12 +34,49 @@ public class EnemyShip : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        MoveForward();
+        DetectPlayer(); // updates playerDetected every frame
+
+        if (playerDetected)
+        {
+            AggroBehavior(); // enemy-specific chasing/firing
+        }
+        else
+        {
+            Wander(); // idle movement
+        }
     }
 
-    protected virtual void MoveForward()
+    protected virtual void Wander()
     {
+        // Only turn at intervals
+        if (Time.time >= nextWanderTurnTime)
+        {
+            // Pick a random turn direction
+            float randomTurn = Random.Range(-wanderTurnAmount, wanderTurnAmount);
+
+            // Apply turn to Rigidbody2D
+            rb.angularVelocity = randomTurn;
+
+            // Next time to pick a new turn
+            nextWanderTurnTime = Time.time + wanderTurnInterval;
+        }
+
+        // Keep moving forward slowly
         rb.linearVelocity = transform.up * moveSpeed;
+    }
+
+    protected virtual void DetectPlayer()
+    {
+        if (!player) return; // safety
+
+        float distance = Vector2.Distance(transform.position, player.position);
+        playerDetected = distance <= detectionRange;
+    }
+
+    // Default empty implementation
+    protected virtual void AggroBehavior()
+    {
+        // Base class does nothing by default
     }
 
     protected virtual void FacePlayer()
