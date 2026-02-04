@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7984790508685028330}
   - component: {fileID: 6862136046046413429}
   - component: {fileID: 7113789758626709022}
-  - component: {fileID: 6295777682634156870}
-  - component: {fileID: 1025840070161197708}
   m_Layer: 0
   m_Name: Galleon
   m_TagString: Untagged
@@ -121,36 +119,6 @@ PolygonCollider2D:
       - {x: 0.1796768, y: 0.0037043914}
       - {x: 0.13064654, y: 0.20862862}
   m_UseDelaunayMesh: 0
---- !u!114 &6295777682634156870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462078149943355466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f356401162452a44eb895e5d3b307113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 60
-  maxHealth: 3
---- !u!114 &1025840070161197708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462078149943355466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dfc6dcd7df3c6440b45decb6c9dfb8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 60
-  maxHealth: 3
 --- !u!1 &9035034751874766669
 GameObject:
   m_ObjectHideFlags: 0

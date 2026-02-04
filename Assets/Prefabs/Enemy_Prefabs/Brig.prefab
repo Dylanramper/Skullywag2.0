@@ -98,8 +98,6 @@ GameObject:
   - component: {fileID: 7159994373104078296}
   - component: {fileID: 1734354596691982457}
   - component: {fileID: 1942978057439593076}
-  - component: {fileID: 3298521711172052532}
-  - component: {fileID: 3623694423586805182}
   m_Layer: 0
   m_Name: Brig
   m_TagString: Untagged
@@ -206,60 +204,6 @@ PolygonCollider2D:
       - {x: 0.20289485, y: -0.1389971}
       - {x: 0.14830275, y: 0.17376241}
   m_UseDelaunayMesh: 0
---- !u!114 &3298521711172052532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193873732804398788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f356401162452a44eb895e5d3b307113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 60
-  maxHealth: 3
-  shieldPowerUpPrefab: {fileID: 0}
-  speedPowerUpPrefab: {fileID: 0}
-  dropChance: 0.4
-  wanderTurnInterval: 2
-  wanderTurnAmount: 60
-  detectionRange: 6
---- !u!114 &3623694423586805182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193873732804398788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b403cddfd0b48f24ea88d7421f1b663c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 60
-  maxHealth: 3
-  shieldPowerUpPrefab: {fileID: 0}
-  speedPowerUpPrefab: {fileID: 0}
-  dropChance: 0.4
-  wanderTurnInterval: 2
-  wanderTurnAmount: 60
-  detectionRange: 6
-  broadsideSpeed: 2
-  attackRange: 4
-  broadsideAngle: 45
-  angleTolerance: 10
-  engageBroadsideRange: 5
-  disengageBroadsideRange: 7
-  fireCooldown: 2
-  leftCannon:
-  - {fileID: 7946939897938403683}
-  rightCannon:
-  - {fileID: 1270964971650404550}
-  cannonballPrefab: {fileID: 3606931892842474823, guid: d72b3a5a16aa35a48b6e892aaabd3dbb, type: 3}
 --- !u!1 &7741842694849031175
 GameObject:
   m_ObjectHideFlags: 0

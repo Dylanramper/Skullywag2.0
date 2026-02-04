@@ -98,8 +98,7 @@ GameObject:
   - component: {fileID: 971475646094168237}
   - component: {fileID: 3970709524698905010}
   - component: {fileID: 3612861312682110825}
-  - component: {fileID: 4362456908185148667}
-  - component: {fileID: 8207849351217416780}
+  - component: {fileID: 5022098896843900403}
   m_Layer: 0
   m_Name: Rowboat
   m_TagString: Untagged
@@ -204,22 +203,7 @@ PolygonCollider2D:
       - {x: 0.22976387, y: -0.2714225}
       - {x: 0.19628286, y: 0.27548045}
   m_UseDelaunayMesh: 0
---- !u!114 &4362456908185148667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7378332656579810395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f356401162452a44eb895e5d3b307113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 60
-  maxHealth: 3
---- !u!114 &8207849351217416780
+--- !u!114 &5022098896843900403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,11 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce8cb2a2d34923499d2483ef08a78e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.8
-  turnSpeed: 30
+  moveSpeed: 2
+  turnSpeed: 120
+  detectionRange: 8
   maxHealth: 1
-  detectionRange: 10
-  wanderTurnInterval: 1.5
-  wanderTurnAmount: 60
-  shieldPowerUpPrefab: {fileID: 0}
-  dropChance: 0.3

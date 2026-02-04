@@ -2,67 +2,19 @@ using UnityEngine;
 
 public class RowboatEnemy : EnemyShip
 {
-    [Header("Detection")]
-    public new float detectionRange = 6f;
-
-    [Header("Wander")]
-    public new float wanderTurnInterval = 2f;
-    public new float wanderTurnAmount = 45f;
-
-    private new float nextWanderTurnTime;
-    private new bool playerDetected;
-
-    void Start()
+    protected override void AggroBehavior()
     {
-        // Initialize next wander time
-        nextWanderTurnTime = Time.time + Random.Range(0f, wanderTurnInterval);
+        Vector2 toPlayer = ((Vector2)player.position - rb.position).normalized;
+
+        float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
+
+        rb.MoveRotation(rb.rotation + angleToPlayer * turnSpeed * Time.fixedDeltaTime / 90f);
+        rb.linearVelocity = transform.up * moveSpeed;
     }
 
-    protected override void FixedUpdate()
-    {
-        DetectPlayer();
-
-        if (playerDetected)
-        {
-            ChasePlayer();
-        }
-        else { Wander(); }
-    }
-
-    protected override void DetectPlayer()
-    {
-        if (player == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-        playerDetected = distance <= detectionRange;
-    }
-
-    void ChasePlayer()
-    {
-        if (player == null) return;
-
-        Vector2 direction = (player.position - transform.position).normalized;
-        float angle = Vector2.SignedAngle(transform.up, direction);
-
-        float turn = Mathf.Clamp(angle, -1f, 1f);
-        rb.angularVelocity = turn * turnSpeed;
-    }
-
-    protected override void Wander()
-    {
-        if (Time.time >= nextWanderTurnTime)
-        {
-            float randomTurn = Random.Range(-wanderTurnAmount, wanderTurnAmount);
-            rb.angularVelocity = randomTurn;
-            nextWanderTurnTime = Time.time + wanderTurnInterval;
-        }
-    }
-
-    // This is called when enemy dies (from parent class or however your system works)
     protected override void Die()
     {
-    
-        // Call base method if it exists
-        base.Die();
+        //TODO: Explosion + Damage
+        Destroy(gameObject);
     }
 }
