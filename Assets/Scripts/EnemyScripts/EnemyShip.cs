@@ -2,6 +2,13 @@ using UnityEngine;
 
 public abstract class EnemyShip : MonoBehaviour
 {
+    [Header("Wander")]
+    [SerializeField] protected float wanderTurnStrength = 20f;
+    [SerializeField] protected float wanderChangeInterval = 2f;
+
+    protected float wanderTurnDirection;
+    protected float nextWanderChangeTime;
+
     [Header("Base Stats")]
     public float moveSpeed = 2f;
     public float turnSpeed = 120f;
@@ -38,7 +45,19 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void Wander()
     {
+        //Always move forward
         rb.linearVelocity = transform.up * moveSpeed * 0.5f;
+
+        //Occasionally turn
+        if(Time.time > nextWanderChangeTime)
+        {
+            int choice = Random.Range(0, 3); //0 = left : 2 = right
+            wanderTurnDirection = choice == 0 ? -1 : choice == 2 ? 1f : 0f;
+            nextWanderChangeTime = Time.time + wanderChangeInterval;
+        }
+
+        //Apply turn
+        rb.MoveRotation(rb.rotation + wanderTurnDirection * wanderTurnStrength * Time.fixedDeltaTime);
     }
 
     protected abstract void AggroBehavior();

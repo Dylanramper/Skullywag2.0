@@ -1,12 +1,23 @@
 using UnityEngine;
 
-public class CannonBallProjectile : MonoBehaviour
+public class EnemyCannonball : MonoBehaviour
 {
     public int damage = 1;
     public float lifetime = 3f;
+    public float speed = 7f;
+
+    private Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
+        // Fire forward in the cannon's facing direction
+        rb.linearVelocity = transform.up * speed;
+
         Destroy(gameObject, lifetime);
     }
 
@@ -14,18 +25,14 @@ public class CannonBallProjectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // Try to damage enemy
             EnemyShip enemy = other.GetComponent<EnemyShip>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
-
-            // Destroy the cannon ball
             Destroy(gameObject);
         }
 
-        // Optional: Also destroy when hitting walls/obstacles
         if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
         {
             Destroy(gameObject);

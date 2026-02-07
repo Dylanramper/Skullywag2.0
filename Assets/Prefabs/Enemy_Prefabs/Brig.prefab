@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7159994373104078296}
   - component: {fileID: 1734354596691982457}
   - component: {fileID: 1942978057439593076}
+  - component: {fileID: 6595188152912828162}
   m_Layer: 0
   m_Name: Brig
   m_TagString: Untagged
@@ -204,6 +205,33 @@ PolygonCollider2D:
       - {x: 0.20289485, y: -0.1389971}
       - {x: 0.14830275, y: 0.17376241}
   m_UseDelaunayMesh: 0
+--- !u!114 &6595188152912828162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193873732804398788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b403cddfd0b48f24ea88d7421f1b663c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderTurnStrength: 20
+  wanderChangeInterval: 3
+  moveSpeed: 2
+  turnSpeed: 120
+  detectionRange: 8
+  maxHealth: 3
+  idealRange: 6
+  tooCloseRange: 3.5
+  broadsideSpeed: 1.5
+  leftCannon: {fileID: 7946939897938403683}
+  rightCannon: {fileID: 1270964971650404550}
+  cannonballPrefab: {fileID: 3606931892842474823, guid: d72b3a5a16aa35a48b6e892aaabd3dbb, type: 3}
+  broadsideAngle: 45
+  angleTolerance: 5
+  fireCooldown: 2
 --- !u!1 &7741842694849031175
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7946939897938403683}
   m_Layer: 0
-  m_Name: Firepoint1
+  m_Name: LeftCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,13 +256,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741842694849031175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -0.184, y: 0.264, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159994373104078296}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!1 &7784368815337404002
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1270964971650404550}
   m_Layer: 0
-  m_Name: Firepoint2
+  m_Name: RightCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,10 +287,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7784368815337404002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.185, y: 0.254, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159994373104078296}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}

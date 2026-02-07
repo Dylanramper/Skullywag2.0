@@ -80,7 +80,7 @@ public class PlayerCannons : MonoBehaviour
         rb.AddForce(direction * currentForce, ForceMode2D.Impulse);
 
         // OPTIONAL: If you add a CannonBall script with damage variable
-        CannonBallProjectile cannonBallScript = ball.GetComponent<CannonBallProjectile>();
+        EnemyCannonball cannonBallScript = ball.GetComponent<EnemyCannonball>();
         if (cannonBallScript != null)
         {
             cannonBallScript.damage = currentDamage;
