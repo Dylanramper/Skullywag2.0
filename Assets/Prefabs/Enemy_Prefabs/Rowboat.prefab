@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7859522525706435484}
   - component: {fileID: 5398301954082537084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RowboatSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 3970709524698905010}
   - component: {fileID: 3612861312682110825}
   - component: {fileID: 5022098896843900403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rowboat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,3 +219,10 @@ MonoBehaviour:
   turnSpeed: 120
   detectionRange: 8
   maxHealth: 1
+  explodeDelay: 1.2
+  flashInterval: 0.15
+  explosionRadius: 2
+  explosionDamage: 1
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 8

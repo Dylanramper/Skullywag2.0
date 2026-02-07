@@ -1375,6 +1375,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5022098896843900403, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+      propertyPath: explosionRadius
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
       propertyPath: m_Name
       value: Rowboat
