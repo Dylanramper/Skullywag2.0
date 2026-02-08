@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e1611d17fdafd945816f5b156499f3e
+guid: bd07eb531ae4ed6468717c27785ecd85
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6127710698108072671
-    second: Galleon_NoBack_0
+      213: -5372039401208127107
+    second: Galleon_NoBack 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Galleon_NoBack_0
+      name: Galleon_NoBack 1_0
       rect:
         serializedVersion: 2
-        x: 6
+        x: 10
         y: 0
-        width: 483
-        height: 497
+        width: 476
+        height: 496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 12d48e8069ff5faa0800000000000000
-      internalID: -6127710698108072671
+      spriteID: d71669b70aea275b0800000000000000
+      internalID: -5372039401208127107
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Galleon_NoBack_0: -6127710698108072671
+      Galleon_NoBack 1_0: -5372039401208127107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

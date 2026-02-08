@@ -142,10 +142,10 @@ TextureImporter:
       name: Cannon_NoBack_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 2
-        width: 213
-        height: 217
+        x: 58
+        y: 68
+        width: 88
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 86ad6a00086c5a44792e0e208ab0dfcf
     internalID: 0
     vertices: []
     indices: 

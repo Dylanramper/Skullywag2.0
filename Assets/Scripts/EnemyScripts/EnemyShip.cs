@@ -20,6 +20,9 @@ public abstract class EnemyShip : MonoBehaviour
     protected Transform player;
     protected bool playerDetected;
 
+    [Header("Aggro Settings")]
+    public float loseAggroRange = 14f;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,7 +43,18 @@ public abstract class EnemyShip : MonoBehaviour
     protected void CheckPlayerDetection()
     {
         float distance = Vector2.Distance(rb.position, (Vector2)player.position);
-        playerDetected = distance <= detectionRange;
+        if (playerDetected)
+        {
+            //Disengage if too far
+            if (distance > loseAggroRange)
+                playerDetected = false;
+        }
+        else
+        {
+            //If not Aggro'd and player is in detection range. Detected set to true.
+            if (distance < detectionRange)
+                playerDetected = true;
+        }
     }
 
     protected virtual void Wander()
