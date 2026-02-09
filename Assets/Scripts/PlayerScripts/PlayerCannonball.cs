@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyCannonball : MonoBehaviour
+public class PlayerCannonball : MonoBehaviour
 {
     public int damage = 1;
     public float lifetime = 3f;

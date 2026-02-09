@@ -33,11 +33,16 @@ public abstract class EnemyShip : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         CheckPlayerDetection();
+
         if (playerDetected)
         {
+            rb.linearVelocity = Vector2.zero;
             AggroBehavior();
         }
-        else { Wander(); }
+        else
+        {
+            Wander();
+        }
     }
 
     protected void CheckPlayerDetection()

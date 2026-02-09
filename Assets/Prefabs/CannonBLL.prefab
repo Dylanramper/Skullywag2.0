@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4074237468625798695}
   - component: {fileID: -1492736960600116282}
   - component: {fileID: -6702209835042902565}
-  - component: {fileID: 4090561326875341692}
+  - component: {fileID: 5021532333966295223}
   m_Layer: 0
   m_Name: CannonBLL
   m_TagString: Cannonball
@@ -153,7 +153,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &4090561326875341692
+--- !u!114 &5021532333966295223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,3 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   lifetime: 3
+  speed: 7

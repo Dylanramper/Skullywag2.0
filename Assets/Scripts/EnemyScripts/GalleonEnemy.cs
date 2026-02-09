@@ -31,8 +31,6 @@ public class GalleonEnemy : EnemyShip
         float distance = toPlayer.magnitude;
         toPlayer.Normalize();
 
-        rb.linearVelocity = transform.up * moveSpeed;
-
         switch (currentState)
         {
             case GalleonState.Wandering:
@@ -51,13 +49,21 @@ public class GalleonEnemy : EnemyShip
     private bool CanCharge(float angleToPlayer)
     {
         // Only allow charge if player is mostly in front
-        return Mathf.Abs(angleToPlayer) < 35f;
+        return Mathf.Abs(angleToPlayer) < 30f;
     }
 
     //Desicion Making
     private void DecideNextAction(Vector2 toPlayer, float distance)
     {
         float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
+
+        //Force turn if player is behind Galleon
+        if(Vector2.Dot(transform.up, toPlayer)  < -0.1f)
+        {
+            rb.MoveRotation(rb.rotation + Mathf.Sign(angleToPlayer) * turnSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = transform.up * moveSpeed;
+            return;
+        }
 
         //If far, charge
         if (distance > detectionRange && Time.time >= nextChargeTime && CanCharge(angleToPlayer))
@@ -69,13 +75,16 @@ public class GalleonEnemy : EnemyShip
         //If player passes in front, Choose action
         if (Mathf.Abs(angleToPlayer) < 30f)
         {
-            if (Random.value > 0.5f && Time.time >= nextChargeTime)
+            if (Random.value > 0.7f && Time.time >= nextChargeTime)
             {
                 StartCharge();
             }
-            else currentState = GalleonState.Broadside;
+            else
+            {
+                currentState = GalleonState.Broadside;
 
-            return;
+                return;
+            }
         }
 
         //If the player is closer to the sides, align cannons to the player
@@ -86,7 +95,9 @@ public class GalleonEnemy : EnemyShip
         }
 
         //Default slow turn toward the player
-        rb.MoveRotation(rb.rotation - Mathf.Sign(angleToPlayer) * turnSpeed * 0.4f * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation + Mathf.Sign(angleToPlayer) * turnSpeed * Time.fixedDeltaTime);
+        rb.linearVelocity = transform.up * moveSpeed;
+
     }
 
     //Charge Ability
@@ -95,6 +106,7 @@ public class GalleonEnemy : EnemyShip
         currentState = GalleonState.Charging;
         chargeTimer = chargeDuration;
         nextChargeTime = Time.time + chargeCooldown;
+        Debug.Log("Charging!");
     }
 
     private void ChargeBehavior()
@@ -105,31 +117,34 @@ public class GalleonEnemy : EnemyShip
         chargeTimer -= Time.fixedDeltaTime;
         if(chargeTimer <= 0f)
         {
-            currentState = GalleonState.Wandering;
+            currentState = GalleonState.Broadside;
         }
     }
 
     //Broadside (Line up side cannons toward player)
     private void BroadsideBehavior(Vector2 toPlayer)
     {
+        Debug.Log("Lining up shot!");
         float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
 
-        float targetAngle = Mathf.Abs(angleToPlayer - broadsideAngle) < Mathf.Abs(angleToPlayer + broadsideAngle) ? broadsideAngle : -broadsideAngle;
+        float sideAngle = angleToPlayer > 0f ? broadsideAngle : -broadsideAngle;
 
-        float angleDiff = Mathf.DeltaAngle(angleToPlayer, targetAngle);
+        float angleDiff = Mathf.DeltaAngle(angleToPlayer, sideAngle);
 
         //Gentle correction
-        rb.MoveRotation(rb.rotation - Mathf.Sign(angleDiff) * turnSpeed * 0.35f * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation + Mathf.Sign(angleDiff) * turnSpeed * 0.35f * Time.fixedDeltaTime);
+
+        rb.linearVelocity = transform.up * moveSpeed;
 
         //Fire when cannons align
         if (Time.time >= nextFireTime && Mathf.Abs(angleDiff) <= angleTolerance)
         {
-            FireBroadside(targetAngle);
+            FireBroadside(sideAngle);
             nextFireTime = Time.time + fireCooldown;
         }
 
         //Drift out of broadside if player leaves
-        if(Mathf.Abs(angleToPlayer) < 40f)
+        if(Mathf.Abs(angleToPlayer) < 40f || Mathf.Abs(angleToPlayer) > 140f)
         {
             currentState = GalleonState.Wandering;
         }
