@@ -1,7 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyShip : MonoBehaviour
 {
+    [Header("Hit Feedback")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private Color originalColor;
+
     [Header("Wander")]
     [SerializeField] protected float wanderTurnStrength = 20f;
     [SerializeField] protected float wanderChangeInterval = 2f;
@@ -28,6 +34,8 @@ public abstract class EnemyShip : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentHealth = maxHealth;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     protected virtual void FixedUpdate()
@@ -84,6 +92,8 @@ public abstract class EnemyShip : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        StartCoroutine(Flash());
+
         if (currentHealth <= 0)
         {
             Die();
@@ -93,5 +103,12 @@ public abstract class EnemyShip : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    private IEnumerator Flash()
+    {
+        spriteRenderer.color = Color.gray;
+        yield return new WaitForSeconds(0.5f);
+        spriteRenderer.color = originalColor;
     }
 }

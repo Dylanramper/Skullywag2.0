@@ -215,10 +215,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce8cb2a2d34923499d2483ef08a78e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5398301954082537084}
+  flashDuration: 0.08
+  flashcolor: {r: 1, g: 1, b: 1, a: 1}
+  wanderTurnStrength: 20
+  wanderChangeInterval: 2
   moveSpeed: 2
   turnSpeed: 120
   detectionRange: 8
   maxHealth: 1
+  loseAggroRange: 14
   explodeDelay: 1.2
   flashInterval: 0.15
   explosionRadius: 2

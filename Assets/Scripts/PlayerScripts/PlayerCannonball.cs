@@ -21,20 +21,15 @@ public class PlayerCannonball : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.gameObject.tag == "Enemy")
         {
-            EnemyShip enemy = other.GetComponent<EnemyShip>();
+            EnemyShip enemy = collision.gameObject.GetComponent<EnemyShip>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
-            Destroy(gameObject);
-        }
-
-        if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
-        {
             Destroy(gameObject);
         }
     }

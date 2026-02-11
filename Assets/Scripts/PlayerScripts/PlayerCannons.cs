@@ -57,7 +57,7 @@ public class PlayerCannons : MonoBehaviour
     {
         if (Time.time > lastFireTime + currentCoolDown)
         {
-            Fire(leftCannonPoint, -transform.right);
+            Fire(leftCannonPoint);
         }
     }
 
@@ -65,19 +65,19 @@ public class PlayerCannons : MonoBehaviour
     {
         if (Time.time > lastFireTime + currentCoolDown)
         {
-            Fire(rightCannonPoint, transform.right);
+            Fire(rightCannonPoint);
         }
     }
 
-    void Fire(Transform firePoint, Vector2 direction)
+    void Fire(Transform firePoint)
     {
         lastFireTime = Time.time;
 
-        GameObject ball = Instantiate(CannonBall, firePoint.position, Quaternion.identity);
+        GameObject ball = Instantiate(CannonBall, firePoint.position, firePoint.rotation);
 
         // Apply force to cannon ball
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
-        rb.AddForce(direction * currentForce, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * currentForce, ForceMode2D.Impulse);
 
         // OPTIONAL: If you add a CannonBall script with damage variable
         PlayerCannonball cannonBallScript = ball.GetComponent<PlayerCannonball>();
@@ -85,8 +85,6 @@ public class PlayerCannons : MonoBehaviour
         {
             cannonBallScript.damage = currentDamage;
         }
-
-        Debug.Log($"Fired! Damage: {currentDamage}, Cooldown: {currentCoolDown}s");
     }
 
     // ========== WEAPON BOOST METHODS ==========

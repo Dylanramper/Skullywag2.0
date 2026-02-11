@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8071083629081392940}
   - component: {fileID: 433624813385230094}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftCannonDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2782169356133710108}
   - component: {fileID: 5167932855937371079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightCannonDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,9 +188,9 @@ GameObject:
   - component: {fileID: 6862136046046413429}
   - component: {fileID: 7113789758626709022}
   - component: {fileID: 6198046034848961441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Galleon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,14 +310,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c083075d7408f84988b56fe811b267f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7766882270299526157}
+  flashDuration: 1
   wanderTurnStrength: 20
   wanderChangeInterval: 2
-  moveSpeed: 2
-  turnSpeed: 120
-  detectionRange: 8
-  maxHealth: 1
+  moveSpeed: 1.5
+  turnSpeed: 90
+  detectionRange: 6.5
+  maxHealth: 5
+  loseAggroRange: 9
   chargeCooldown: 4
-  broadsideRange: 5.5
+  broadsideRange: 4
   broadsideAngle: 90
   angleTolerance: 10
   fireCooldown: 3
@@ -338,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6643653380916940956}
   - component: {fileID: 4350246949412404579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightCannonUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2517376807933160625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CannonBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427737281287266651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CannonBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7158019738506507381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftCannons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5993754870362766383}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CannonBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7048816418818514568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightCannons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613213442048247510}
   - component: {fileID: 7023825934364544546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftCannonUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2682877542499474637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CannonBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6681162423877031234}
   - component: {fileID: 7766882270299526157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GalleonSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
