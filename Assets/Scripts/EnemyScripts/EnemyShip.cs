@@ -93,7 +93,7 @@ public abstract class EnemyShip : MonoBehaviour
     {
         currentHealth -= amount;
         StartCoroutine(Flash());
-
+        GameManager.Instance.ShakeCamera(0.1f, 0.08f);
         if (currentHealth <= 0)
         {
             Die();
