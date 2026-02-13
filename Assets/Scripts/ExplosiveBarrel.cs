@@ -1,0 +1,58 @@
+using UnityEngine;
+using System.Collections;
+
+public class ExplosiveBarrel : MonoBehaviour
+{
+    public float fuseTime = 3f;
+    public float explosionRadius = 2.5f;
+    public int damage = 3;
+
+    public LayerMask enemyLayer;
+    public GameObject explosionEffect;
+
+    private bool hasExploded = false;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        StartCoroutine(FuseTimer());
+    }
+
+    IEnumerator FuseTimer()
+    {
+        yield return new WaitForSeconds(fuseTime);
+        Explode();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (hasExploded) return;
+
+        if (collision.CompareTag("Enemy"))
+        {
+            Explode();
+        }
+    }
+     
+    void Explode()
+    {
+        if (hasExploded) return;
+        hasExploded = true;
+
+        //Damage all enemies in radius
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);
+
+        foreach(Collider2D hit in hits)
+        {
+            EnemyShip enemy = hit.GetComponent<EnemyShip>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+
+        GameManager.Instance.ShakeCamera(0.25f, 0.2f);
+
+        Destroy(gameObject);
+    }
+}

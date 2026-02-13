@@ -26,6 +26,7 @@ public class EnemyCannonball : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.Instance.ShakeCamera(0.2f, 0.1f);
             PlayerHealth player = GetComponent<PlayerHealth>();
             if (player != null)
             {
@@ -35,7 +36,7 @@ public class EnemyCannonball : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
+        if (other.CompareTag("Wall") || other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }

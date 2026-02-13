@@ -30,6 +30,12 @@ public class PlayerCannons : MonoBehaviour
     public SpriteRenderer rightCannonSprite;
     private Color originalCannonColor;
 
+    public GameObject explosiveBarrelPrefab;
+    public Transform barrelSpawnPoint;
+    public float barrelCooldown = 5f;
+
+    private float lastBarrelTime;
+
     void Start()
     {
         // Initialize with default values
@@ -85,6 +91,16 @@ public class PlayerCannons : MonoBehaviour
         {
             cannonBallScript.damage = currentDamage;
         }
+    }
+
+    public void DeployBarrel()
+    {
+        if (Time.time < lastBarrelTime + barrelCooldown)
+            return;
+
+        lastBarrelTime = Time.time;
+
+        Instantiate(explosiveBarrelPrefab, barrelSpawnPoint.position, Quaternion.identity);
     }
 
     // ========== WEAPON BOOST METHODS ==========
