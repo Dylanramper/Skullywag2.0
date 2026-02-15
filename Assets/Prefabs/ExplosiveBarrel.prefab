@@ -98,12 +98,12 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3268643946339172368}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 3
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -165,3 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44978e9373dd9e94b98f2962c8e12bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuseTime: 3
+  explosionRadius: 2.5
+  damage: 3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  explosionEffect: {fileID: 0}

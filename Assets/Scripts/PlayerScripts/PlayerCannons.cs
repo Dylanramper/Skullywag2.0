@@ -100,7 +100,16 @@ public class PlayerCannons : MonoBehaviour
 
         lastBarrelTime = Time.time;
 
-        Instantiate(explosiveBarrelPrefab, barrelSpawnPoint.position, Quaternion.identity);
+        GameObject barrel = Instantiate(explosiveBarrelPrefab, barrelSpawnPoint.position, Quaternion.identity);
+
+        Rigidbody2D rb = barrel.GetComponent<Rigidbody2D>();
+
+        if(rb != null)
+        {
+            //Small push backwards when spawned
+            Vector2 throwDirection = -transform.up;
+            rb.AddForce(throwDirection * 4f, ForceMode2D.Impulse);
+        }
     }
 
     // ========== WEAPON BOOST METHODS ==========
