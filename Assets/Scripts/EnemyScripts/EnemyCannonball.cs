@@ -1,4 +1,3 @@
-using Unity.XR.Oculus.Input;
 using UnityEngine;
 
 public class EnemyCannonball : MonoBehaviour
@@ -27,11 +26,10 @@ public class EnemyCannonball : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.ShakeCamera(0.2f, 0.1f);
-            PlayerHealth player = GetComponent<PlayerHealth>();
+            PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damage);
-                Debug.Log("Player has taken dmg " + damage);
             }
             Destroy(gameObject);
         }

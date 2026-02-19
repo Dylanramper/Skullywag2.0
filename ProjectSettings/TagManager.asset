@@ -8,7 +8,7 @@ TagManager:
   - Enemy
   - GameManager
   - Wall
-  - Obastacle
+  - Obstacle
   layers:
   - Default
   - TransparentFX

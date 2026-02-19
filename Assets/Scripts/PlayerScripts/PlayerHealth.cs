@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // For UI if you want
 
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHealth = 100;
+    public int maxHealth = 10;
     public int currentHealth;
 
     [Header("Shield Settings")]
@@ -14,19 +15,21 @@ public class PlayerHealth : MonoBehaviour
     public GameObject shieldVisual; // Optional: shield graphic on player
 
     [Header("UI Elements")]
-    public Slider healthSlider;     // Optional
-    public Image shieldBar;         // Optional
-    public Text shieldText;         // Optional
+    public Image shieldBar;
+    public Text shieldText;
+    public Image fillImage;
+
+    private float fillSmoothSpeed = 5;
+    private Color originalColor;
 
     void Start()
     {
+        originalColor = fillImage.color;
         currentHealth = maxHealth;
 
-        // Update UI if set
-        if (healthSlider != null)
+        if(fillImage != null)
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
+            fillImage.fillAmount = 1f;
         }
 
         // Hide shield visual at start
@@ -59,6 +62,12 @@ public class PlayerHealth : MonoBehaviour
                 DeactivateShield();
             }
         }
+
+        // Smooth health bar animation
+        if (fillImage != null)
+        {
+            fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, (float)currentHealth / maxHealth, fillSmoothSpeed * Time.deltaTime);
+        }
     }
 
     // Call this when player takes damage
@@ -73,19 +82,22 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
 
-        // Update UI if set
-        if (healthSlider != null)
-        {
-            healthSlider.value = currentHealth;
-        }
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        Debug.Log("Player health: " + currentHealth + "/" + maxHealth);
+        StartCoroutine(HealthFlash());
 
         // Check for death
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private IEnumerator HealthFlash()
+    {
+        fillImage.color = new Color(1f, 0.6f, 0.6f);
+        yield return new WaitForSeconds(0.1f);
+        fillImage.color = originalColor;
     }
 
     // Call this from ShieldPowerUp script
