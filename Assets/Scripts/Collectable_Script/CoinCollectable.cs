@@ -17,4 +17,5 @@ public class CoinCollectable : Collectable
         
        base.Start();
     }
+   
 }

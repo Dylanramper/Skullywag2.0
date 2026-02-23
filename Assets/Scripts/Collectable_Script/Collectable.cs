@@ -11,9 +11,11 @@ public class Collectable : MonoBehaviour
     public float floatHeight = 0.2f;
 
     private Vector3 startPosition;
+    public ParticleSystem particleSystem;
 
     protected virtual void Start()
     {
+        particleSystem = GetComponentInChildren<ParticleSystem>();
         startPosition = transform.position;
         Destroy(gameObject, 15f); // Auto-destroy after 15 seconds
     }
@@ -32,6 +34,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            particleSystem.Play();
             Collect();
         }
     }
