@@ -5,10 +5,16 @@ public class ExplosiveBarrel : MonoBehaviour
 {
     public float fuseTime = 3f;
     public float explosionRadius = 2.5f;
-    public int damage = 3;
+    public int damage = 30;
 
     public LayerMask enemyLayer;
     public GameObject explosionEffect;
+
+    [Header("Explosion FX")]
+    [SerializeField]
+    private ParticleSystem explosion;
+    [SerializeField]
+    private ParticleSystem debris;
 
     private bool hasExploded = false;
 
@@ -33,9 +39,27 @@ public class ExplosiveBarrel : MonoBehaviour
             Explode();
         }
     }
-     
+
+    private void PlayExplosionFX()
+    {
+        if (explosion != null)
+        {
+            explosion.transform.parent = null;
+            explosion.Play();
+            Destroy(explosion.gameObject, explosion.main.duration + explosion.main.startLifetime.constantMax);
+        }
+        if (debris != null)
+        {
+            debris.transform.parent = null;
+            debris.Play();
+            Destroy(debris.gameObject, debris.main.duration + debris.main.startLifetime.constantMax);
+        }
+    }
+
     void Explode()
     {
+        PlayExplosionFX();
+
         if (hasExploded) return;
         hasExploded = true;
 

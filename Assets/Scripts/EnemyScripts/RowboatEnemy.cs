@@ -11,9 +11,15 @@ public class RowboatEnemy : EnemyShip
     private bool isExploding;
 
     [Header("Explosion Damage")]
-    public float explosionRadius = 2.5f;
-    public int explosionDamage = 1;
+    public float explosionRadius = 3.2f;
+    public int explosionDamage = 20;
     public LayerMask damageLayers;
+
+    [Header("Explosion FX")]
+    [SerializeField]
+    private ParticleSystem explosion;
+    [SerializeField]
+    private ParticleSystem debris;
 
     protected override void Awake()
     {
@@ -49,8 +55,9 @@ public class RowboatEnemy : EnemyShip
 
     protected override void Die()
     {
-        //TODO: Explosion + Damage
-        Destroy(gameObject);
+        if (isExploding) return;
+        isExploding = true;
+        Explode();
     }
 
     private void StartExplosionCountdown()
@@ -76,8 +83,26 @@ public class RowboatEnemy : EnemyShip
         Explode();
     }
 
+    private void PlayExplosionFX()
+    {
+        if(explosion != null)
+        {
+            explosion.transform.parent = null;
+            explosion.Play();
+            Destroy(explosion.gameObject, explosion.main.duration + explosion.main.startLifetime.constantMax);
+        }
+        if(debris != null)
+        {
+            debris.transform.parent = null;
+            debris.Play();
+            Destroy(debris.gameObject, debris.main.duration + debris.main.startLifetime.constantMax);
+        }
+    }
+
     private void Explode()
     {
+        PlayExplosionFX();
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(rb.position, explosionRadius, damageLayers);
 
         foreach (Collider2D hit in hits)
@@ -97,7 +122,7 @@ public class RowboatEnemy : EnemyShip
                 enemy.TakeDamage(explosionDamage);
             }
         }
-        //TODO: Explosion VFX, sound, camera shake----------------------------------------------------------------------
+        //TODO: Damage, sound----------------------------------------------------------------------
         Destroy(gameObject);
     }
 
@@ -105,5 +130,7 @@ public class RowboatEnemy : EnemyShip
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }
