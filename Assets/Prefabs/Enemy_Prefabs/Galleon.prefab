@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7766882270299526157}
-  flashDuration: 1
   wanderTurnStrength: 20
   wanderChangeInterval: 2
   moveSpeed: 1.5
@@ -772,7 +771,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 60
   m_Sprite: {fileID: -5372039401208127107, guid: bd07eb531ae4ed6468717c27785ecd85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
