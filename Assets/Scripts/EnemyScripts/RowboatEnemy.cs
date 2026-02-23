@@ -115,14 +115,8 @@ public class RowboatEnemy : EnemyShip
                     playerHealth.TakeDamage(explosionDamage);
                 }
             }
-            //Damage other enemies
-            EnemyShip enemy = hit.GetComponent<EnemyShip>();
-            if(enemy != null && enemy != this)
-            {
-                enemy.TakeDamage(explosionDamage);
-            }
         }
-        //TODO: Damage, sound----------------------------------------------------------------------
+        //TODO: sound----------------------------------------------------------------------
         Destroy(gameObject);
     }
 

@@ -19,7 +19,7 @@ public abstract class EnemyShip : MonoBehaviour
     public float moveSpeed = 2f;
     public float turnSpeed = 120f;
     public float detectionRange = 8f;
-    public int maxHealth = 1;
+    public int maxHealth;
 
     protected int currentHealth;
     protected Rigidbody2D rb;
@@ -29,13 +29,17 @@ public abstract class EnemyShip : MonoBehaviour
     [Header("Aggro Settings")]
     public float loseAggroRange = 14f;
 
+    [SerializeField] FloatingHealthbar healthbar;
+
     protected virtual void Awake()
     {
+        healthbar = GetComponentInChildren<FloatingHealthbar>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentHealth = maxHealth;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+        healthbar.UpdateHealthbar(currentHealth, maxHealth);
     }
 
     protected virtual void FixedUpdate()
@@ -98,6 +102,7 @@ public abstract class EnemyShip : MonoBehaviour
         {
             Die();
         }
+        healthbar.UpdateHealthbar(currentHealth, maxHealth);
     }
 
     protected virtual void Die()

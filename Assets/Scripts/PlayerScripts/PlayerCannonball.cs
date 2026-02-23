@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCannonball : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 10;
     public float lifetime = 3f;
     public float speed = 7f;
 
@@ -29,6 +29,7 @@ public class PlayerCannonball : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                Debug.Log(damage);
             }
             Destroy(gameObject);
         }
