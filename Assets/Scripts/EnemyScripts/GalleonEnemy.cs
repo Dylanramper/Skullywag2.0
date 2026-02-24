@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GalleonEnemy : EnemyShip
@@ -24,6 +25,19 @@ public class GalleonEnemy : EnemyShip
     private float chargeTimer;
     private float nextChargeTime;
     private float nextFireTime;
+
+    [Header("Death VFX")]
+    [SerializeField] private ParticleSystem explsion1;
+    [SerializeField] private ParticleSystem explsion2;
+    [SerializeField] private ParticleSystem explsion3;
+    [SerializeField] private ParticleSystem explsion4;
+    [SerializeField] private ParticleSystem trail1;
+    [SerializeField] private ParticleSystem trail2;
+    [SerializeField] private ParticleSystem trail3;
+
+    [SerializeField] private float explosionDelay = 0.5f;
+    [SerializeField] private float secondExplosions = 0.4f;
+    [SerializeField] private float thirdExplosions = 0.2f;
 
     protected override void AggroBehavior()
     {
@@ -164,7 +178,72 @@ public class GalleonEnemy : EnemyShip
 
     protected override void Die()
     {
-        //TODO: Death animation or sinking?
+        StartCoroutine(DeathSequence());
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        //Stop moving
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        trail1.Stop();
+        trail2.Stop();
+        trail3.Stop();
+
+        //Disable Collider
+        PolygonCollider2D col = GetComponent<PolygonCollider2D>();
+        if (col != null)
+            col.enabled = false;
+
+        //First Explosion
+        if (explsion1 != null)
+        {
+            explsion1.transform.parent = null;
+            explsion1.Play();
+
+            float totalDuration1 = explsion1.main.duration + explsion1.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration1);
+        }
+
+        yield return new WaitForSeconds(explosionDelay);
+
+        //Second Explosion
+        if (explsion2 != null)
+        {
+            explsion2.transform.parent = null;
+            explsion2.Play();
+
+            float totalDuration2 = explsion2.main.duration + explsion2.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration2);
+        }
+
+         yield return new WaitForSeconds(secondExplosions);
+
+        //Third Explosion
+        if(explsion3 != null)
+        {
+            explsion3.transform.parent = null;
+            explsion3.Play();
+
+            float totalDuration3 = explsion3.main.duration + explsion3.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration3);
+        }
+
+        yield return new WaitForSeconds(thirdExplosions);
+
+        //Forth Explosion
+        if (explsion4 != null)
+        {
+            explsion4.transform.parent = null;
+            explsion4.Play();
+
+            float totalDuration4 = explsion4.main.duration + explsion4.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration4);
+        }
         Destroy(gameObject);
     }
 

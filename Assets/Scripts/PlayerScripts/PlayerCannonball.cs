@@ -29,7 +29,6 @@ public class PlayerCannonball : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-                Debug.Log(damage);
             }
             Destroy(gameObject);
         }
