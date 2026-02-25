@@ -2164,15 +2164,15 @@ MonoBehaviour:
   shieldTimeLeft: 0
   shieldDefense: 0
   shieldVisual: {fileID: 0}
-  healthSlider: {fileID: 0}
   shieldBar: {fileID: 0}
   shieldText: {fileID: 0}
+  fillImage: {fileID: 0}
 --- !u!114 &7995606143928524417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6103006420665617104, guid: a1c47be59f0315846ac3ae00b457d4d7, type: 3}
   m_PrefabInstance: {fileID: 7995606143928524411}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7995606143928524414}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35b34af422747d445a438dc60f8eafe8, type: 3}
