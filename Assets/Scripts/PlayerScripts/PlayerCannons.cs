@@ -10,7 +10,7 @@ public class PlayerCannons : MonoBehaviour
     // Default values
     public float force = 8f;
     public float defaultCoolDown = 0.4f;
-    public int defaultDamage = 1; // Add this if your cannon balls don't have damage yet
+    public int defaultDamage = 10;
 
     // Current values (can be boosted)
     private float currentCoolDown;

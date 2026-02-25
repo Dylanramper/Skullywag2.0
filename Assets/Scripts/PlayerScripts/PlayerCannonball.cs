@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCannonball : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 10;
     public float lifetime = 3f;
     public float speed = 7f;
 

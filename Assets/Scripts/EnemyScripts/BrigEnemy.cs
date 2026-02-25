@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,6 +20,17 @@ public class BrigEnemy : EnemyShip
     public float fireCooldown = 2f;
 
     private float nextFireTime;
+
+    [Header("Death VFX")]
+    [SerializeField] private ParticleSystem explsion1;
+    [SerializeField] private ParticleSystem explsion2;
+    [SerializeField] private ParticleSystem explsion3;
+    [SerializeField] private ParticleSystem trail1;
+    [SerializeField] private ParticleSystem trail2;
+
+    [SerializeField] private float explosionDelay = 0.5f;
+    [SerializeField] private float secondDelay = 0.3f;
+    
 
     protected override void AggroBehavior()
     {
@@ -74,5 +86,66 @@ public class BrigEnemy : EnemyShip
         }
 
         Instantiate(cannonballPrefab, cannonToFire.position, cannonToFire.rotation);
+    }
+
+    protected override void Die()
+    {
+        StartCoroutine(DeathSequence());
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        //Stop moving
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = 0f;
+
+        trail1.Stop();
+        trail2.Stop();
+
+        //Disable Collider
+        PolygonCollider2D col = GetComponent<PolygonCollider2D>();
+        if(col != null)
+           col.enabled = false;
+
+        enabled = false;
+
+        //First Explosion
+        if(explsion1 != null)
+        {
+            explsion1.transform.parent = null;
+            explsion1.Play();
+
+            float totalDuration1 = explsion1.main.duration + explsion1.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration1);
+        }
+
+        yield return new WaitForSeconds(explosionDelay);
+        
+        //Second Explosion
+        if(explsion2 != null)
+        {
+            explsion2.transform.parent = null;
+            explsion2.Play();
+
+            float totalDuration2 = explsion2.main.duration + explsion2.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration2);
+        }
+
+        yield return new WaitForSeconds(secondDelay);
+
+        //Third Explosion
+        if(explsion3 != null)
+        {
+            explsion3.transform.parent = null;
+            explsion3.Play();
+
+            float totalDuration3 = explsion3.main.duration + explsion3.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration3);
+        }
+
+        Destroy(gameObject);
     }
 }
