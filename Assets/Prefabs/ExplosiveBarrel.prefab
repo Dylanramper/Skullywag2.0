@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuseTime: 3
-  explosionRadius: 2.5
+  explosionRadius: 1
   damage: 30
   enemyLayer:
     serializedVersion: 2
