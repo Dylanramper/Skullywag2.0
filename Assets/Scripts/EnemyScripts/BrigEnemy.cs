@@ -27,6 +27,8 @@ public class BrigEnemy : EnemyShip
     [SerializeField] private ParticleSystem explsion3;
     [SerializeField] private ParticleSystem trail1;
     [SerializeField] private ParticleSystem trail2;
+    [SerializeField] private ParticleSystem leftCannonFX;
+    [SerializeField] private ParticleSystem rightCannonFX;
 
     [SerializeField] private float explosionDelay = 0.5f;
     [SerializeField] private float secondDelay = 0.3f;
@@ -86,6 +88,14 @@ public class BrigEnemy : EnemyShip
         }
 
         Instantiate(cannonballPrefab, cannonToFire.position, cannonToFire.rotation);
+
+        if(sideAngle >= 0)
+        {
+            leftCannonFX.Play();
+        }else if(sideAngle < 0)
+        {
+            rightCannonFX.Play();
+        }
     }
 
     protected override void Die()

@@ -4,7 +4,7 @@ using System.Collections;
 public class ExplosiveBarrel : MonoBehaviour
 {
     public float fuseTime = 3f;
-    public float explosionRadius = 2.5f;
+    public float explosionRadius = 1f;
     public int damage = 30;
 
     public LayerMask enemyLayer;
@@ -78,5 +78,10 @@ public class ExplosiveBarrel : MonoBehaviour
         GameManager.Instance.ShakeCamera(0.25f, 0.2f);
 
         Destroy(gameObject);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

@@ -22,6 +22,11 @@ public class GalleonEnemy : EnemyShip
     public Transform[] rightCannons;
     public GameObject cannonballPrefab;
 
+    [SerializeField] private ParticleSystem leftFX1;
+    [SerializeField] private ParticleSystem leftFX2;
+    [SerializeField] private ParticleSystem rightFX1;
+    [SerializeField] private ParticleSystem rightFX2;
+
     private float chargeTimer;
     private float nextChargeTime;
     private float nextFireTime;
@@ -173,6 +178,16 @@ public class GalleonEnemy : EnemyShip
         foreach(Transform cannon in cannons)
         {
             Instantiate(cannonballPrefab, cannon.position, cannon.rotation);
+        }
+
+        if(sideAngle >= 0)
+        {
+            leftFX1.Play();
+            leftFX2.Play();
+        }else if(sideAngle < 0)
+        {
+            rightFX1.Play();
+            rightFX2.Play();
         }
     }
 

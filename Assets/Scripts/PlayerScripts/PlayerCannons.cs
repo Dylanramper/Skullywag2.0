@@ -7,6 +7,9 @@ public class PlayerCannons : MonoBehaviour
     public Transform rightCannonPoint;
     public GameObject CannonBall;
 
+    [SerializeField] private ParticleSystem leftFX;
+    [SerializeField] private ParticleSystem rightFX;
+
     // Default values
     public float force = 8f;
     public float defaultCoolDown = 0.4f;
@@ -64,6 +67,7 @@ public class PlayerCannons : MonoBehaviour
         if (Time.time > lastFireTime + currentCoolDown)
         {
             Fire(leftCannonPoint);
+            leftFX.Play();
         }
     }
 
@@ -72,6 +76,7 @@ public class PlayerCannons : MonoBehaviour
         if (Time.time > lastFireTime + currentCoolDown)
         {
             Fire(rightCannonPoint);
+            rightFX.Play();
         }
     }
 
