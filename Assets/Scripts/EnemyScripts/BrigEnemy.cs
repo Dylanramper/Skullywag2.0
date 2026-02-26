@@ -29,6 +29,8 @@ public class BrigEnemy : EnemyShip
     [SerializeField] private ParticleSystem trail2;
     [SerializeField] private ParticleSystem leftCannonFX;
     [SerializeField] private ParticleSystem rightCannonFX;
+    [SerializeField] private ParticleSystem SmokeFX1;
+    [SerializeField] private ParticleSystem SmokeFX2;
 
     [SerializeField] private float explosionDelay = 0.5f;
     [SerializeField] private float secondDelay = 0.3f;
@@ -95,6 +97,20 @@ public class BrigEnemy : EnemyShip
         }else if(sideAngle < 0)
         {
             rightCannonFX.Play();
+        }
+    }
+
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+        if(currentHealth <= 20)
+        {
+            SmokeFX1.Play();
+            SmokeFX2.Play();
+        }else if(currentHealth >= 21)
+        {
+            SmokeFX1.Stop();
+            SmokeFX2.Stop();
         }
     }
 
