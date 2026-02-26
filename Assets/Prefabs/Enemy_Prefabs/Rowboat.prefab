@@ -15253,13 +15253,13 @@ MonoBehaviour:
   moveSpeed: 2
   turnSpeed: 120
   detectionRange: 8
-  maxHealth: 1
+  maxHealth: 10
   loseAggroRange: 14
   healthbar: {fileID: 7906383211204316842}
   explodeDelay: 1.2
   flashInterval: 0.15
   explosionRadius: 2
-  explosionDamage: 1
+  explosionDamage: 10
   damageLayers:
     serializedVersion: 2
     m_Bits: 8

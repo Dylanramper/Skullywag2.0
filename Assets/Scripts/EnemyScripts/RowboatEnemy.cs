@@ -11,7 +11,7 @@ public class RowboatEnemy : EnemyShip
     private bool isExploding;
 
     [Header("Explosion Damage")]
-    public float explosionRadius = 3.2f;
+    public float explosionRadius = 2f;
     public int explosionDamage = 20;
     public LayerMask damageLayers;
 

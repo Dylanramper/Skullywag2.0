@@ -39,6 +39,9 @@ public class GalleonEnemy : EnemyShip
     [SerializeField] private ParticleSystem trail1;
     [SerializeField] private ParticleSystem trail2;
     [SerializeField] private ParticleSystem trail3;
+    [SerializeField] private ParticleSystem smokeFX1;
+    [SerializeField] private ParticleSystem smokeFX2;
+    [SerializeField] private ParticleSystem smokeFX3;
 
     [SerializeField] private float explosionDelay = 0.5f;
     [SerializeField] private float secondExplosions = 0.4f;
@@ -188,6 +191,23 @@ public class GalleonEnemy : EnemyShip
         {
             rightFX1.Play();
             rightFX2.Play();
+        }
+    }
+
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+
+        if(currentHealth <= 30)
+        {
+            smokeFX1.Play();
+            smokeFX2.Play();
+            smokeFX3.Play();
+        }else if(currentHealth >= 31)
+        {
+            smokeFX1.Stop();
+            smokeFX2.Stop();
+            smokeFX3.Stop();
         }
     }
 

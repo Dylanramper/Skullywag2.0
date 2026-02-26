@@ -5,7 +5,7 @@ using UnityEngine.UI; // For UI if you want
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHealth = 10;
+    public int maxHealth = 100;
     public int currentHealth;
 
     [Header("Shield Settings")]
@@ -18,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     public Image shieldBar;
     public Text shieldText;
     public Image fillImage;
+    [SerializeField] private ParticleSystem smokeFX1;
+    [SerializeField] private ParticleSystem smokeFX2;
 
     private float fillSmoothSpeed = 5;
     private Color originalColor;
@@ -85,6 +87,19 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         StartCoroutine(HealthFlash());
+
+        //Play smoke FX when health is below 25%
+        if(currentHealth <= 25)
+        {
+            smokeFX1.Play();
+            smokeFX2.Play();
+        }
+        else if(currentHealth >= 26)
+        {
+            smokeFX1.Stop();
+            smokeFX2.Stop();
+        }
+
 
         // Check for death
         if (currentHealth <= 0)

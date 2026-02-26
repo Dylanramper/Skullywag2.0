@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brig
       objectReference: {fileID: 0}
+    - target: {fileID: 6595188152912828162, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
+      propertyPath: maxHealth
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7159994373104078296, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.64
