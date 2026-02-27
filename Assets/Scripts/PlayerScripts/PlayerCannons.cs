@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 public class PlayerCannons : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class PlayerCannons : MonoBehaviour
     [SerializeField] private ParticleSystem leftFX;
     [SerializeField] private ParticleSystem rightFX;
 
-    // Default values
+    [Header("Defualt Values")]
     public float force = 8f;
     public float defaultCoolDown = 0.4f;
     public int defaultDamage = 10;
@@ -20,24 +22,29 @@ public class PlayerCannons : MonoBehaviour
     private int currentDamage;
     private float currentForce;
 
-    private float lastFireTime;
+    private float lastLeftFireTime;
+    private float lastRightFireTime;
+    private float lastBarrelTime;
 
-    // Weapon boost tracking
+    [Header("Weapon Boost")]
     private float weaponBoostEndTime = 0f;
     private bool isWeaponBoosted = false;
 
-    // Optional visual feedback
+    [Header("Visual FX")]
     public GameObject leftCannonBoostEffect;
     public GameObject rightCannonBoostEffect;
     public SpriteRenderer leftCannonSprite;
     public SpriteRenderer rightCannonSprite;
     private Color originalCannonColor;
+    [SerializeField] private Image barrelCooldownButton;
+    [SerializeField] private Image leftCannonCooldownImage;
+    [SerializeField] private Image rightCannonCooldownImage;
 
     public GameObject explosiveBarrelPrefab;
     public Transform barrelSpawnPoint;
     public float barrelCooldown = 5f;
 
-    private float lastBarrelTime;
+    
 
     void Start()
     {
@@ -60,12 +67,16 @@ public class PlayerCannons : MonoBehaviour
         {
             EndWeaponBoost();
         }
+
+        UpdateBarrelCooldownUI();
+        UpdateCannonCooldownUI();
     }
 
     public void FireLeft()
     {
-        if (Time.time > lastFireTime + currentCoolDown)
+        if(Time.time > lastLeftFireTime + currentCoolDown)
         {
+            lastLeftFireTime = Time.time;
             Fire(leftCannonPoint);
             leftFX.Play();
         }
@@ -73,8 +84,9 @@ public class PlayerCannons : MonoBehaviour
 
     public void FireRight()
     {
-        if (Time.time > lastFireTime + currentCoolDown)
+        if(Time.time > lastRightFireTime + currentCoolDown)
         {
+            lastRightFireTime = Time.time;
             Fire(rightCannonPoint);
             rightFX.Play();
         }
@@ -82,7 +94,6 @@ public class PlayerCannons : MonoBehaviour
 
     void Fire(Transform firePoint)
     {
-        lastFireTime = Time.time;
 
         GameObject ball = Instantiate(CannonBall, firePoint.position, firePoint.rotation);
 
@@ -109,12 +120,40 @@ public class PlayerCannons : MonoBehaviour
 
         Rigidbody2D rb = barrel.GetComponent<Rigidbody2D>();
 
-        if(rb != null)
+        if (rb != null)
         {
             //Small push backwards when spawned
             Vector2 throwDirection = -transform.up;
             rb.AddForce(throwDirection * 4f, ForceMode2D.Impulse);
         }
+    }
+
+    private void UpdateCannonCooldownUI()
+    {
+        if(leftCannonCooldownImage != null)
+        {
+            float elapsedLeft = Time.time - lastLeftFireTime;
+            float fillLeft = Mathf.Clamp01(elapsedLeft / currentCoolDown);
+            leftCannonCooldownImage.fillAmount = fillLeft;
+        }
+        if(rightCannonCooldownImage != null)
+        {
+            float elapsedRight = Time.time - lastRightFireTime;
+            float fillRight = Mathf.Clamp01(elapsedRight / currentCoolDown);
+            rightCannonCooldownImage.fillAmount = fillRight;
+        }
+    }
+
+    private void UpdateBarrelCooldownUI()
+    {
+        if (barrelCooldownButton == null)
+            return;
+
+        float elapsed = Time.time - lastBarrelTime;
+
+        float fillPercent = Mathf.Clamp01(elapsed / barrelCooldown);
+
+        barrelCooldownButton.fillAmount = fillPercent;
     }
 
     // ========== WEAPON BOOST METHODS ==========
