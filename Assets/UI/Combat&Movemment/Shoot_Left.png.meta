@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 18f8d79b9cc99364c9cfcf156190b98a
+guid: cbbb915e3d31d2e4eb766f61ba75a692
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1162569161695696328
-    second: Right_Arrow_0
+      213: 7001303626420778984
+    second: Shoot_Left_0
   - first:
-      213: 2154907353188646362
-    second: Right_Arrow_1
-  - first:
-      213: 5111190941445151071
-    second: Right_Arrow_2
-  - first:
-      213: -1896977777116792523
-    second: Right_Arrow_3
-  - first:
-      213: -805912746733811820
-    second: Right_Arrow_4
-  - first:
-      213: -9082609897038178150
-    second: Right_Arrow_5
+      213: 9109500529856467196
+    second: Shoot_Left_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -124,39 +112,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right_Arrow_0
+      name: Shoot_Left_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 40
-        height: 622
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83aed4ac189bddfe0800000000000000
-      internalID: -1162569161695696328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Right_Arrow_1
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 0
         width: 850
-        height: 616
+        height: 594
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: addbfae02d4c7ed10800000000000000
-      internalID: 2154907353188646362
+      spriteID: 8e7f671cd80a92160800000000000000
+      internalID: 7001303626420778984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Arrow_2
+      name: Shoot_Left_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 615
-        width: 792
-        height: 7
+        x: 0
+        y: 0
+        width: 21
+        height: 583
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,74 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f59580cb4199ee640800000000000000
-      internalID: 5111190941445151071
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Right_Arrow_3
-      rect:
-        serializedVersion: 2
-        x: 893
-        y: 613
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 539b42823c49ca5e0800000000000000
-      internalID: -1896977777116792523
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Right_Arrow_4
-      rect:
-        serializedVersion: 2
-        x: 874
-        y: 548
-        width: 8
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 497c8f270a2d0d4f0800000000000000
-      internalID: -805912746733811820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Right_Arrow_5
-      rect:
-        serializedVersion: 2
-        x: 883
-        y: 548
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a98979d9b6614f180800000000000000
-      internalID: -9082609897038178150
+      spriteID: cf0d35bb7727b6e70800000000000000
+      internalID: 9109500529856467196
       vertices: []
       indices: 
       edges: []
@@ -273,12 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Right_Arrow_0: -1162569161695696328
-      Right_Arrow_1: 2154907353188646362
-      Right_Arrow_2: 5111190941445151071
-      Right_Arrow_3: -1896977777116792523
-      Right_Arrow_4: -805912746733811820
-      Right_Arrow_5: -9082609897038178150
+      Shoot_Left_0: 7001303626420778984
+      Shoot_Left_1: 9109500529856467196
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

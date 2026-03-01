@@ -96,6 +96,7 @@ public abstract class EnemyShip : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        AudioManager.Instance.PlayHit();
         StartCoroutine(Flash());
         GameManager.Instance.ShakeCamera(0.1f, 0.08f);
         if (currentHealth <= 0)

@@ -90,7 +90,7 @@ public class BrigEnemy : EnemyShip
         }
 
         Instantiate(cannonballPrefab, cannonToFire.position, cannonToFire.rotation);
-
+        AudioManager.Instance.PlayCannon();
         if(sideAngle >= 0)
         {
             leftCannonFX.Play();
@@ -140,6 +140,7 @@ public class BrigEnemy : EnemyShip
         {
             explsion1.transform.parent = null;
             explsion1.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration1 = explsion1.main.duration + explsion1.main.startLifetime.constantMax;
 
@@ -153,10 +154,11 @@ public class BrigEnemy : EnemyShip
         {
             explsion2.transform.parent = null;
             explsion2.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration2 = explsion2.main.duration + explsion2.main.startLifetime.constantMax;
 
-            Destroy(explsion1.gameObject, totalDuration2);
+            Destroy(explsion2.gameObject, totalDuration2);
         }
 
         yield return new WaitForSeconds(secondDelay);
@@ -166,10 +168,11 @@ public class BrigEnemy : EnemyShip
         {
             explsion3.transform.parent = null;
             explsion3.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration3 = explsion3.main.duration + explsion3.main.startLifetime.constantMax;
 
-            Destroy(explsion1.gameObject, totalDuration3);
+            Destroy(explsion3.gameObject, totalDuration3);
         }
 
         Destroy(gameObject);

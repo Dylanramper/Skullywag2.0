@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: cbbb915e3d31d2e4eb766f61ba75a692
+guid: 6bca0578494236143b27f04f2190b375
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7001303626420778984
-    second: Shoot_Left_0
+      213: 5002300884888047338
+    second: Shoot_Right_0
   - first:
-      213: 9109500529856467196
-    second: Shoot_Left_1
+      213: 4224087026540804319
+    second: Shoot_Right_1
+  - first:
+      213: -3281806404344095122
+    second: Shoot_Right_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,17 +115,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shoot_Left_0
+      name: Shoot_Right_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 850
-        height: 594
+        width: 836
+        height: 604
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e7f671cd80a92160800000000000000
-      internalID: 7001303626420778984
+      spriteID: aeecf57c62ebb6540800000000000000
+      internalID: 5002300884888047338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shoot_Left_1
+      name: Shoot_Right_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 21
-        height: 583
+        x: 824
+        y: 597
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +182,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cf0d35bb7727b6e70800000000000000
-      internalID: 9109500529856467196
+      spriteID: fd8fc4d35c8fe9a30800000000000000
+      internalID: 4224087026540804319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shoot_Right_2
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 0
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6ed777867ea472d0800000000000000
+      internalID: -3281806404344095122
       vertices: []
       indices: 
       edges: []
@@ -173,8 +224,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shoot_Left_0: 7001303626420778984
-      Shoot_Left_1: 9109500529856467196
+      Shoot_Right_0: 5002300884888047338
+      Shoot_Right_1: 4224087026540804319
+      Shoot_Right_2: -3281806404344095122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

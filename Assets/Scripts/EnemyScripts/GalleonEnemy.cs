@@ -187,10 +187,12 @@ public class GalleonEnemy : EnemyShip
         {
             leftFX1.Play();
             leftFX2.Play();
+            AudioManager.Instance.PlayCannon();
         }else if(sideAngle < 0)
         {
             rightFX1.Play();
             rightFX2.Play();
+            AudioManager.Instance.PlayCannon();
         }
     }
 
@@ -235,6 +237,7 @@ public class GalleonEnemy : EnemyShip
         {
             explsion1.transform.parent = null;
             explsion1.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration1 = explsion1.main.duration + explsion1.main.startLifetime.constantMax;
 
@@ -248,10 +251,11 @@ public class GalleonEnemy : EnemyShip
         {
             explsion2.transform.parent = null;
             explsion2.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration2 = explsion2.main.duration + explsion2.main.startLifetime.constantMax;
 
-            Destroy(explsion1.gameObject, totalDuration2);
+            Destroy(explsion2.gameObject, totalDuration2);
         }
 
          yield return new WaitForSeconds(secondExplosions);
@@ -261,10 +265,11 @@ public class GalleonEnemy : EnemyShip
         {
             explsion3.transform.parent = null;
             explsion3.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration3 = explsion3.main.duration + explsion3.main.startLifetime.constantMax;
 
-            Destroy(explsion1.gameObject, totalDuration3);
+            Destroy(explsion3.gameObject, totalDuration3);
         }
 
         yield return new WaitForSeconds(thirdExplosions);
@@ -274,10 +279,11 @@ public class GalleonEnemy : EnemyShip
         {
             explsion4.transform.parent = null;
             explsion4.Play();
+            AudioManager.Instance.PlayExplosion();
 
             float totalDuration4 = explsion4.main.duration + explsion4.main.startLifetime.constantMax;
 
-            Destroy(explsion1.gameObject, totalDuration4);
+            Destroy(explsion4.gameObject, totalDuration4);
         }
         Destroy(gameObject);
     }

@@ -96,6 +96,7 @@ public class PlayerCannons : MonoBehaviour
     {
 
         GameObject ball = Instantiate(CannonBall, firePoint.position, firePoint.rotation);
+        AudioManager.Instance.PlayCannon();
 
         // Apply force to cannon ball
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();

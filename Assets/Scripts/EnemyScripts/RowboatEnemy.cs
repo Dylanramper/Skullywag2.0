@@ -85,6 +85,7 @@ public class RowboatEnemy : EnemyShip
 
     private void PlayExplosionFX()
     {
+        AudioManager.Instance.PlayExplosion();
         if(explosion != null)
         {
             explosion.transform.parent = null;

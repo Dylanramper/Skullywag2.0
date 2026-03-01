@@ -83,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         currentHealth -= damage;
-
+        AudioManager.Instance.PlayHit();
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         StartCoroutine(HealthFlash());
