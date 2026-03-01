@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
             rb.MoveRotation(Mathf.LerpAngle(rb.rotation, targetRotation, 0.9f));
         }
     }
+
     // === ADD THIS ENTIRE METHOD to your PlayerMove script ===
     public void ApplySpeedBoost(float multiplier, float duration)
     {
