@@ -20,9 +20,9 @@ public class EnemySpawner : MonoBehaviour
     public float maxSpawnInterval = 8f;
 
     [Header("Spawn Area")]
-    public bool spawnWithinCameraView = true;
+    public bool spawnWithinCameraView = false;
     public Vector2 spawnAreaSize = new Vector2(10f, 6f); // If not using camera
-    public float minDistanceFromPlayer = 4f; // Don't spawn too close
+    public float minDistanceFromPlayer = 10f; // Don't spawn too close
 
     [Header("Limits")]
     public int maxEnemiesOnScreen = 10;
@@ -119,7 +119,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (attempts < maxAttempts)
         {
-            if (spawnWithinCameraView && mainCamera != null)
+            if (!spawnWithinCameraView && mainCamera != null)
             {
                 // Random position within camera view (but not at edges)
                 float randomX = Random.Range(-0.45f, 0.45f); // 90% of screen width
@@ -145,7 +145,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             // Also check if position is inside the camera view (if using camera)
-            if (spawnWithinCameraView && mainCamera != null)
+            if (!spawnWithinCameraView && mainCamera != null)
             {
                 Vector3 viewportCheck = mainCamera.WorldToViewportPoint(spawnPosition);
                 if (viewportCheck.x < 0 || viewportCheck.x > 1 || viewportCheck.y < 0 || viewportCheck.y > 1)
