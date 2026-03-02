@@ -1,28 +1,29 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Speed Power-up")]
     private float currentMoveSpeed;
-    private float speedBoostEndTime = 0f; // Time when the boost wears off
+    private float speedBoostEndTime = 2f; // Time when the boost wears off
 
     private Rigidbody2D rb;
     public float speed;
     public float turnSpeed;
     private int turnDir = 0;
 
+    [SerializeField] private ControlMode controlMode = ControlMode.Buttons;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        speed = 1.5f;
-        currentMoveSpeed = speed;
+        currentMoveSpeed = 1.5f;
+        speed = currentMoveSpeed;
     }
 
     private void FixedUpdate()
     {
         // Check if a speed boost has expired
-        if (Time.time > speedBoostEndTime && currentMoveSpeed != speed)
+        if (Time.time > speedBoostEndTime && speed != currentMoveSpeed)
         {
             // Boost just ended
             Debug.Log("Speed boost ended!");
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Move Forward 
-        rb.linearVelocity = (Vector2)transform.up * speed;
+        rb.linearVelocity = (Vector2)transform.up * currentMoveSpeed;
 
         //If the player is pressing left or right buttons on screen; calculate rotation and speed.
         //Rotate the player
@@ -62,4 +63,10 @@ public class PlayerMovement : MonoBehaviour
     public void TurnLeftDown() => turnDir = -1;
     public void TurnRightDown() => turnDir = 1;
     public void TurnUp() => turnDir = 0;
+
+    public enum ControlMode
+    {
+        Buttons,
+        Joystick
+    }
 }
