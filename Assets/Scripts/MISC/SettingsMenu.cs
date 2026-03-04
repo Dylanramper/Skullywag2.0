@@ -9,6 +9,10 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private GameObject joystickUI;
     [SerializeField] private GameObject buttonsUI;
 
+    [Header("Volume Control")]
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +23,16 @@ public class SettingsMenu : MonoBehaviour
         joystickToggle.isOn = isJoystick;
 
         ApplyControlMode(isJoystick);
+
+        //Synch Audio Sliders with saved values
+        if(AudioManager.Instance != null)
+        {
+            //musicSlider.value = AudioManager.Instance.GetMusicVolume();
+            //sfxSlider.value = AudioManager.Instance.GetSFXVolume();
+
+            musicSlider.SetValueWithoutNotify(AudioManager.Instance.GetMusicVolume());
+            sfxSlider.SetValueWithoutNotify(AudioManager.Instance.GetSFXVolume());
+        }
     }
 
     public void OnJoystickToggleChanged(bool isOn)
@@ -40,5 +54,14 @@ public class SettingsMenu : MonoBehaviour
             joystickUI?.SetActive(false);
             buttonsUI?.SetActive(true);
         }
+    }
+    public void OnMusicSliderChanged(float value)
+    {
+        AudioManager.Instance.SetMusicVolume(value);
+    }
+
+    public void OnSFXSliderChanged(float value)
+    {
+        AudioManager.Instance.SetSFXVolume(value);
     }
 }

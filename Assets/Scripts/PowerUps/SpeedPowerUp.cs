@@ -44,6 +44,7 @@ public class SpeedPowerUp : MonoBehaviour
             {
                 // Apply the speed boost to the player (instance method)
                 playerMove.ApplySpeedBoost(speedMultiplier, boostDuration);
+                playerMove.AddStamina(20f);
             }
 
             // Visual/Audio feedback

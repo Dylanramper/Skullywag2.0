@@ -6,7 +6,7 @@ public class CoinCollectable : Collectable
     {
         // Override base values for coin
         scoreValue = 5;
-        rotationSpeed = 200f;
+        rotationSpeed = 0f;
         floatSpeed = 3f;
         
         // Optional: Randomize rotation direction
