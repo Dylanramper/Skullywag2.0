@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip cannonFireClip;
     [SerializeField] private AudioClip Hit;
     [SerializeField] private AudioClip explosion;
+    [SerializeField] private AudioClip textSFX;
     [SerializeField] private AudioSource backgroundAudioSource;
 
     private AudioSource audioSource;
@@ -38,6 +39,12 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.pitch = Random.Range(0.75f, 1f);
         audioSource.PlayOneShot(cannonFireClip, 0.2f * sfxVolume);
+    }
+
+    public void PlayTextSFX()
+    {
+        audioSource.pitch = Random.Range(0.6f, 1f);
+        audioSource.PlayOneShot(textSFX, 0.2f * sfxVolume);
     }
 
     public void PlayHit()

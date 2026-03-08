@@ -17,6 +17,27 @@ public class GameStartCountdown : MonoBehaviour
         gameStarted = false;
     }
 
+    IEnumerator AnimatePop()
+    {
+        countdownText.transform.localScale = Vector3.one * 1.5f;
+
+        float timer = 0f;
+        float duration = 0.2f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            countdownText.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one, t);
+
+            yield return null;
+
+        }
+
+        countdownText.transform.localScale = Vector3.one;
+    }
+
     IEnumerator StartCountdown()
     {
         float timeRemaining = countdownTime;
@@ -30,6 +51,8 @@ public class GameStartCountdown : MonoBehaviour
             countdownText.text = Mathf.Ceil(timeRemaining).ToString();
             yield return new WaitForSeconds(1f);
             timeRemaining--;
+            StartCoroutine(AnimatePop());
+            AudioManager.Instance.PlayTextSFX();
         }
 
         countdownText.text = "TAKE SAIL!";
