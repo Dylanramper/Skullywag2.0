@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5524899803497876462
 Transform:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   fireRateMultiplier: 2
   damageMultiplier: 2
   boostDuration: 5
-  rotationSpeed: 150
+  rotationSpeed: 0
   floatSpeed: 3
   floatHeight: 0.3
   glowColor: {r: 0.8962264, g: 0.84970534, b: 0.19023676, a: 1}

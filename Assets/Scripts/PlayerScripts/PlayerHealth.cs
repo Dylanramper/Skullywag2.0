@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem smokeFX1;
     [SerializeField] private ParticleSystem smokeFX2;
 
+    [SerializeField] private GameOverScroll gameOverScroll;
+
     private float fillSmoothSpeed = 5;
     private Color originalColor;
 
@@ -75,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
     // Call this when player takes damage
     public void TakeDamage(int damage)
     {
+        Die(); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------Debug---------------------------------------------------------------------
         if (hasShield)
         {
             // Reduce damage with shield
@@ -149,8 +152,8 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died!");
-        // Add your death logic here (respawn, game over, etc.)
-        // Time.timeScale = 0; // Pause game
+        Time.timeScale = 0f;
+        gameOverScroll.ShowGameOver();
     }
 
     // Optional: For testing with keyboard

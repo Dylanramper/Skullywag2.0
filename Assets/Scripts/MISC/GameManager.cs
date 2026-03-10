@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: keep between scenes
-        }
-        else
-        {
-            Destroy(gameObject);
         }
 
         // Load saved high score

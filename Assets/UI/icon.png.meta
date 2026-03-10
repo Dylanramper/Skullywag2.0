@@ -1,67 +1,10 @@
 fileFormatVersion: 2
-guid: b4f6f83143df0c648b856321022f83db
+guid: c771584c3caa4c44d8aee43e217fa8d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2667601937048796137
-    second: AllButtons_0
-  - first:
-      213: 8214095464950831658
-    second: AllButtons_1
-  - first:
-      213: 3330059195138927908
-    second: AllButtons_2
-  - first:
-      213: 2411212472365977688
-    second: AllButtons_3
-  - first:
-      213: -3584729956510026820
-    second: AllButtons_4
-  - first:
-      213: -5036017874119578007
-    second: AllButtons_5
-  - first:
-      213: 8358031735429160076
-    second: AllButtons_6
-  - first:
-      213: -1346192342640614101
-    second: AllButtons_7
-  - first:
-      213: 3048046727508453914
-    second: AllButtons_8
-  - first:
-      213: -1598660791985785328
-    second: AllButtons_9
-  - first:
-      213: -55883367789263871
-    second: AllButtons_10
-  - first:
-      213: 4870583925440662370
-    second: AllButtons_11
-  - first:
-      213: -5343104428733539016
-    second: AllButtons_12
-  - first:
-      213: 4637296544684726787
-    second: AllButtons_13
-  - first:
-      213: -7623941836676379646
-    second: AllButtons_14
-  - first:
-      213: -218204792859334503
-    second: AllButtons_15
-  - first:
-      213: -4705361236846966694
-    second: AllButtons_16
-  - first:
-      213: 5074925829654688468
-    second: AllButtons_17
-  - first:
-      213: -8621510400839366488
-    second: AllButtons_18
-  - first:
-      213: 8033685832096523929
-    second: AllButtons_19
+      213: 6934086728263231946
+    second: icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -199,20 +142,20 @@ TextureImporter:
       name: icon_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 5
-        width: 496
-        height: 507
+        x: 10
+        y: 4
+        width: 499
+        height: 508
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d5aa10f902ce8874c9ba7c21a30b2321
-      internalID: 971085119
+      spriteID: ac961e71423da3060800000000000000
+      internalID: 6934086728263231946
       vertices: []
       indices: 
       edges: []
@@ -221,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ebb5df4e57980344a86e02f6d4ecb0b5
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -231,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icon_0: 971085119
+      icon_0: 6934086728263231946
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

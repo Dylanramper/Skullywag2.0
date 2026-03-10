@@ -17,7 +17,7 @@ MonoBehaviour:
   m_Subtarget: 0
   m_PlatformId: b9b35072a6f44c2e863f17467ea3dc13
   m_PlatformBuildProfile:
-    rid: 2265451391635947587
+    rid: 5884809491668533406
   m_OverrideGlobalSceneList: 0
   m_Scenes: []
   m_ScriptingDefines: []
@@ -190,7 +190,7 @@ MonoBehaviour:
     - line: '|   androidMaxAspectRatio: 2.4'
     - line: '|   androidMinAspectRatio: 1'
     - line: '|   applicationIdentifier:'
-    - line: '|     Android: com.SwitchbreakEntertainment.Skullywag'
+    - line: '|     Android: com.Stwitchbreakent.Skullywag'
     - line: '|     Standalone: com.DefaultCompany.2D-URP'
     - line: '|   buildNumber:'
     - line: '|     Standalone: 0'
@@ -321,7 +321,7 @@ MonoBehaviour:
     - line: '|   - m_BuildTarget: '
     - line: '|     m_Icons:'
     - line: '|     - serializedVersion: 2'
-    - line: '|       m_Icon: {fileID: 2800000, guid: b4f6f83143df0c648b856321022f83db,
+    - line: '|       m_Icon: {fileID: 2800000, guid: c771584c3caa4c44d8aee43e217fa8d8,
         type: 3}'
     - line: '|       m_Width: 128'
     - line: '|       m_Height: 128'
@@ -459,62 +459,62 @@ MonoBehaviour:
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 192'
     - line: '|       m_Height: 192'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 144'
     - line: '|       m_Height: 144'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 96'
     - line: '|       m_Height: 96'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 72'
     - line: '|       m_Height: 72'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 48'
     - line: '|       m_Height: 48'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 36'
     - line: '|       m_Height: 36'
-    - line: '|       m_Kind: 1'
+    - line: '|       m_Kind: 0'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 192'
     - line: '|       m_Height: 192'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 144'
     - line: '|       m_Height: 144'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 96'
     - line: '|       m_Height: 96'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 72'
     - line: '|       m_Height: 72'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 48'
     - line: '|       m_Height: 48'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|     - m_Textures: []'
     - line: '|       m_Width: 36'
     - line: '|       m_Height: 36'
-    - line: '|       m_Kind: 0'
+    - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
     - line: '|   m_BuildTargetBatching: []'
     - line: '|   m_BuildTargetShaderSettings: []'
@@ -924,7 +924,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2265451391635947587
+    - rid: 5884809491668533406
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
         m_Development: 0
