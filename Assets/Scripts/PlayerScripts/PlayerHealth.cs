@@ -77,7 +77,6 @@ public class PlayerHealth : MonoBehaviour
     // Call this when player takes damage
     public void TakeDamage(int damage)
     {
-        Die(); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------Debug---------------------------------------------------------------------
         if (hasShield)
         {
             // Reduce damage with shield
