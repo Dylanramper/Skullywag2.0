@@ -27,6 +27,10 @@ public class EnemySpawner : MonoBehaviour
     [Header("Limits")]
     public int maxEnemiesOnScreen = 10;
 
+    [Header("Enemy Indicators")]
+    [SerializeField] private GameObject indicatorPrefab;
+    [SerializeField] private Transform indicatorParent;
+
     // Internal variables
     private float nextSpawnTime;
     private Transform player;
@@ -108,6 +112,13 @@ public class EnemySpawner : MonoBehaviour
         GameObject newEnemy = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
         activeEnemies.Add(newEnemy);
 
+        // Spawn its indicator immediately
+        if (indicatorPrefab != null && indicatorParent != null)
+        {
+            GameObject indicator = Instantiate(indicatorPrefab, indicatorParent);
+            indicator.GetComponent<EnemyIndicator>().Initialize(newEnemy.transform);
+        }
+
         Debug.Log("Spawned " + selectedPrefab.name + " at " + spawnPosition);
     }
 
@@ -121,13 +132,20 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!spawnWithinCameraView && mainCamera != null)
             {
-                // Random position within camera view (but not at edges)
-                float randomX = Random.Range(-0.45f, 0.45f); // 90% of screen width
-                float randomY = Random.Range(-0.45f, 0.45f); // 90% of screen height
-
+                // Use proper viewport range 0-1
+                float randomX = Random.Range(0.1f, 0.9f); // avoid edges
+                float randomY = Random.Range(0.1f, 0.9f);
                 Vector3 viewportPos = new Vector3(randomX, randomY, 10f);
                 spawnPosition = mainCamera.ViewportToWorldPoint(viewportPos);
-                spawnPosition.z = 0; // For 2D
+                spawnPosition.z = 0;
+
+                /*  // Random position within camera view (but not at edges)
+                  float randomX = Random.Range(-0.45f, 0.45f); // 90% of screen width
+                  float randomY = Random.Range(-0.45f, 0.45f); // 90% of screen height
+
+                  Vector3 viewportPos = new Vector3(randomX, randomY, 10f);
+                  spawnPosition = mainCamera.ViewportToWorldPoint(viewportPos);
+                  spawnPosition.z = 0; // For 2D */
             }
             else
             {
