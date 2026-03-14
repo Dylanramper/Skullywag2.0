@@ -1109,6 +1109,8 @@ MonoBehaviour:
   pauseButton: {fileID: 466072109}
   settingsMenu: {fileID: 1443171920}
   pauseMenuButtons: {fileID: 1833269751}
+  gameStartCountdown: {fileID: 1123553299}
+  textCountdownActive: 0
 --- !u!114 &801506866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,7 +2641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1708457866
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2725,7 +2727,6 @@ MonoBehaviour:
   scrollLeftGO: {fileID: 1324120546}
   scrollRightGO: {fileID: 1174149452}
   openDuration: 0.8
-  scrollSideMoveDistance: 200
   slideDuration: 0.5
   startYOffset: -800
   bounceHeight: 40
@@ -3357,7 +3358,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdownText: {fileID: 1123553301}
   countdownTime: 5
+  pauseButton: {fileID: 466072109}
   player: {fileID: 562066993}
+  manager: {fileID: 801506865}
 --- !u!114 &4484495395694977022 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6516559524020508070, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}

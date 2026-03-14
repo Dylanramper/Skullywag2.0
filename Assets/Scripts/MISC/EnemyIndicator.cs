@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class EnemyIndicator : MonoBehaviour
 {
@@ -26,35 +27,32 @@ public class EnemyIndicator : MonoBehaviour
             return;
         }
 
+        Vector3 viewportPos = cam.WorldToViewportPoint(target.position);
         Vector3 screenPos = cam.WorldToScreenPoint(target.position);
 
-        bool isOffScreen = screenPos.x <= 0 || screenPos.x >= Screen.width || screenPos.y <= 0 || screenPos.y >= Screen.height;
+        bool isOffScreen = viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1;
 
-        arrowUI.gameObject.SetActive(isOffScreen);
+        arrowUI.GetComponent<UnityEngine.UI.Image>().enabled = isOffScreen;
 
         if (!isOffScreen) return;
 
-        //Clamp Arrow to the edge of the screen
+        // Clamp arrow to edge
         screenPos.x = Mathf.Clamp(screenPos.x, screenEdgeOffset, Screen.width - screenEdgeOffset);
         screenPos.y = Mathf.Clamp(screenPos.y, screenEdgeOffset, Screen.height - screenEdgeOffset);
 
         arrowUI.position = screenPos;
 
-        //Rotate Arrow toward enemy
+        // Rotate arrow
         Vector3 dir = (target.position - cam.transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         arrowUI.localRotation = Quaternion.Euler(0, 0, angle);
-    }
 
-    public void UpdateIndicator()
-    {
-        
+        arrowUI.localScale = Vector3.one * (1f + Mathf.Sin(Time.time * 4f) * 0.1f);
     }
 
     public void Initialize(Transform newTarget)
     {
         target = newTarget;
-        UpdateIndicator();
     }
 }

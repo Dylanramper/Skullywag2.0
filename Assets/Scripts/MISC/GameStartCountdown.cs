@@ -6,15 +6,15 @@ public class GameStartCountdown : MonoBehaviour
 {
     public TextMeshProUGUI countdownText;
     public float countdownTime = 5f;
-
+    public GameObject pauseButton;
     public GameObject player;
-    private bool gameStarted = false;
+    [SerializeField] PauseManager manager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(StartCountdown());
-        gameStarted = false;
+        pauseButton.SetActive(false);
     }
 
     IEnumerator AnimatePop()
@@ -44,7 +44,6 @@ public class GameStartCountdown : MonoBehaviour
 
         //Disable PlayerMovement and Shooting scripts
         player.GetComponent<PlayerMovement>().enabled = false;
-        //player.GetComponent<PlayerCannons>().enabled = false;
 
         while (timeRemaining > 0)
         {
@@ -53,6 +52,7 @@ public class GameStartCountdown : MonoBehaviour
             timeRemaining--;
             StartCoroutine(AnimatePop());
             AudioManager.Instance.PlayTextSFX();
+            manager.textCountdownActive = true;
         }
 
         countdownText.text = "TAKE SAIL!";
@@ -62,8 +62,7 @@ public class GameStartCountdown : MonoBehaviour
 
         //Enable Player Movement and Shooting scripts
         player.GetComponent<PlayerMovement>().enabled = true;
-        //player.GetComponent<PlayerCannons>().enabled = true;
-
-        gameStarted = true;
+        manager.textCountdownActive = false;
+        pauseButton.SetActive(true);
     }
 }

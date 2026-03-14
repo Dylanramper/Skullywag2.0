@@ -20,7 +20,6 @@ public class GameOverScroll : MonoBehaviour
 
     [Header("Animation Settings")]
     [SerializeField] private float openDuration = 0.8f;
-    [SerializeField] private float scrollSideMoveDistance = 200f;
 
     [Header("Slide Animation")]
     [SerializeField] private float slideDuration = 0.5f;

@@ -102,7 +102,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 971475646094168237}
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 40
-  m_Sprite: {fileID: -2539487190145813675, guid: fdd7054e381bc214d953465360c5bf1d, type: 3}
+  m_Sprite: {fileID: 7292512524064471356, guid: b5868b32db952604eb2fbacb043cefab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,7 +189,7 @@ RectTransform:
   m_GameObject: {fileID: 2172430049792199736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.65833, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6336953162081873363}
@@ -198,7 +198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -4.7}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 109.68, y: 48.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910965089065639355
@@ -15227,13 +15227,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.019804358, y: 0.5399422}
-      - {x: -0.23169452, y: 0.28005365}
-      - {x: -0.26941097, y: -0.27276623}
-      - {x: -0.21239609, y: -0.5026119}
-      - {x: 0.17228961, y: -0.50421965}
-      - {x: 0.22976387, y: -0.2714225}
-      - {x: 0.19628286, y: 0.27548045}
+    - - {x: -0.0033568144, y: 0.6578173}
+      - {x: -0.16713268, y: 0.48127034}
+      - {x: -0.25574398, y: 0.22741461}
+      - {x: -0.2627915, y: -0.17347634}
+      - {x: -0.23997635, y: -0.372432}
+      - {x: -0.17322254, y: -0.49964976}
+      - {x: -0.0006890297, y: -0.6407633}
+      - {x: 0.17937851, y: -0.49713778}
+      - {x: 0.24068952, y: -0.37293637}
+      - {x: 0.25955093, y: -0.1765455}
+      - {x: 0.25358677, y: 0.22952247}
+      - {x: 0.1633873, y: 0.48655933}
   m_UseDelaunayMesh: 0
 --- !u!114 &5022098896843900403
 MonoBehaviour:

@@ -7,8 +7,10 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject pauseMenuButtons;
+    [SerializeField] private GameObject gameStartCountdown;
 
     private bool isPaused;
+    public bool textCountdownActive;
 
     public void TogglePause()
     {
@@ -24,6 +26,7 @@ public class PauseManager : MonoBehaviour
         pauseButton.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
+        gameStartCountdown.SetActive(false);
 
         //Pause sound
         if (AudioManager.Instance != null)
@@ -36,6 +39,12 @@ public class PauseManager : MonoBehaviour
         pauseButton.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
+
+        if (textCountdownActive)
+        {
+            gameStartCountdown.SetActive(true);
+        }
+        
 
         //Resume Playing sound
         if(AudioManager.Instance != null)
