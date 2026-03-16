@@ -361,19 +361,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9159f082cb6e005469d5d87d4809a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyPrefab: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
-    spawnWeight: 72
-  - enemyPrefab: {fileID: 5193873732804398788, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
-    spawnWeight: 58
-  - enemyPrefab: {fileID: 462078149943355466, guid: ddc8d920efed87c4d8e7c61e669577c1, type: 3}
-    spawnWeight: 24
+  waves:
+  - rowboats: 6
+    brigs: 0
+    galleons: 0
+  - rowboats: 6
+    brigs: 1
+    galleons: 0
+  - rowboats: 6
+    brigs: 2
+    galleons: 0
+  - rowboats: 6
+    brigs: 3
+    galleons: 0
+  - rowboats: 4
+    brigs: 2
+    galleons: 1
+  - rowboats: 4
+    brigs: 3
+    galleons: 2
+  - rowboats: 2
+    brigs: 3
+    galleons: 3
+  countdownManager: {fileID: 2958602485188248753}
+  rowboatPrefab: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+  brigPrefab: {fileID: 5193873732804398788, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
+  galleonPrefab: {fileID: 462078149943355466, guid: ddc8d920efed87c4d8e7c61e669577c1, type: 3}
   initialDelay: 5
-  minSpawnInterval: 3
-  maxSpawnInterval: 8
-  spawnWithinCameraView: 1
+  spawnWithinCameraView: 0
   spawnAreaSize: {x: 10, y: 6}
-  minDistanceFromPlayer: 4
+  minDistanceFromPlayer: 10
   maxEnemiesOnScreen: 10
   indicatorPrefab: {fileID: 7128717156821998975, guid: 4b6ad71e4120da4429a7d9dd4d833683, type: 3}
   indicatorParent: {fileID: 1047672679}
@@ -1895,7 +1912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1123553300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2757,7 +2774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1708457866
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3754,15 +3771,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791817454544118312, guid: aed96631543918d46bbb39823e6cd535, type: 3}
       propertyPath: m_Color.b
-      value: 0.72327036
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 8791817454544118312, guid: aed96631543918d46bbb39823e6cd535, type: 3}
       propertyPath: m_Color.g
-      value: 0.55091864
+      value: 0.5761836
       objectReference: {fileID: 0}
     - target: {fileID: 8791817454544118312, guid: aed96631543918d46bbb39823e6cd535, type: 3}
       propertyPath: m_Color.r
-      value: 0.5481388
+      value: 0.5761836
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

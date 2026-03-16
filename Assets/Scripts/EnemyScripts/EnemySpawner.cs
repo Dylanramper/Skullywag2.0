@@ -1,23 +1,29 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
     [System.Serializable]
-    public class EnemyType
+    public class Wave
     {
-        public GameObject enemyPrefab;
-        [Range(0f, 100f)]
-        public float spawnWeight = 10f; // Higher = more common
+        public int rowboats;
+        public int brigs;
+        public int galleons;
     }
 
-    [Header("Enemy Types")]
-    public List<EnemyType> enemyTypes = new List<EnemyType>();
+    [Header("Wave Settings")]
+    [SerializeField] private List<Wave> waves = new List<Wave>();
+    [SerializeField] private GameStartCountdown countdownManager;
+
+    //------------------------------------Edit
+    [Header("Enemy Prefabs")]
+    [SerializeField] private GameObject rowboatPrefab;
+    [SerializeField] private GameObject brigPrefab;
+    [SerializeField] private GameObject galleonPrefab;
 
     [Header("Spawn Timing")]
-    public float initialDelay = 5f;        // Time before first spawn
-    public float minSpawnInterval = 3f;
-    public float maxSpawnInterval = 8f;
+    public float initialDelay = 5f;
 
     [Header("Spawn Area")]
     public bool spawnWithinCameraView = false;
@@ -32,13 +38,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform indicatorParent;
 
     // Internal variables
-    private float nextSpawnTime;
     private Transform player;
     private Camera mainCamera;
     private List<GameObject> activeEnemies = new List<GameObject>();
 
+    //------------------------------------Edit
+    private int currentWave = 0;
+    private bool waveInProgress = false;
+
     void Start()
     {
+        /*
         // Find player
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
@@ -49,10 +59,20 @@ public class EnemySpawner : MonoBehaviour
         nextSpawnTime = Time.time + initialDelay;
 
         Debug.Log("Enemy Spawner initialized. First spawn in " + initialDelay + " seconds.");
+        */
+
+        //------------------------------------Edit
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null) player = playerObj.transform;
+
+        mainCamera = Camera.main;
+
+        Invoke(nameof(StartNextWave), initialDelay);
     }
 
     void Update()
     {
+        /*
         // Clean up destroyed enemies from the list
         activeEnemies.RemoveAll(item => item == null);
 
@@ -64,65 +84,88 @@ public class EnemySpawner : MonoBehaviour
             // Set next spawn time
             float randomInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             nextSpawnTime = Time.time + randomInterval;
+        }*/
+
+        //------------------------------------Edit
+        activeEnemies.RemoveAll(item => item == null);
+
+        if(waveInProgress && activeEnemies.Count == 0)
+        {
+            waveInProgress = false;
+            StartCoroutine(StartNextWaveRoutine());
         }
     }
 
-    void SpawnEnemy()
+    IEnumerator StartNextWaveRoutine()
     {
-        if (enemyTypes.Count == 0)
+        yield return StartCoroutine(countdownManager.WaveCountdown());
+        StartNextWave();
+    }
+
+    void StartNextWave()
+    {
+        currentWave++;
+
+        if(currentWave > waves.Count)
         {
-            Debug.LogWarning("No enemy types assigned to spawner!");
+            StartBossWave();
             return;
         }
 
-        // Calculate total weight
-        float totalWeight = 0f;
-        foreach (EnemyType type in enemyTypes)
+        waveInProgress = true;
+
+        Wave wave = waves[currentWave - 1];
+
+        SpawnWave(wave.rowboats, wave.brigs, wave.galleons);
+    }
+
+    void SpawnWave(int rowboats, int brigs, int galleons)
+    {
+        StartCoroutine(SpawnWaveRoutine(rowboats, brigs, galleons));
+    }
+
+    IEnumerator SpawnWaveRoutine(int rowboats, int brigs, int galleons)
+    {
+        for(int i = 0; i < rowboats; i++)
         {
-            if (type.enemyPrefab != null)
-                totalWeight += type.spawnWeight;
+            SpawnEnemy(rowboatPrefab);
+            yield return new WaitForSeconds(1f);
         }
 
-        if (totalWeight <= 0) return;
-
-        // Pick a random enemy type based on weight
-        float randomPoint = Random.Range(0f, totalWeight);
-        float currentWeight = 0f;
-        GameObject selectedPrefab = null;
-
-        foreach (EnemyType type in enemyTypes)
+        for (int i = 0; i < brigs; i++)
         {
-            if (type.enemyPrefab == null) continue;
-
-            currentWeight += type.spawnWeight;
-            if (randomPoint <= currentWeight)
-            {
-                selectedPrefab = type.enemyPrefab;
-                break;
-            }
+            SpawnEnemy(brigPrefab);
+            yield return new WaitForSeconds(1.5f);
         }
+        for(int i = 0;i < galleons; i++)
+        {
+            SpawnEnemy(galleonPrefab);
+            yield return new WaitForSeconds(2f);
+        }
+    }
 
-        if (selectedPrefab == null) return;
+    void SpawnEnemy(GameObject prefab)
+    {
+        //-------------------------------------Edit
+        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 spawnPosition = GetRandomSpawnPosition(playerPos);
 
-        // Get spawn position
-        Vector3 spawnPosition = GetRandomSpawnPosition();
-        if (spawnPosition == Vector3.zero) return; // No valid position
-
-        // Spawn enemy
-        GameObject newEnemy = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
         activeEnemies.Add(newEnemy);
 
-        // Spawn its indicator immediately
-        if (indicatorPrefab != null && indicatorParent != null)
+        if(indicatorPrefab != null && indicatorParent != null)
         {
             GameObject indicator = Instantiate(indicatorPrefab, indicatorParent);
             indicator.GetComponent<EnemyIndicator>().Initialize(newEnemy.transform);
         }
-
-        Debug.Log("Spawned " + selectedPrefab.name + " at " + spawnPosition);
     }
 
-    Vector3 GetRandomSpawnPosition()
+    void StartBossWave()
+    {
+        Debug.Log("Boss Wave!!");
+    }
+
+    Vector3 GetRandomSpawnPosition(Vector3 playerPos)
     {
         Vector3 spawnPosition = Vector3.zero;
         int attempts = 0;
@@ -132,20 +175,12 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!spawnWithinCameraView && mainCamera != null)
             {
-                // Use proper viewport range 0-1
-                float randomX = Random.Range(0.1f, 0.9f); // avoid edges
-                float randomY = Random.Range(0.1f, 0.9f);
-                Vector3 viewportPos = new Vector3(randomX, randomY, 10f);
-                spawnPosition = mainCamera.ViewportToWorldPoint(viewportPos);
-                spawnPosition.z = 0;
+                float spawnRadius = Random.Range(10f, 18f); //Distance from player
+                float angle = Random.Range(0f, Mathf.PI * 2);
 
-                /*  // Random position within camera view (but not at edges)
-                  float randomX = Random.Range(-0.45f, 0.45f); // 90% of screen width
-                  float randomY = Random.Range(-0.45f, 0.45f); // 90% of screen height
+                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * spawnRadius;
 
-                  Vector3 viewportPos = new Vector3(randomX, randomY, 10f);
-                  spawnPosition = mainCamera.ViewportToWorldPoint(viewportPos);
-                  spawnPosition.z = 0; // For 2D */
+                spawnPosition = playerPos + offset;
             }
             else
             {
@@ -156,21 +191,10 @@ public class EnemySpawner : MonoBehaviour
             }
 
             // Check distance from player
-            if (player != null && Vector3.Distance(spawnPosition, player.position) < minDistanceFromPlayer)
+            if (Vector3.Distance(spawnPosition, playerPos) < minDistanceFromPlayer)
             {
                 attempts++;
                 continue;
-            }
-
-            // Also check if position is inside the camera view (if using camera)
-            if (!spawnWithinCameraView && mainCamera != null)
-            {
-                Vector3 viewportCheck = mainCamera.WorldToViewportPoint(spawnPosition);
-                if (viewportCheck.x < 0 || viewportCheck.x > 1 || viewportCheck.y < 0 || viewportCheck.y > 1)
-                {
-                    attempts++;
-                    continue;
-                }
             }
 
             // Valid position found
@@ -178,7 +202,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         Debug.LogWarning("Could not find valid spawn position after " + maxAttempts + " attempts.");
-        return Vector3.zero;
+        return spawnPosition;
     }
 
     // Visualize spawn area in editor

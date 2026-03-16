@@ -56,13 +56,36 @@ public class GameStartCountdown : MonoBehaviour
         }
 
         countdownText.text = "TAKE SAIL!";
+
+        //Enable Player Movement and Shooting scripts
+        player.GetComponent<PlayerMovement>().enabled = true;
         yield return new WaitForSeconds(1f);
 
         countdownText.gameObject.SetActive(false);
 
-        //Enable Player Movement and Shooting scripts
-        player.GetComponent<PlayerMovement>().enabled = true;
+        
         manager.textCountdownActive = false;
         pauseButton.SetActive(true);
+    }
+
+    public IEnumerator WaveCountdown()
+    {
+        countdownText.gameObject.SetActive(true);
+
+        for(int i = 3; i > 0; i--)
+        {
+            countdownText.fontSize = 80;
+            countdownText.text = i.ToString();
+            StartCoroutine(AnimatePop());
+            AudioManager.Instance.PlayTextSFX();
+            yield return new WaitForSeconds(1f);
+        }
+        countdownText.text = "Ships Ahoy!";
+        StartCoroutine(AnimatePop());
+        AudioManager.Instance.PlayTextSFX();
+
+        yield return new WaitForSeconds(2f);
+
+        countdownText.gameObject.SetActive(false);
     }
 }
