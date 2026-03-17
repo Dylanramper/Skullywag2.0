@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("Wave Settings")]
     [SerializeField] private List<Wave> waves = new List<Wave>();
     [SerializeField] private GameStartCountdown countdownManager;
+    [SerializeField] private TextMeshProUGUI enemyCountText;
+    private int totalEnemiesThisWave;
 
     //------------------------------------Edit
     [Header("Enemy Prefabs")]
@@ -88,6 +91,7 @@ public class EnemySpawner : MonoBehaviour
 
         //------------------------------------Edit
         activeEnemies.RemoveAll(item => item == null);
+        UpdateEnemyUI();
 
         if(waveInProgress && activeEnemies.Count == 0)
         {
@@ -100,6 +104,18 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return StartCoroutine(countdownManager.WaveCountdown());
         StartNextWave();
+
+        Wave wave = waves[currentWave - 1];
+    }
+
+    void UpdateEnemyUI()
+    {
+        if (enemyCountText == null) return;
+
+        int alive = activeEnemies.Count;
+        enemyCountText.text = alive + " / " + totalEnemiesThisWave;
+
+        enemyCountText.gameObject.SetActive(waveInProgress);
     }
 
     void StartNextWave()
@@ -115,6 +131,10 @@ public class EnemySpawner : MonoBehaviour
         waveInProgress = true;
 
         Wave wave = waves[currentWave - 1];
+
+        totalEnemiesThisWave = wave.rowboats + wave.brigs + wave.galleons;
+
+        UpdateEnemyUI();
 
         SpawnWave(wave.rowboats, wave.brigs, wave.galleons);
     }
@@ -152,6 +172,7 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject newEnemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
         activeEnemies.Add(newEnemy);
+        UpdateEnemyUI();
 
         if(indicatorPrefab != null && indicatorParent != null)
         {
