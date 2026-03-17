@@ -17,15 +17,12 @@ public class Collectable : MonoBehaviour
     {
         particleFX = GetComponentInChildren<ParticleSystem>();
         startPosition = transform.position;
-        Destroy(gameObject, 15f); // Auto-destroy after 15 seconds
+        Destroy(gameObject, 15f);
     }
 
     void Update()
     {
-        // Make it spin
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
-
-        // Make it float up and down
         float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
@@ -36,15 +33,16 @@ public class Collectable : MonoBehaviour
         {
             particleFX.Play();
             Collect();
+            Debug.Log("collected");
         }
     }
 
     protected virtual void Collect()
     {
-        // Add score
-        if (GameManager.Instance != null)
+        // Add score using ScoreManager
+        if (ScoreManager.Instance != null)
         {
-            GameManager.Instance.AddScore(scoreValue);
+            ScoreManager.Instance.AddScore(scoreValue);
         }
         else
         {
@@ -65,4 +63,4 @@ public class Collectable : MonoBehaviour
 
         Destroy(gameObject);
     }
-}
+} // <-- This brace closes the class
