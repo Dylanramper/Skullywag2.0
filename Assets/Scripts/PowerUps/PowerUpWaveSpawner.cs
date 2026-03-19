@@ -55,7 +55,6 @@ public class PowerUpWaveSpawner : MonoBehaviour
 
     System.Collections.IEnumerator SpawnWave(Wave wave)
     {
-        Debug.Log("Starting wave: " + wave.waveName);
 
         // Wait before wave starts
         yield return new WaitForSeconds(wave.waveDelay);
@@ -87,7 +86,6 @@ public class PowerUpWaveSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = GetRandomSpawnPosition();
         Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Debug.Log("Spawned: " + prefab.name);
     }
 
     Vector3 GetRandomSpawnPosition()

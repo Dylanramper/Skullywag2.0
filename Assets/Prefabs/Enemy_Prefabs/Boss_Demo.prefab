@@ -9989,6 +9989,7 @@ GameObject:
   - component: {fileID: 7984790508685028330}
   - component: {fileID: 6862136046046413429}
   - component: {fileID: 7113789758626709022}
+  - component: {fileID: 8671561474679467891}
   m_Layer: 6
   m_Name: Boss_Demo
   m_TagString: Enemy
@@ -10104,6 +10105,25 @@ PolygonCollider2D:
       - {x: 0.19295603, y: -0.12134167}
       - {x: 0.15398219, y: 0.20003125}
   m_UseDelaunayMesh: 0
+--- !u!114 &8671561474679467891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462078149943355466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5ce086c95e2fb43b607479b1605254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  mortarCooldown: 3
+  cannonCooldown: 2
+  barrelCooldown: 4
+  mortarIndicatorPrefab: {fileID: 9074132819785736204, guid: 30708273a804d6c4bbd53df2d43cbe4c, type: 3}
+  mortarDelay: 1.5
+  explosionPrefab: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}
 --- !u!1 &553436179866757545
 GameObject:
   m_ObjectHideFlags: 0
