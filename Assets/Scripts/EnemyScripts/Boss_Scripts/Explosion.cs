@@ -16,9 +16,11 @@ public class Explosion : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player Hit!");
             other.GetComponent<PlayerHealth>()?.TakeDamage((int)damage);
             FX1.Play();
+            AudioManager.Instance.PlayExplosion();
+            AudioManager.Instance.PlayHit();
+            GameManager.Instance.ShakeCamera(0.25f, 0.2f);
         }
     }
 }

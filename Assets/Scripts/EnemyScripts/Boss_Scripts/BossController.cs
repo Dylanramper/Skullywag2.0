@@ -5,9 +5,26 @@ public class BossController : MonoBehaviour
 {
     public Transform player;
 
+    [Header("Mortar")]
     public float mortarCooldown = 3f;
     public float cannonCooldown = 2f;
     public float barrelCooldown = 4f;
+
+    public GameObject mortarIndicatorPrefab;
+    public float mortarDelay = 1f;
+    public GameObject explosionPrefab;
+
+    [Header("Side Cannons")]
+    public Transform leftCannon1;
+    public Transform leftCannon2;
+
+    public Transform rightCannon1;
+    public Transform rightCannon2;
+
+    public ParticleSystem cannonFX1;
+    public ParticleSystem cannonFX2;
+
+    public GameObject cannonballPrefab;
 
     private float mortarTimer;
     private float cannonTimer;
@@ -16,9 +33,19 @@ public class BossController : MonoBehaviour
     private float health;
     private float maxHealth = 100;
 
-    public GameObject mortarIndicatorPrefab;
-    public float mortarDelay = 1f;
-    public GameObject explosionPrefab;
+    int GetPlayerSide()
+    {
+        Vector2 toPlayer = (player.position - transform.position).normalized;
+
+        float dot = Vector2.Dot(transform.right, toPlayer);
+
+        if (dot > 0.3f)
+            return 1; // Right side
+        else if (dot < -0.3f)
+            return -1; // Left side
+        else
+            return 0; // Front or back
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -72,16 +99,61 @@ public class BossController : MonoBehaviour
             cannonTimer = cannonCooldown;
         }
     }
-        void MortarAttack()
+
+    void FireCannons(Transform cannonA, Transform cannonB)
+    {
+        if (cannonballPrefab == null)
         {
-            Vector2 targetPos = player.position;
-
-            GameObject indicator = Instantiate(mortarIndicatorPrefab, targetPos, Quaternion.identity);
-
-            Destroy(indicator, mortarDelay);
-
-            StartCoroutine(MortarExplosion(targetPos));
+            Debug.LogError("Cannonball Prefab not assigned!");
+            return;
         }
+
+        AudioManager.Instance.PlayCannon();
+
+        FireSingleCannon(cannonA);
+        FireSingleCannon(cannonB);
+    }
+    void FireSingleCannon(Transform cannon)
+    {
+        if (cannon == null)
+        {
+            Debug.LogWarning("Cannon transform missing!");
+            return;
+        }
+
+        GameObject cannonball = Instantiate(cannonballPrefab, cannon.position, cannon.rotation);
+
+        Rigidbody2D rb = cannonball.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = -cannon.transform.right * 10f;
+    }
+
+    IEnumerator FireCannonsDelayed(Transform cannonA, Transform cannonB)
+    {
+        AudioManager.Instance.PlayCannon();
+
+        FireSingleCannon(cannonA);
+
+        AudioManager.Instance.PlayCannon();
+        yield return new WaitForSeconds(0.5f);
+
+        FireSingleCannon(cannonB);
+        AudioManager.Instance.PlayCannon();
+        yield return new WaitForSeconds(0.5f);
+
+        FireSingleCannon(cannonA);
+        AudioManager.Instance.PlayCannon();
+    }
+
+    void MortarAttack()
+    {
+           Vector2 targetPos = player.position;
+
+           GameObject indicator = Instantiate(mortarIndicatorPrefab, targetPos, Quaternion.identity);
+
+           Destroy(indicator, mortarDelay);
+
+           StartCoroutine(MortarExplosion(targetPos));
+    }
 
     IEnumerator MortarExplosion(Vector2 position)
     {
@@ -100,7 +172,16 @@ public class BossController : MonoBehaviour
 
     void SideCannons()
     {
-        Debug.Log("Cannons Fired");
+        int side = GetPlayerSide();
+
+        if (side == 1)
+        {
+            StartCoroutine(FireCannonsDelayed(rightCannon1, rightCannon2));
+        }
+        else if (side == -1)
+        {
+            StartCoroutine(FireCannonsDelayed(leftCannon1, leftCannon2));
+        }
     }
 
     void HandleCooldowns()
