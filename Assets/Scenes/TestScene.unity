@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 236392910}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,9 +741,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
+      propertyPath: barrelPushForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
       propertyPath: explosionPrefab
       value: 
       objectReference: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}
+    - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
+      propertyPath: indicatorParent
+      value: 
+      objectReference: {fileID: 1047672679}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1450,6 +1458,7 @@ MonoBehaviour:
   Hit: {fileID: 8300000, guid: 26321c59fca0fce4d83f93ecbb092c24, type: 3}
   explosion: {fileID: 8300000, guid: 42ce97be5a961734290696ac398b148d, type: 3}
   textSFX: {fileID: 8300000, guid: 0f5446720819a344aafaaa2b6db463df, type: 3}
+  fogHorn: {fileID: 0}
   backgroundAudioSource: {fileID: 858068807}
   musicVolume: 1
   sfxVolume: 1

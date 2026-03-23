@@ -32,5 +32,15 @@ public class PlayerCannonball : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if(collision.gameObject.tag == "Boss")
+        {
+            // Hit Boss
+            BossController boss = collision.GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage); // adjust damage
+                Destroy(gameObject);
+            }
+        }
     }
 }

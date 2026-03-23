@@ -173,7 +173,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  explosionEffect: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   explosion: {fileID: 3498908498108827009}
   debris: {fileID: 5911949418443236158}
 --- !u!1 &4014946123277042735

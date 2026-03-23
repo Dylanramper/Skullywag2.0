@@ -9992,7 +9992,7 @@ GameObject:
   - component: {fileID: 8671561474679467891}
   m_Layer: 6
   m_Name: Boss_Demo
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10017,6 +10017,7 @@ Transform:
   - {fileID: 3271290002608504527}
   - {fileID: 6008631731262679645}
   - {fileID: 4888645004545240741}
+  - {fileID: 403492340616411379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6862136046046413429
@@ -10099,6 +10100,7 @@ PolygonCollider2D:
       - {x: -0.2805137, y: -0.34075582}
       - {x: -0.24442, y: -0.51084185}
       - {x: -0.16118112, y: -0.61658835}
+      - {x: -0.014068122, y: -0.5640387}
       - {x: 0.12436171, y: -0.6145526}
       - {x: 0.21839626, y: -0.51253295}
       - {x: 0.25295544, y: -0.3394248}
@@ -10119,6 +10121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  healthbar: {fileID: 4797639895565846031}
   mortarCooldown: 3
   cannonCooldown: 2
   barrelCooldown: 4
@@ -10132,6 +10135,14 @@ MonoBehaviour:
   cannonFX1: {fileID: 0}
   cannonFX2: {fileID: 0}
   cannonballPrefab: {fileID: 3606931892842474823, guid: d72b3a5a16aa35a48b6e892aaabd3dbb, type: 3}
+  barrelPrefab: {fileID: 3268643946339172368, guid: 1bc2baae22238e043b80020ca9f3ad3b, type: 3}
+  barrelDropPoint: {fileID: 403492340616411379}
+  barrelPushForce: 8
+  rowboatPrefab: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+  rowboatCount: 5
+  summonCooldown: 8
+  indicatorPrefab: {fileID: 7128717156821998975, guid: 4b6ad71e4120da4429a7d9dd4d833683, type: 3}
+  indicatorParent: {fileID: 7731025712478039876, guid: 4b6ad71e4120da4429a7d9dd4d833683, type: 3}
 --- !u!1 &553436179866757545
 GameObject:
   m_ObjectHideFlags: 0
@@ -15169,6 +15180,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &3288820685603520701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403492340616411379}
+  m_Layer: 0
+  m_Name: BarrelPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403492340616411379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288820685603520701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.008, y: -0.638, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7984790508685028330}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3398070905576310042
 GameObject:
   m_ObjectHideFlags: 0
@@ -15245,7 +15287,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 59
   m_Sprite: {fileID: 5022498062756669444, guid: bcc92907888469048a52eb4dfca5071a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -49594,7 +49636,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 59
   m_Sprite: {fileID: 5022498062756669444, guid: bcc92907888469048a52eb4dfca5071a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

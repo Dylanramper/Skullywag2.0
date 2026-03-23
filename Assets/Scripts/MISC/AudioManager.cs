@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip Hit;
     [SerializeField] private AudioClip explosion;
     [SerializeField] private AudioClip textSFX;
+    [SerializeField] private AudioClip fogHorn;
     [SerializeField] private AudioSource backgroundAudioSource;
 
     private AudioSource audioSource;
@@ -57,6 +58,11 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.pitch = Random.Range(0.5f, 1f);
         audioSource.PlayOneShot(explosion, 0.3f * sfxVolume);
+    }
+
+    public void PlayFogHorn()
+    {
+        audioSource.PlayOneShot(fogHorn, 0.2f * sfxVolume);
     }
 
     public void PauseBackground()
