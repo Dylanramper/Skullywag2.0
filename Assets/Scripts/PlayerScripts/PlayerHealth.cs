@@ -131,6 +131,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         Debug.Log("Shield activated! Defense +" + defense + " for " + duration + " seconds");
+
     }
 
     void DeactivateShield()
