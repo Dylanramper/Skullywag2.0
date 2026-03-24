@@ -19,7 +19,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyCountText;
     private int totalEnemiesThisWave;
 
-    //------------------------------------Edit
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject rowboatPrefab;
     [SerializeField] private GameObject brigPrefab;

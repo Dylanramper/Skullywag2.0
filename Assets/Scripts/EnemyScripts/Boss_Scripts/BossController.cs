@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossController : MonoBehaviour
 {
@@ -7,12 +8,16 @@ public class BossController : MonoBehaviour
 
     [Header("Base Stats")]
     [SerializeField] FloatingHealthbar healthbar;
+    [SerializeField] BossHPBar bossHealthbar;
 
     [Header("Mortar")]
+    public GameObject mortarProjectilePrefab;
+    public Transform mortarFirePoint;
     public float mortarCooldown = 3f;
     public float cannonCooldown = 2f;
     public float barrelCooldown = 4f;
 
+    public ParticleSystem mortarParticles;
     public GameObject mortarIndicatorPrefab;
     public float mortarDelay = 1f;
     public GameObject explosionPrefab;
@@ -39,18 +44,20 @@ public class BossController : MonoBehaviour
     public int rowboatCount = 5;
     public float summonCooldown = 8f;
 
+    public float moveSpeed = 1f;
+    public float rotationSpeed = 1f;
 
     private float summonTimer;
 
     private float mortarTimer;
     private float cannonTimer;
     private float barrelTimer;
+    private int orbitDirection = 1;
 
     private int currentPhase = 1;
 
     private float health;
     private float maxHealth = 100;
-    private Rigidbody2D BarrelRb;
 
     int GetPlayerSide()
     {
@@ -66,13 +73,32 @@ public class BossController : MonoBehaviour
             return 0; // Front or back
     }
 
+    bool IsFacingPlayer(float threshold = 0.8f)
+    {
+        Vector2 toPlayer = (player.position - transform.position).normalized;
+        float dot = Vector2.Dot(transform.up, toPlayer);
+        return dot > threshold;
+    }
+
+    bool IsBroadsideAligned(float threshold = 0.7f)
+    {
+        Vector2 toPlayer = (player.position - transform.position).normalized;
+
+        float dot = Vector2.Dot(transform.right, toPlayer);
+
+        return Mathf.Abs(dot) > threshold;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health = maxHealth;
 
+        mortarParticles = GetComponentInChildren<ParticleSystem>();
         healthbar = GetComponentInChildren<FloatingHealthbar>();
         healthbar.UpdateHealthbar(health, maxHealth);
+
+        bossHealthbar.UpdateHealth(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -81,6 +107,7 @@ public class BossController : MonoBehaviour
         UpdatePhase();
         HandleCooldowns();
         DecideAttack();
+        Move();
     }
 
     void UpdatePhase()
@@ -99,6 +126,48 @@ public class BossController : MonoBehaviour
         {
             currentPhase = 1;
         }
+    }
+
+    void Move()
+    {
+        Steer();
+        // Always move forward
+        transform.position += transform.up * moveSpeed * Time.deltaTime;
+    }
+
+    void Steer()
+    {
+        Vector2 toPlayer = (player.position - transform.position);
+        float distance = toPlayer.magnitude;
+
+        Vector2 dirToPlayer = toPlayer.normalized;
+
+        float desiredDistance = 7f;
+
+        Vector2 desiredDirection;
+
+        if (distance > desiredDistance + 1f)
+        {
+            // Chase player
+            desiredDirection = dirToPlayer;
+        }
+        else if (distance < desiredDistance - 1f)
+        {
+            // Back away
+            desiredDirection = -dirToPlayer;
+        }
+        else
+        {
+            // Orbit (THIS is the magic)
+            desiredDirection = new Vector2(-dirToPlayer.y, dirToPlayer.x) * orbitDirection;
+        }
+
+        // Steering using cross product
+        float cross = Vector3.Cross(transform.up, desiredDirection).z;
+
+        float turn = Mathf.Clamp(cross, -1f, 1f);
+
+        transform.Rotate(0, 0, -turn * rotationSpeed * 200f * Time.deltaTime);
     }
 
     void DecideAttack()
@@ -123,7 +192,7 @@ public class BossController : MonoBehaviour
             DropBarrel();
             barrelTimer = barrelCooldown;
         }
-        else if (cannonTimer <= 0f)
+        else if (cannonTimer <= 0f && IsBroadsideAligned())
         {
             SideCannons();
             cannonTimer = cannonCooldown;
@@ -175,8 +244,11 @@ public class BossController : MonoBehaviour
     {
         GameObject indicator = Instantiate(mortarIndicatorPrefab, targetPos, Quaternion.identity);
         Destroy(indicator, mortarDelay);
+        GameObject proj = Instantiate(mortarProjectilePrefab, mortarFirePoint.position, Quaternion.identity);
 
-        StartCoroutine(MortarExplosion(targetPos));
+        MortarProjectile mortar = proj.GetComponent<MortarProjectile>();
+        mortar.Launch(mortarFirePoint.position, targetPos);
+        mortarParticles.Play();
     }
 
     IEnumerator MortarBurst()
@@ -190,17 +262,6 @@ public class BossController : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
         }
-    }
-
-
-    IEnumerator MortarExplosion(Vector2 position)
-    {
-        yield return new WaitForSeconds(mortarDelay);
-
-        AudioManager.Instance.PlayExplosion();
-        AudioManager.Instance.PlayHit();
-
-        Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 
     void DropBarrel()
@@ -291,6 +352,7 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        bossHealthbar.UpdateHealth(health, maxHealth);
 
         if (health <= 0)
         {
