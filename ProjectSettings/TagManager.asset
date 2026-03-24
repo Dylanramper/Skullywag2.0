@@ -9,6 +9,8 @@ TagManager:
   - GameManager
   - Wall
   - Obstacle
+  - Boss
+  - Spawner
   layers:
   - Default
   - TransparentFX

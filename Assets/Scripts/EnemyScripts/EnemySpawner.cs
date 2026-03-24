@@ -19,7 +19,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyCountText;
     private int totalEnemiesThisWave;
 
-    //------------------------------------Edit
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject rowboatPrefab;
     [SerializeField] private GameObject brigPrefab;
@@ -45,26 +44,11 @@ public class EnemySpawner : MonoBehaviour
     private Camera mainCamera;
     private List<GameObject> activeEnemies = new List<GameObject>();
 
-    //------------------------------------Edit
     private int currentWave = 0;
     private bool waveInProgress = false;
 
     void Start()
     {
-        /*
-        // Find player
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null) player = playerObj.transform;
-
-        mainCamera = Camera.main;
-
-        // Set first spawn time
-        nextSpawnTime = Time.time + initialDelay;
-
-        Debug.Log("Enemy Spawner initialized. First spawn in " + initialDelay + " seconds.");
-        */
-
-        //------------------------------------Edit
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
 
@@ -75,21 +59,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        /*
-        // Clean up destroyed enemies from the list
-        activeEnemies.RemoveAll(item => item == null);
-
-        // Check if it's time to spawn and we haven't reached the limit
-        if (Time.time >= nextSpawnTime && activeEnemies.Count < maxEnemiesOnScreen)
-        {
-            SpawnEnemy();
-
-            // Set next spawn time
-            float randomInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-            nextSpawnTime = Time.time + randomInterval;
-        }*/
-
-        //------------------------------------Edit
         activeEnemies.RemoveAll(item => item == null);
         UpdateEnemyUI();
 
@@ -166,7 +135,6 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy(GameObject prefab)
     {
-        //-------------------------------------Edit
         Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         Vector3 spawnPosition = GetRandomSpawnPosition(playerPos);
 

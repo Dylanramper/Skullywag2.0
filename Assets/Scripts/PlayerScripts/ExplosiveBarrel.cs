@@ -8,7 +8,7 @@ public class ExplosiveBarrel : MonoBehaviour
     public int damage = 30;
 
     public LayerMask enemyLayer;
-    public GameObject explosionEffect;
+    public LayerMask playerLayer;
 
     [Header("Explosion FX")]
     [SerializeField]
@@ -37,6 +37,10 @@ public class ExplosiveBarrel : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Explode();
+        }
+        if (collision.CompareTag("Player"))
+        {
+            onHitPlayer();
         }
     }
 
@@ -73,6 +77,31 @@ public class ExplosiveBarrel : MonoBehaviour
             if(enemy != null)
             {
                 enemy.TakeDamage(damage);
+            }
+        }
+
+        GameManager.Instance.ShakeCamera(0.25f, 0.2f);
+
+        Destroy(gameObject);
+    }
+
+    void onHitPlayer()
+    {
+        PlayExplosionFX();
+
+        if (hasExploded) return;
+        hasExploded = true;
+
+        //Damage all enemies in radius
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, playerLayer);
+
+        foreach (Collider2D hit in hits)
+        {
+            PlayerHealth playerhp = hit.GetComponent<PlayerHealth>();
+            if (playerhp != null)
+            {
+                playerhp.TakeDamage(damage);
+                Debug.Log("Barrel Damage: " + damage);
             }
         }
 

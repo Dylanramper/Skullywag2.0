@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 7122926831915652814}
   - component: {fileID: 4074237468625798695}
   - component: {fileID: -1492736960600116282}
-  - component: {fileID: -6702209835042902565}
-  - component: {fileID: 5021532333966295223}
+  - component: {fileID: 3852083815591259148}
   m_Layer: 0
-  m_Name: CannonBLL
-  m_TagString: Cannonball
+  m_Name: E_MortarBLL
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.018, y: -1.622, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
+  m_LocalScale: {x: 0.036746267, y: 0.036746267, z: 0.24575}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,9 +77,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 40
-  m_Sprite: {fileID: -8119931697947367210, guid: 98e2553dbc8699542a0959856de06fa4, type: 3}
-  m_Color: {r: 0.9559748, g: 0.944952, b: 0.93493134, a: 1}
+  m_SortingOrder: 61
+  m_Sprite: {fileID: 1939561546804190385, guid: 78276385192f96244a583a7b9c17ddcb, type: 3}
+  m_Color: {r: 0.9496855, g: 0.69651574, b: 0.5883271, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,43 +116,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &-6702209835042902565
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3606931892842474823}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.045626283, y: 0.010369931}
-  m_Radius: 1.5846686
---- !u!114 &5021532333966295223
+--- !u!114 &3852083815591259148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,9 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3606931892842474823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e197e2bef097a049aa31792546efb05, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b025302ed5259c46b5c2886240002f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  lifetime: 3
-  speed: 7
+  travelTime: 1
+  minScale: 0.07
+  maxScale: 0.3
+  explosionPrefab: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}
