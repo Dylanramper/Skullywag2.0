@@ -71,13 +71,13 @@ public class ShieldPowerUp : MonoBehaviour
             }
 
             // Show UI icon (requires PowerUpUIManager in scene)
-            PowerUpUIManager uiManager = FindObjectOfType<PowerUpUIManager>();
+            PowerUpUIManager uiManager = FindAnyObjectByType<PowerUpUIManager>();
             if (uiManager != null && iconSprite != null)
             {
                 uiManager.ShowPowerUpIcon(iconSprite);
             }
 
-            PowerUpTimerUI timer = FindObjectOfType<PowerUpTimerUI>();
+            PowerUpTimerUI timer = FindAnyObjectByType<PowerUpTimerUI>();
             if (timer != null)
             {
                 timer.StartTimer(powerUpDuration);

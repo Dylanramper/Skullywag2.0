@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 236392911}
   - component: {fileID: 236392910}
+  - component: {fileID: 236392912}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Spawner
@@ -388,6 +389,9 @@ MonoBehaviour:
   rowboatPrefab: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
   brigPrefab: {fileID: 5193873732804398788, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
   galleonPrefab: {fileID: 462078149943355466, guid: ddc8d920efed87c4d8e7c61e669577c1, type: 3}
+  bossPrefab: {fileID: 462078149943355466, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
+  bossSpawnPoint: {fileID: 0}
+  bossHPBar: {fileID: 0}
   initialDelay: 5
   spawnWithinCameraView: 0
   spawnAreaSize: {x: 10, y: 6}
@@ -395,6 +399,7 @@ MonoBehaviour:
   maxEnemiesOnScreen: 10
   indicatorPrefab: {fileID: 7128717156821998975, guid: 4b6ad71e4120da4429a7d9dd4d833683, type: 3}
   indicatorParent: {fileID: 1047672679}
+  bossActive: 0
 --- !u!4 &236392911
 Transform:
   m_ObjectHideFlags: 0
@@ -410,6 +415,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &236392912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236392909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06de02a722077249ad655b6b4e211ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 387244771}
+  hpBar: {fileID: 901720932}
 --- !u!1 &241041956
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +760,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 262932417}
     - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
+      propertyPath: bossHPUI
+      value: 
+      objectReference: {fileID: 236392910}
+    - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
       propertyPath: moveSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -751,11 +774,15 @@ PrefabInstance:
     - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
       propertyPath: bossHealthbar
       value: 
-      objectReference: {fileID: 814858080}
+      objectReference: {fileID: 236392912}
     - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
       propertyPath: rotationSpeed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
+      propertyPath: healthbarImage
+      value: 
+      objectReference: {fileID: 901720934}
     - target: {fileID: 8671561474679467891, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
       propertyPath: barrelPushForce
       value: 3
@@ -768,7 +795,8 @@ PrefabInstance:
       propertyPath: indicatorParent
       value: 
       objectReference: {fileID: 1047672679}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8167930483112295117, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -854,7 +882,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.968
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1531,17 +1559,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7984790508685028330, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
   m_PrefabInstance: {fileID: 321309145}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &814858080 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8167930483112295117, guid: 24667e86a9bcdf449978443c0dd462d7, type: 3}
-  m_PrefabInstance: {fileID: 321309145}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814858075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06de02a722077249ad655b6b4e211ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &814858081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1944,7 +1961,7 @@ GameObject:
   - component: {fileID: 901720934}
   m_Layer: 5
   m_Name: BossHPBar
-  m_TagString: Untagged
+  m_TagString: BossUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1966,7 +1983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 9.166687}
+  m_AnchoredPosition: {x: 0, y: 9.166748}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &901720934

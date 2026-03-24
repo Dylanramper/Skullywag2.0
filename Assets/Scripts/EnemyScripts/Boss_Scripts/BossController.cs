@@ -80,6 +80,11 @@ public class BossController : MonoBehaviour
         return dot > threshold;
     }
 
+    public float GetHealthPercent()
+    {
+        return health / maxHealth;
+    }
+
     bool IsBroadsideAligned(float threshold = 0.7f)
     {
         Vector2 toPlayer = (player.position - transform.position).normalized;
@@ -98,7 +103,8 @@ public class BossController : MonoBehaviour
         healthbar = GetComponentInChildren<FloatingHealthbar>();
         healthbar.UpdateHealthbar(health, maxHealth);
 
-        bossHealthbar.UpdateHealth(health, maxHealth);
+        if (bossHealthbar != null)
+            bossHealthbar.UpdateHealth(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -352,22 +358,28 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        bossHealthbar.UpdateHealth(health, maxHealth);
 
         if (health <= 0)
         {
             Die();
         }
         healthbar.UpdateHealthbar(health, maxHealth);
+
+        if (bossHealthbar != null)
+            bossHealthbar.UpdateHealth(health, maxHealth);
+
         AudioManager.Instance.PlayHit();
         GameManager.Instance.ShakeCamera(0.1f, 0.08f);
-    }
+}
 
     void Die()
     {
         Debug.Log("Boss Defeated!");
 
-        // TODO: add explosion, loot, etc.
+        // Disable boss UI (direct reference)
+        if (bossHealthbar != null)
+            bossHealthbar.Hide();
+
         Destroy(gameObject);
     }
 }

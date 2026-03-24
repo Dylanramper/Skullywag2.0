@@ -24,6 +24,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject brigPrefab;
     [SerializeField] private GameObject galleonPrefab;
 
+    [Header("Boss")]
+    [SerializeField] private GameObject bossPrefab;
+    [SerializeField] private Transform bossSpawnPoint;
+    [SerializeField] private BossHPBar bossHPBar;
+
     [Header("Spawn Timing")]
     public float initialDelay = 5f;
 
@@ -46,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int currentWave = 0;
     private bool waveInProgress = false;
+    public bool bossActive = false;
 
     void Start()
     {
@@ -151,7 +157,20 @@ public class EnemySpawner : MonoBehaviour
 
     void StartBossWave()
     {
-        Debug.Log("Boss Wave!!");
+        waveInProgress = true;
+        bossActive = true;
+        bossHPBar.Show();
+
+        // Hide normal enemy counter
+        if (enemyCountText != null)
+            enemyCountText.gameObject.SetActive(false);
+
+        // Spawn boss
+        Vector3 spawnPos = bossSpawnPoint != null ? bossSpawnPoint.position : GetRandomSpawnPosition(player.position);
+
+        GameObject boss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+
+        activeEnemies.Add(boss);
     }
 
     Vector3 GetRandomSpawnPosition(Vector3 playerPos)

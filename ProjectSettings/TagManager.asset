@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - Boss
   - Spawner
+  - BossUI
   layers:
   - Default
   - TransparentFX

@@ -9990,7 +9990,6 @@ GameObject:
   - component: {fileID: 6862136046046413429}
   - component: {fileID: 7113789758626709022}
   - component: {fileID: 8671561474679467891}
-  - component: {fileID: 8167930483112295117}
   m_Layer: 6
   m_Name: Boss_Demo
   m_TagString: Boss
@@ -10152,19 +10151,6 @@ MonoBehaviour:
   summonCooldown: 8
   moveSpeed: 1
   rotationSpeed: 1
---- !u!114 &8167930483112295117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462078149943355466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06de02a722077249ad655b6b4e211ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillImage: {fileID: 0}
 --- !u!1 &553436179866757545
 GameObject:
   m_ObjectHideFlags: 0
