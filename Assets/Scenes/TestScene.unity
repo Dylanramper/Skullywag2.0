@@ -403,7 +403,7 @@ MonoBehaviour:
   indicatorParent: {fileID: 1047672679}
   player: {fileID: 0}
   bossActive: 0
-  startAtLastWave: 1
+  startAtLastWave: 0
 --- !u!4 &236392911
 Transform:
   m_ObjectHideFlags: 0
