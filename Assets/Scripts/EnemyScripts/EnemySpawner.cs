@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject bossPrefab;
     [SerializeField] private Transform bossSpawnPoint;
     [SerializeField] private BossHPBar bossHPBar;
+    [SerializeField] private BossIndicator bossIndicator;
 
     [Header("Spawn Timing")]
     public float initialDelay = 5f;
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform indicatorParent;
 
     // Internal variables
-    private Transform player;
+    public Transform player;
     private Camera mainCamera;
     private List<GameObject> activeEnemies = new List<GameObject>();
 
@@ -53,14 +54,33 @@ public class EnemySpawner : MonoBehaviour
     private bool waveInProgress = false;
     public bool bossActive = false;
 
+    [Header("Debug")]
+    [SerializeField] private bool startAtLastWave = false;
+
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
+        bossHPBar.Hide();
 
         mainCamera = Camera.main;
 
-        Invoke(nameof(StartNextWave), initialDelay);
+        //------------------------------------------------------------------Edit
+        if (startAtLastWave)
+        {
+            // Jump to final wave
+            currentWave = waves.Count - 1;
+
+            StartNextWave();
+        }
+        else
+        {
+            Invoke(nameof(StartNextWave), initialDelay);
+        }
+        //------------------------------------------------------------------
+
+        //DO NOT DELETE THIS LINE //Invoke(nameof(StartNextWave), initialDelay);
+
     }
 
     void Update()
@@ -100,6 +120,7 @@ public class EnemySpawner : MonoBehaviour
         if(currentWave > waves.Count)
         {
             StartBossWave();
+            //StartCoroutine(BossWaveEnum());
             return;
         }
 
@@ -170,7 +191,29 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject boss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
 
+        if (bossIndicator != null)
+        {
+            bossIndicator.SetBoss(boss.transform);
+        }
+
         activeEnemies.Add(boss);
+
+        BossController bossController = boss.GetComponent<BossController>();
+        if (bossController != null)
+        {
+            bossController.SetBossHealthbar(bossHPBar);
+            bossController.SetPlayer(player);
+        }
+
+        if (bossIndicator != null)
+        {
+            bossIndicator.SetBoss(boss.transform);
+        }
+    }
+    IEnumerator BossWaveEnum()
+    {
+        yield return StartCoroutine(countdownManager.WaveCountdown());
+        StartBossWave();
     }
 
     Vector3 GetRandomSpawnPosition(Vector3 playerPos)

@@ -105,6 +105,12 @@ public class BossController : MonoBehaviour
 
         if (bossHealthbar != null)
             bossHealthbar.UpdateHealth(health, maxHealth);
+
+        BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
+        if (indicator != null)
+        {
+            indicator.SetBoss(this.transform);
+        }
     }
 
     // Update is called once per frame
@@ -132,6 +138,15 @@ public class BossController : MonoBehaviour
         {
             currentPhase = 1;
         }
+    }
+
+    public void SetBossHealthbar(BossHPBar hpBar)
+    {
+        bossHealthbar = hpBar;
+
+        // Immediately sync health
+        if (bossHealthbar != null)
+            bossHealthbar.UpdateHealth(health, maxHealth);
     }
 
     void Move()
@@ -174,6 +189,11 @@ public class BossController : MonoBehaviour
         float turn = Mathf.Clamp(cross, -1f, 1f);
 
         transform.Rotate(0, 0, -turn * rotationSpeed * 200f * Time.deltaTime);
+    }
+
+    public void SetPlayer(Transform playerTransform)
+    {
+        player = playerTransform;
     }
 
     void DecideAttack()
@@ -376,9 +396,11 @@ public class BossController : MonoBehaviour
     {
         Debug.Log("Boss Defeated!");
 
-        // Disable boss UI (direct reference)
-        if (bossHealthbar != null)
-            bossHealthbar.Hide();
+        BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
+        if (indicator != null)
+        {
+            indicator.ClearBoss();
+        }
 
         Destroy(gameObject);
     }

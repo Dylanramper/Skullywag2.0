@@ -34,7 +34,7 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         if (hasExploded) return;
 
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
             Explode();
         }

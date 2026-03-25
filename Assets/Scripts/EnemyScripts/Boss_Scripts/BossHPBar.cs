@@ -12,12 +12,10 @@ public class BossHPBar : MonoBehaviour
     }
     public void Hide()
     {
-        if(hpBar == true)
         hpBar.SetActive(false);
     }
     public void Show()
     {
-        if(hpBar == false)
         hpBar.SetActive(true);
     }
 }
