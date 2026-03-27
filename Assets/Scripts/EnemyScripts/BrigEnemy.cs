@@ -98,6 +98,7 @@ public class BrigEnemy : EnemyShip
         {
             rightCannonFX.Play();
         }
+
     }
 
     public override void TakeDamage(int amount)

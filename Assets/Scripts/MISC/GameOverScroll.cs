@@ -50,10 +50,47 @@ public class GameOverScroll : MonoBehaviour
         scrollPanel.anchoredPosition = panelTargetPos + Vector2.up * startYOffset;
     }
 
+    public void CloseMenu(System.Action onComplete)
+    {
+        StartCoroutine(CloseSequence(onComplete));
+    }
+
+    public void ShowScroll()
+    {
+        gameObject.SetActive(true);
+
+        // Reset position so it slides in properly every time
+        scrollPanel.anchoredPosition = panelTargetPos + Vector2.up * startYOffset;
+
+        StartCoroutine(GameOverSequence());
+    }
+
     public void ShowGameOver()
     {
         gameObject.SetActive(true);
         StartCoroutine(GameOverSequence());
+    }
+
+    private IEnumerator CloseSequence(System.Action onComplete)
+    {
+        // Hide buttons immediately
+        Buttons.SetActive(false);
+
+        yield return StartCoroutine(CloseScrollAnimation());
+        yield return StartCoroutine(SlideOut());
+        onComplete?.Invoke();
+        scrollCenter.SetActive(true);
+        scrollLeftGO.SetActive(false);
+        scrollRightGO.SetActive(false);
+        Buttons.SetActive(false);
+        scrollLeftStart = scrollLeft.anchoredPosition;
+        scrollRightStart = scrollRight.anchoredPosition;
+
+        gameObject.SetActive(false);
+        paperLeft.fillAmount = 0f;
+        paperRight.fillAmount = 0f;
+        Time.timeScale = 1f;
+        gameObject.SetActive(false);
     }
 
     private IEnumerator GameOverSequence()
@@ -95,6 +132,25 @@ public class GameOverScroll : MonoBehaviour
         scrollPanel.anchoredPosition = panelTargetPos;
     }
 
+    private IEnumerator SlideOut()
+    {
+        float elapsed = 0f;
+
+        Vector2 startPos = scrollPanel.anchoredPosition;
+        Vector2 endPos = panelTargetPos + Vector2.up * startYOffset * 1.5f;
+
+        while (elapsed < slideDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.SmoothStep(0, 1, elapsed / slideDuration);
+
+            scrollPanel.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+
+            yield return null;
+        }
+
+    }
+
     private IEnumerator OpenScrollAnimation()
     {
         scrollLeftGO.SetActive(true);
@@ -122,5 +178,34 @@ public class GameOverScroll : MonoBehaviour
         paperRight.fillAmount = 1f;
         scrollLeft.anchoredPosition = new Vector2(scrollLeftStart.x, scrollLeftStart.y);
         scrollRight.anchoredPosition = new Vector2(scrollRightStart.x, scrollRightStart.y);
+    }
+
+    private IEnumerator CloseScrollAnimation()
+    {
+        float elapsed = 0f;
+        //AudioManager (Page Turn)
+        while (elapsed < openDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = 1 - (elapsed / openDuration); // REVERSE
+
+            paperLeft.fillAmount = t;
+            paperRight.fillAmount = t;
+
+            scrollLeft.anchoredPosition = new Vector2(scrollLeftStart.x * t, scrollLeftStart.y);
+            scrollRight.anchoredPosition = new Vector2(scrollRightStart.x * t, scrollRightStart.y);
+
+            yield return null;
+        }
+
+        paperLeft.fillAmount = 0f;
+        paperRight.fillAmount = 0f;
+
+        scrollLeft.anchoredPosition = new Vector2(scrollLeftStart.x, scrollLeftStart.y);
+        scrollRight.anchoredPosition = new Vector2(scrollRightStart.x, scrollRightStart.y);
+
+        scrollLeftGO.SetActive(false);
+        scrollRightGO.SetActive(false);
+        scrollCenter.SetActive(true);
     }
 }

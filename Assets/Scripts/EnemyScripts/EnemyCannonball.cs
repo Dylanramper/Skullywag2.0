@@ -16,7 +16,7 @@ public class EnemyCannonball : MonoBehaviour
     void Start()
     {
         // Fire forward in the cannon's facing direction
-        //rb.linearVelocity = transform.up * speed;
+        rb.linearVelocity = transform.up * speed;
 
         Destroy(gameObject, lifetime);
     }
@@ -34,7 +34,7 @@ public class EnemyCannonball : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Wall") || other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
+        if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
         }
