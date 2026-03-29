@@ -10,6 +10,7 @@ public class GameUIManager : MonoBehaviour
     public GameObject hud;
     private bool hasTapped = false;
     private Coroutine blinkRoutine;
+    private EnemySpawner spawner;
 
     [SerializeField] private GameOverScroll mainMenuScroll;
     [SerializeField] private GameOverScroll pauseMenuScroll;
@@ -29,12 +30,12 @@ public class GameUIManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0f;
+        spawner = FindFirstObjectByType<EnemySpawner>();
+        spawner.enabled = false;
 
         continueTXT.gameObject.SetActive(true);
         blinkRoutine = StartCoroutine(BlinkLoop());
         hud.SetActive(false);
-
-        FindFirstObjectByType<EnemySpawner>().enabled = false;
     }
 
     void Update()
@@ -52,7 +53,6 @@ public class GameUIManager : MonoBehaviour
     {
         if (blinkRoutine != null)
             StopCoroutine(blinkRoutine);
-
         continueTXT.gameObject.SetActive(false);
 
         ShowMainMenu();
@@ -60,25 +60,26 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        Time.timeScale = 0f;
 
+        Time.timeScale = 0f;
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         hud.SetActive(false);
 
-        FindFirstObjectByType<EnemySpawner>().enabled = false;
+        AudioManager.Instance.PlayMusic(menuMusic);
 
         mainMenuScroll.ShowScroll();
     }
 
     public void StartGame()
     {
+        AudioManager.Instance.PlayMusic(gameplayMusic);
+
         mainMenuScroll.CloseMenu(() => {
             Time.timeScale = 1f;
 
             hud.SetActive(true);
-
-            FindFirstObjectByType<EnemySpawner>().enabled = true; });
+            spawner.enabled = true; });
     }
 
     public void PauseGame()
@@ -91,8 +92,14 @@ public class GameUIManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenuScroll.CloseMenu(ResumeGame);
+        pauseMenuScroll.CloseMenu(OnResumeComplete);
     }
+
+    private void OnResumeComplete()
+{
+    Time.timeScale = 1f;
+    pauseMenu.SetActive(false);
+}
 
     public void GameOver()
     {
@@ -108,6 +115,7 @@ public class GameUIManager : MonoBehaviour
 
     public void RestartGame()
     {
+        AudioManager.Instance.PlayMusic(gameplayMusic);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 

@@ -50,10 +50,12 @@ public abstract class EnemyShip : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             AggroBehavior();
+            AudioManager.Instance.PlayMusic(combatMusic);
         }
         else
         {
             Wander();
+            AudioManager.Instance.PlayMusic(gameplayMusic);
         }
     }
 
@@ -64,7 +66,9 @@ public abstract class EnemyShip : MonoBehaviour
         {
             //Disengage if too far
             if (distance > loseAggroRange)
+            {
                 playerDetected = false;
+            }
         }
         else
         {

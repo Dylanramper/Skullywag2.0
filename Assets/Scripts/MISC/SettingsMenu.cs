@@ -10,7 +10,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private GameObject buttonsUI;
 
     [Header("Volume Control")]
-    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider bgSlider;
     [SerializeField] private Slider sfxSlider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +30,7 @@ public class SettingsMenu : MonoBehaviour
             //musicSlider.value = AudioManager.Instance.GetMusicVolume();
             //sfxSlider.value = AudioManager.Instance.GetSFXVolume();
 
-            musicSlider.SetValueWithoutNotify(AudioManager.Instance.GetMusicVolume());
+            bgSlider.SetValueWithoutNotify(AudioManager.Instance.GetBackgroundVolume());
             sfxSlider.SetValueWithoutNotify(AudioManager.Instance.GetSFXVolume());
         }
     }
@@ -55,13 +55,19 @@ public class SettingsMenu : MonoBehaviour
             buttonsUI?.SetActive(true);
         }
     }
-    public void OnMusicSliderChanged(float value)
+    public void OnBackgroundSliderChanged(float value)
     {
-        AudioManager.Instance.SetMusicVolume(value);
+        AudioManager.Instance.SetBackgroundVolume(value);
     }
 
     public void OnSFXSliderChanged(float value)
     {
         AudioManager.Instance.SetSFXVolume(value);
+    }
+
+    public void OnMusicSliderChanged(float value)
+    {
+        PlayerPrefs.SetFloat("MusicVolume", value);
+        PlayerPrefs.Save();
     }
 }

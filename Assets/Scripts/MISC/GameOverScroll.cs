@@ -34,6 +34,7 @@ public class GameOverScroll : MonoBehaviour
 
     private void Awake()
     {
+
         scrollCenter.SetActive(true);
         scrollLeftGO.SetActive(false);
         scrollRightGO.SetActive(false);
