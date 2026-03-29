@@ -285,7 +285,7 @@ public class GalleonEnemy : EnemyShip
 
             Destroy(explsion4.gameObject, totalDuration4);
         }
-        Destroy(gameObject);
+        base.Die();
     }
 
     private void OnDrawGizmosSelected()

@@ -12,6 +12,9 @@ public class SettingsMenu : MonoBehaviour
     [Header("Volume Control")]
     [SerializeField] private Slider bgSlider;
     [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Slider musicSlider;
+
+    [SerializeField] private InputField musicInputField;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,11 +30,10 @@ public class SettingsMenu : MonoBehaviour
         //Synch Audio Sliders with saved values
         if(AudioManager.Instance != null)
         {
-            //musicSlider.value = AudioManager.Instance.GetMusicVolume();
-            //sfxSlider.value = AudioManager.Instance.GetSFXVolume();
 
             bgSlider.SetValueWithoutNotify(AudioManager.Instance.GetBackgroundVolume());
             sfxSlider.SetValueWithoutNotify(AudioManager.Instance.GetSFXVolume());
+            musicSlider.SetValueWithoutNotify(AudioManager.Instance.GetMusicVolume());
         }
     }
 
@@ -55,6 +57,13 @@ public class SettingsMenu : MonoBehaviour
             buttonsUI?.SetActive(true);
         }
     }
+    public void OnMusicSliderChanged(float value)
+    {
+        AudioManager.Instance.SetMusicVolume(value);
+
+        if (musicInputField != null)
+            musicInputField.text = (value * 100f).ToString("0");
+    }
     public void OnBackgroundSliderChanged(float value)
     {
         AudioManager.Instance.SetBackgroundVolume(value);
@@ -63,11 +72,5 @@ public class SettingsMenu : MonoBehaviour
     public void OnSFXSliderChanged(float value)
     {
         AudioManager.Instance.SetSFXVolume(value);
-    }
-
-    public void OnMusicSliderChanged(float value)
-    {
-        PlayerPrefs.SetFloat("MusicVolume", value);
-        PlayerPrefs.Save();
     }
 }

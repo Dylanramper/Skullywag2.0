@@ -175,7 +175,6 @@ public class BrigEnemy : EnemyShip
 
             Destroy(explsion3.gameObject, totalDuration3);
         }
-
-        Destroy(gameObject);
+        base.Die();
     }
 }

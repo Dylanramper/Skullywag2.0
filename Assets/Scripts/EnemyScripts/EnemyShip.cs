@@ -31,6 +31,9 @@ public abstract class EnemyShip : MonoBehaviour
 
     [SerializeField] FloatingHealthbar healthbar;
 
+    public static int activeEnemiesInCombat = 0;
+    private bool countedInCombat = false;
+
     protected virtual void Awake()
     {
         healthbar = GetComponentInChildren<FloatingHealthbar>();
@@ -44,18 +47,17 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        Debug.Log("Enemies in combat: " + activeEnemiesInCombat);
         CheckPlayerDetection();
 
         if (playerDetected)
         {
             rb.linearVelocity = Vector2.zero;
             AggroBehavior();
-            AudioManager.Instance.PlayMusic(combatMusic);
         }
         else
         {
             Wander();
-            AudioManager.Instance.PlayMusic(gameplayMusic);
         }
     }
 
@@ -64,17 +66,41 @@ public abstract class EnemyShip : MonoBehaviour
         float distance = Vector2.Distance(rb.position, (Vector2)player.position);
         if (playerDetected)
         {
+            if (activeEnemiesInCombat <= 0)
+            {
+                activeEnemiesInCombat = 0;
+                AudioManager.Instance.PlayGameplayMusic();
+            }
+
             //Disengage if too far
             if (distance > loseAggroRange)
             {
                 playerDetected = false;
+
+                if (countedInCombat)
+                {
+                    countedInCombat = false;
+                }
             }
         }
         else
         {
             //If not Aggro'd and player is in detection range. Detected set to true.
             if (distance < detectionRange)
+            {
                 playerDetected = true;
+
+                if (!countedInCombat)
+                {
+                    countedInCombat = true;
+                    activeEnemiesInCombat++;
+
+                    if (activeEnemiesInCombat == 1)
+                    {
+                        AudioManager.Instance.PlayCombatMusic();
+                    }
+                }
+            }
         }
     }
 
@@ -112,6 +138,20 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void Die()
     {
+        // Remove from combat if it was EVER counted
+        if (countedInCombat)
+        {
+            activeEnemiesInCombat--;
+        }
+
+        // Safety clamp
+        activeEnemiesInCombat = Mathf.Max(0, activeEnemiesInCombat);
+
+        // If no enemies left -> return to gameplay music
+        if (activeEnemiesInCombat == 0)
+        {
+            AudioManager.Instance.PlayGameplayMusic();
+        }
         Destroy(gameObject);
     }
 

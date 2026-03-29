@@ -117,8 +117,7 @@ public class RowboatEnemy : EnemyShip
                 }
             }
         }
-        //TODO: sound----------------------------------------------------------------------
-        Destroy(gameObject);
+        base.Die();
     }
 
     private void OnDrawGizmosSelected()

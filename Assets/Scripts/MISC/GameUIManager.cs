@@ -66,14 +66,14 @@ public class GameUIManager : MonoBehaviour
         gameOverMenu.SetActive(false);
         hud.SetActive(false);
 
-        AudioManager.Instance.PlayMusic(menuMusic);
+        AudioManager.Instance.PlayMenuMusic();
 
         mainMenuScroll.ShowScroll();
     }
 
     public void StartGame()
     {
-        AudioManager.Instance.PlayMusic(gameplayMusic);
+        AudioManager.Instance.PlayGameplayMusic();
 
         mainMenuScroll.CloseMenu(() => {
             Time.timeScale = 1f;
@@ -115,7 +115,7 @@ public class GameUIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        AudioManager.Instance.PlayMusic(gameplayMusic);
+        //AudioManager.Instance.PlayMusic(gameplayMusic);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
