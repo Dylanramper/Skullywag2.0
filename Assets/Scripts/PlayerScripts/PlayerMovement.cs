@@ -47,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
         // Check if a speed boost has expired
         if (Time.time > speedBoostEndTime && currentMoveSpeed != speed)
         {
-            // Boost just ended
-            Debug.Log("Speed boost ended!");
             currentMoveSpeed = speed;
         }
 

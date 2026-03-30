@@ -29,8 +29,15 @@ public class BossController : MonoBehaviour
     public Transform rightCannon1;
     public Transform rightCannon2;
 
-    public ParticleSystem cannonFX1;
-    public ParticleSystem cannonFX2;
+    [Header("VisualFX")]
+    public ParticleSystem damageFX1;
+    public ParticleSystem damageFX2;
+    public ParticleSystem damageFX3;
+    public ParticleSystem cannonRightFX1;
+    public ParticleSystem cannonRightFX2;
+    public ParticleSystem cannonLeftFX1;
+    public ParticleSystem cannonLeftFX2;
+    private bool damagedFX;
 
     public GameObject cannonballPrefab;
 
@@ -45,58 +52,46 @@ public class BossController : MonoBehaviour
     public float summonCooldown = 8f;
 
     public float moveSpeed = 1f;
-    public float rotationSpeed = 1f;
+    public float rotationSpeed = 1.2f;
 
     private float summonTimer;
 
     private float mortarTimer;
     private float cannonTimer;
     private float barrelTimer;
-    private int orbitDirection = 1;
 
     private int currentPhase = 1;
+    private int previousPhase = 1;
 
     private float health;
     private float maxHealth = 100;
 
-    int GetPlayerSide()
-    {
-        Vector2 toPlayer = (player.position - transform.position).normalized;
-
-        float dot = Vector2.Dot(transform.right, toPlayer);
-
-        if (dot > 0.3f)
-            return 1; // Right side
-        else if (dot < -0.3f)
-            return -1; // Left side
-        else
-            return 0; // Front or back
-    }
-
-    bool IsFacingPlayer(float threshold = 0.8f)
-    {
-        Vector2 toPlayer = (player.position - transform.position).normalized;
-        float dot = Vector2.Dot(transform.up, toPlayer);
-        return dot > threshold;
-    }
-
+    private int broadsideSide = 1; // 1 = right, -1 = left
+    private float broadsideSwitchCooldown = 2f;
+    private float broadsideSwitchTimer;
+    float broadsideLockTimer = 0f;
+    float requiredLockTime = 0.1f;
     public float GetHealthPercent()
     {
         return health / maxHealth;
     }
-
-    bool IsBroadsideAligned(float threshold = 0.7f)
+    bool IsBroadsideLocked(float tolerance = 6f)
     {
-        Vector2 toPlayer = (player.position - transform.position).normalized;
+        Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
 
-        float dot = Vector2.Dot(transform.right, toPlayer);
+        float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
 
-        return Mathf.Abs(dot) > threshold;
+        float targetAngle = 45f * broadsideSide;
+
+        float angleDiff = Mathf.DeltaAngle(-angleToPlayer, targetAngle);
+
+        return Mathf.Abs(angleDiff) < tolerance;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        damagedFX = false;
         health = maxHealth;
 
         mortarParticles = GetComponentInChildren<ParticleSystem>();
@@ -120,23 +115,72 @@ public class BossController : MonoBehaviour
         HandleCooldowns();
         DecideAttack();
         Move();
+        broadsideSwitchTimer -= Time.deltaTime;
+
+        if (broadsideSwitchTimer <= 0f)
+        {
+            ChooseBroadsideSide();
+            broadsideSwitchTimer = broadsideSwitchCooldown;
+        }
+        if (IsBroadsideLocked())
+        {
+            broadsideLockTimer += Time.deltaTime;
+        }
+        else
+        {
+            broadsideLockTimer = 0f;
+        }
+        if (health <= 40f)
+        {
+            damagedFX = true;
+        }
+        else { damagedFX = false; }
     }
 
     void UpdatePhase()
     {
         float healthPercent = health / maxHealth;
 
+        int newPhase;
+
         if (healthPercent <= 0.3f)
         {
-            currentPhase = 3;
+            newPhase = 3;
         }
         else if (healthPercent <= 0.7f)
         {
-            currentPhase = 2;
+            newPhase = 2;
+            
         }
         else
         {
-            currentPhase = 1;
+            newPhase = 1;
+        }
+
+        if (damagedFX)
+        {
+            damageFX1.Play();
+            damageFX2.Play();
+            damageFX3.Play();
+        }
+
+        // Detect phase change
+        if (newPhase != currentPhase)
+        {
+            OnPhaseChanged(newPhase);
+        }
+
+        previousPhase = currentPhase;
+        currentPhase = newPhase;
+    }
+
+    void OnPhaseChanged(int newPhase)
+    {
+        if (newPhase == 3)
+        {
+            // Only play foghorn and summon rowboats when entering phase 3
+            StartCoroutine(SummonRowboatsSequence());
+            summonTimer = summonCooldown; // initialize cooldown
         }
     }
 
@@ -158,37 +202,44 @@ public class BossController : MonoBehaviour
 
     void Steer()
     {
-        Vector2 toPlayer = (player.position - transform.position);
-        float distance = toPlayer.magnitude;
+        Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        Vector2 dirToPlayer = toPlayer.normalized;
+        float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
+        float turnDirection = Mathf.Sign(angleToPlayer);
 
-        float desiredDistance = 7f;
+        float desiredDistance = 10f;
 
-        Vector2 desiredDirection;
-
-        if (distance > desiredDistance + 1f)
+        if (distance > desiredDistance)
         {
-            // Chase player
-            desiredDirection = dirToPlayer;
-        }
-        else if (distance < desiredDistance - 1f)
-        {
-            // Back away
-            desiredDirection = -dirToPlayer;
+            // Chase player (like brig)
+            transform.Rotate(0, 0, turnDirection * rotationSpeed * 100f * Time.deltaTime);
         }
         else
         {
-            // Orbit (THIS is the magic)
-            desiredDirection = new Vector2(-dirToPlayer.y, dirToPlayer.x) * orbitDirection;
+            // Maintain broadside instead of orbiting blindly
+            MaintainBroadside(angleToPlayer);
         }
+    }
 
-        // Steering using cross product
-        float cross = Vector3.Cross(transform.up, desiredDirection).z;
+    void ChooseBroadsideSide()
+    {
+        Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
 
-        float turn = Mathf.Clamp(cross, -1f, 1f);
+        float dot = Vector2.Dot(transform.right, toPlayer);
 
-        transform.Rotate(0, 0, -turn * rotationSpeed * 200f * Time.deltaTime);
+        broadsideSide = dot >= 0 ? 1 : -1;
+    }
+
+    void MaintainBroadside(float angleToPlayer)
+    {
+        float targetAngle = 45f * broadsideSide;
+
+        float angleDiff = Mathf.DeltaAngle(-angleToPlayer, targetAngle);
+
+        float turnStrength = Mathf.Clamp(angleDiff / 45f, -1f, 1f);
+
+        transform.Rotate(0, 0, turnStrength * rotationSpeed * 120f * Time.deltaTime);
     }
 
     public void SetPlayer(Transform playerTransform)
@@ -200,28 +251,29 @@ public class BossController : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Phase 3 special ability (highest priority)
-        if (currentPhase == 3 && summonTimer <= 0f)
+        // PRIORITY 1: Cannons when broadside is locked
+        if (cannonTimer <= 0f && broadsideLockTimer >= requiredLockTime)
         {
-            SummonRowboats();
-            summonTimer = summonCooldown;
+            SideCannons();
+            cannonTimer = cannonCooldown;
+            broadsideLockTimer = 0f;
             return;
         }
 
+        // Priority 2: Mortar (long range)
         if (distance > 6f && mortarTimer <= 0f)
         {
             MortarAttack();
             mortarTimer = mortarCooldown;
+            return;
         }
-        else if (IsPlayerBehind() && barrelTimer <= 0f)
+
+        // Priority 3: Barrel (close + behind)
+        if (IsPlayerBehind() && barrelTimer <= 0f)
         {
             DropBarrel();
             barrelTimer = barrelCooldown;
-        }
-        else if (cannonTimer <= 0f && IsBroadsideAligned())
-        {
-            SideCannons();
-            cannonTimer = cannonCooldown;
+            return;
         }
     }
     void FireSingleCannon(Transform cannon)
@@ -241,7 +293,6 @@ public class BossController : MonoBehaviour
     IEnumerator FireCannonsDelayed(Transform cannonA, Transform cannonB)
     {
         AudioManager.Instance.PlayCannon();
-
         FireSingleCannon(cannonA);
 
         AudioManager.Instance.PlayCannon();
@@ -253,6 +304,32 @@ public class BossController : MonoBehaviour
 
         FireSingleCannon(cannonA);
         AudioManager.Instance.PlayCannon();
+    }
+
+    IEnumerator FireRightCannonsFX()
+    {
+        if (cannonRightFX1 != null) cannonRightFX1.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (cannonRightFX2 != null) cannonRightFX2.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (cannonRightFX1 != null) cannonRightFX1.Play();
+    }
+
+    IEnumerator FireLeftCannonsFX()
+    {
+        if (cannonLeftFX1 != null) cannonLeftFX1.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (cannonLeftFX2 != null) cannonLeftFX2.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (cannonLeftFX1 != null) cannonLeftFX1.Play();
     }
 
     void MortarAttack()
@@ -310,21 +387,19 @@ public class BossController : MonoBehaviour
         {
             Debug.LogWarning("Barrel has no Rigidbody2D!");
         }
-
-        Debug.Log("Barrel Dropped");
     }
 
     void SideCannons()
     {
-        int side = GetPlayerSide();
-
-        if (side == 1)
+        if (broadsideSide == 1)
         {
             StartCoroutine(FireCannonsDelayed(rightCannon1, rightCannon2));
+            StartCoroutine(FireRightCannonsFX());
         }
-        else if (side == -1)
+        else if (broadsideSide == -1)
         {
             StartCoroutine(FireCannonsDelayed(leftCannon1, leftCannon2));
+            StartCoroutine(FireLeftCannonsFX());
         }
     }
 
@@ -355,6 +430,20 @@ public class BossController : MonoBehaviour
 
             Instantiate(rowboatPrefab, spawnPos, rotation);
         }
+    }
+
+    IEnumerator SummonRowboatsSequence()
+    {
+        // Play fog horn
+        AudioManager.Instance.PlayFogHorn();
+
+        // Big camera shake
+        GameManager.Instance.ShakeCamera(3f, 0.8f);
+
+        // Small delay for anticipation
+        yield return new WaitForSeconds(1.2f);
+
+        SummonRowboats();
     }
 
     void HandleCooldowns()

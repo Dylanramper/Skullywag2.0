@@ -99,8 +99,6 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return StartCoroutine(countdownManager.WaveCountdown());
         StartNextWave();
-
-        Wave wave = waves[currentWave - 1];
     }
 
     void UpdateEnemyUI()

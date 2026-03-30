@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float fadeDelay = 4f; // delay before fading to gameplay music
 
     private AudioSource audioSource;
+    [SerializeField] private AudioSource foghornSource;
 
     private void Awake()
     {
@@ -81,7 +82,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFogHorn()
     {
-        audioSource.PlayOneShot(fogHorn, 0.2f * sfxVolume);
+        foghornSource.PlayOneShot(fogHorn, 0.9f * sfxVolume);
     }
     #endregion
 

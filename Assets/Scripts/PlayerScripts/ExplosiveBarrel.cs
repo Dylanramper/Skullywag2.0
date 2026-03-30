@@ -78,6 +78,12 @@ public class ExplosiveBarrel : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
+            BossController boss = hit.GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage); // adjust damage
+                Destroy(gameObject);
+            }
         }
 
         GameManager.Instance.ShakeCamera(0.25f, 0.2f);
