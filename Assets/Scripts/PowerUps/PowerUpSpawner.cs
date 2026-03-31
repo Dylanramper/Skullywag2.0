@@ -41,7 +41,7 @@ public class PowerUpSpawner : MonoBehaviour
         // Set first spawn time
         nextSpawnTime = Time.time + initialDelay;
 
-        Debug.Log("Power-up Spawner initialized. First spawn in " + initialDelay + " seconds.");
+        //Debug.Log("Power-up Spawner initialized. First spawn in " + initialDelay + " seconds.");
     }
 
     void Update()
@@ -107,7 +107,7 @@ public class PowerUpSpawner : MonoBehaviour
         GameObject newPowerUp = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
         activePowerUps.Add(newPowerUp);
 
-        Debug.Log("Spawned " + selectedPrefab.name + " at " + spawnPosition);
+        //Debug.Log("Spawned " + selectedPrefab.name + " at " + spawnPosition);
     }
 
     Vector3 GetRandomSpawnPosition()

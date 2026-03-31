@@ -6,11 +6,13 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private GameObject pauseMenuButtons;
     [SerializeField] private GameObject gameStartCountdown;
 
     [SerializeField] private GameOverScroll pauseMenuScroll;
 
+    public bool isMainActive = true;
     private bool isPaused;
     public bool textCountdownActive;
 
@@ -26,7 +28,7 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        pauseMenuScroll.ShowScroll(); // reuse animation
+        pauseMenuScroll.ShowScroll();
     }
 
     public void ResumeGame()
@@ -36,13 +38,22 @@ public class PauseManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        pauseMenuButtons.SetActive(false);
         settingsMenu.SetActive(true);
+        mainMenuButtons.SetActive(false);
+        pauseMenuButtons.SetActive(false);
     }
 
     public void BackFromSettings()
     {
-        pauseMenuButtons.SetActive(true);
-        settingsMenu.SetActive(false);
+        if (isMainActive)
+        {
+            mainMenuButtons.SetActive(true);
+            settingsMenu.SetActive(false);
+        }
+        else
+        {
+            pauseMenuButtons.SetActive(true);
+            settingsMenu.SetActive(false);
+        } 
     }
 }

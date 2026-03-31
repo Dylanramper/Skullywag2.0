@@ -31,7 +31,7 @@ public abstract class EnemyShip : MonoBehaviour
 
     [SerializeField] FloatingHealthbar healthbar;
 
-    public static int activeEnemiesInCombat = 0;
+    public static int activeEnemiesInCombat;
     private bool countedInCombat = false;
 
     protected virtual void Awake()
@@ -66,12 +66,6 @@ public abstract class EnemyShip : MonoBehaviour
         float distance = Vector2.Distance(rb.position, (Vector2)player.position);
         if (playerDetected)
         {
-            if (activeEnemiesInCombat <= 0)
-            {
-                activeEnemiesInCombat = 0;
-                AudioManager.Instance.PlayGameplayMusic();
-            }
-
             //Disengage if too far
             if (distance > loseAggroRange)
             {
@@ -80,29 +74,27 @@ public abstract class EnemyShip : MonoBehaviour
                 if (countedInCombat)
                 {
                     countedInCombat = false;
+                    activeEnemiesInCombat--;
                 }
             }
         }
-        else
+        else if(distance < detectionRange)
         {
             //If not Aggro'd and player is in detection range. Detected set to true.
-            if (distance < detectionRange)
-            {
                 playerDetected = true;
 
                 if (!countedInCombat)
-                {
-                    countedInCombat = true;
-                    activeEnemiesInCombat++;
+{
+    countedInCombat = true;
+    activeEnemiesInCombat++;
 
-                    if (activeEnemiesInCombat == 1)
-                    {
-                        AudioManager.Instance.PlayCombatMusic();
-                    }
-                }
+    if (!AudioManager.Instance.bossActive && activeEnemiesInCombat >= 1)
+    {
+        AudioManager.Instance.PlayCombatMusic();
+    }
+}
             }
         }
-    }
 
     protected virtual void Wander()
     {
@@ -147,11 +139,11 @@ public abstract class EnemyShip : MonoBehaviour
         // Safety clamp
         activeEnemiesInCombat = Mathf.Max(0, activeEnemiesInCombat);
 
-        // If no enemies left -> return to gameplay music
-        if (activeEnemiesInCombat == 0)
+        if (!AudioManager.Instance.bossActive && activeEnemiesInCombat == 0)
         {
             AudioManager.Instance.PlayGameplayMusic();
         }
+
         Destroy(gameObject);
     }
 

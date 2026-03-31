@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Slider musicSlider;
 
     private Coroutine musicFadeCoroutine;
+    private Coroutine fadeRoutine;
 
     [Header("Volume Settings")]
     [SerializeField] private float bgVolume = 1f;
@@ -33,6 +34,8 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource audioSource;
     [SerializeField] private AudioSource foghornSource;
+    [SerializeField] private PauseManager pauseManager;
+    public bool bossActive = false;
 
     private void Awake()
     {
@@ -88,7 +91,51 @@ public class AudioManager : MonoBehaviour
 
     #region Music
     public void PlayMenuMusic() => PlayMusic(menuMusic);
-    public void PlayCombatMusic() => PlayMusic(combatMusic);
+    public void PlayCombatMusic()
+    {
+        // Cancel delayed gameplay fade
+        if (musicFadeCoroutine != null)
+        {
+            StopCoroutine(musicFadeCoroutine);
+            musicFadeCoroutine = null;
+        }
+
+        FadeToMusic(combatMusic);
+    }
+
+    public void FadeToMusic(AudioClip newClip)
+    {
+        if (musicAudioSource.clip == newClip) return;
+
+        if (fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(FadeMusicRoutine(newClip));
+    }
+
+    private IEnumerator FadeMusicRoutine(AudioClip newClip)
+    {
+        // Fade OUT current music
+        while (musicAudioSource.volume > 0)
+        {
+            musicAudioSource.volume -= fadeSpeed * Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        // Switch clip
+        musicAudioSource.clip = newClip;
+        musicAudioSource.loop = true;
+        musicAudioSource.Play();
+
+        // Fade IN new music
+        while (musicAudioSource.volume < musicVolume)
+        {
+            musicAudioSource.volume += fadeSpeed * Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        musicAudioSource.volume = musicVolume;
+    }
 
     // Fade to gameplay music with delay
     public void PlayGameplayMusic()
@@ -96,7 +143,21 @@ public class AudioManager : MonoBehaviour
         if (musicFadeCoroutine != null)
             StopCoroutine(musicFadeCoroutine);
 
-        musicFadeCoroutine = StartCoroutine(FadeToGameplayWithDelay());
+        if (fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        musicFadeCoroutine = StartCoroutine(DelayedFadeToGameplay());
+    }
+
+    private IEnumerator DelayedFadeToGameplay()
+    {
+        yield return new WaitForSecondsRealtime(fadeDelay);
+
+        //STOP if boss is active
+        if (bossActive)
+            yield break;
+
+        FadeToMusic(gameplayMusic);
     }
 
     private IEnumerator FadeToGameplayWithDelay()
@@ -165,12 +226,12 @@ public class AudioManager : MonoBehaviour
     #region Volume Setters
     public void SetMusicVolume(float volume)
     {
-        volume = musicSlider.value;
-        musicVolume = Mathf.Clamp01(volume);
-        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
-        PlayerPrefs.Save();
+            volume = musicSlider.value;
+            musicVolume = Mathf.Clamp01(volume);
+            PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+            PlayerPrefs.Save();
 
-        ApplyVolumes();
+            ApplyVolumes();
     }
 
     public void SetSFXVolume(float volume)

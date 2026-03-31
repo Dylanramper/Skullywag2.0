@@ -88,10 +88,18 @@ public class EnemySpawner : MonoBehaviour
         activeEnemies.RemoveAll(item => item == null);
         UpdateEnemyUI();
 
-        if(waveInProgress && activeEnemies.Count == 0)
+        if (waveInProgress && activeEnemies.Count == 0)
         {
             waveInProgress = false;
-            StartCoroutine(StartNextWaveRoutine());
+
+            if (bossActive)
+            {
+                OnBossDefeated();
+            }
+            else
+            {
+                StartCoroutine(StartNextWaveRoutine());
+            }
         }
     }
 
@@ -118,7 +126,6 @@ public class EnemySpawner : MonoBehaviour
         if(currentWave > waves.Count)
         {
             StartBossWave();
-            //StartCoroutine(BossWaveEnum());
             return;
         }
 
@@ -208,12 +215,20 @@ public class EnemySpawner : MonoBehaviour
             bossIndicator.SetBoss(boss.transform);
         }
     }
-    IEnumerator BossWaveEnum()
-    {
-        yield return StartCoroutine(countdownManager.WaveCountdown());
-        StartBossWave();
-    }
 
+    void OnBossDefeated()
+    {
+        bossActive = false;
+
+        // Reset waves back to beginning
+        currentWave = 0;
+
+        // Hide boss UI
+        bossHPBar.Hide();
+
+        // Start again from Wave 1
+        StartCoroutine(StartNextWaveRoutine());
+    }
     Vector3 GetRandomSpawnPosition(Vector3 playerPos)
     {
         Vector3 spawnPosition = Vector3.zero;

@@ -10150,6 +10150,19 @@ MonoBehaviour:
   cannonLeftFX1: {fileID: 3661887093271756644}
   cannonLeftFX2: {fileID: 848516545281261102}
   cannonballPrefab: {fileID: 3606931892842474823, guid: d72b3a5a16aa35a48b6e892aaabd3dbb, type: 3}
+  explsion1: {fileID: 975331944565719245}
+  explsion2: {fileID: 4452297120205395540}
+  explsion3: {fileID: 777610381851977873}
+  explsion4: {fileID: 8589470808422730815}
+  trail1: {fileID: 0}
+  trail2: {fileID: 0}
+  trail3: {fileID: 0}
+  smokeFX1: {fileID: 0}
+  smokeFX2: {fileID: 0}
+  smokeFX3: {fileID: 0}
+  explosionDelay: 0.5
+  secondExplosions: 0.4
+  thirdExplosions: 0.2
   barrelPrefab: {fileID: 3268643946339172368, guid: 1bc2baae22238e043b80020ca9f3ad3b, type: 3}
   barrelDropPoint: {fileID: 403492340616411379}
   barrelPushForce: 8

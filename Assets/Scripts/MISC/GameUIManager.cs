@@ -8,6 +8,7 @@ public class GameUIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
     public GameObject hud;
+    public GameObject mainMenuButtons;
     private bool hasTapped = false;
     private Coroutine blinkRoutine;
     private EnemySpawner spawner;
@@ -15,6 +16,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameOverScroll mainMenuScroll;
     [SerializeField] private GameOverScroll pauseMenuScroll;
     [SerializeField] private TextMeshProUGUI continueTXT;
+    [SerializeField] private PauseManager pm;
 
     bool IsTap()
     {
@@ -36,6 +38,7 @@ public class GameUIManager : MonoBehaviour
         continueTXT.gameObject.SetActive(true);
         blinkRoutine = StartCoroutine(BlinkLoop());
         hud.SetActive(false);
+        pm = pm.GetComponent<PauseManager>();
     }
 
     void Update()
@@ -74,6 +77,7 @@ public class GameUIManager : MonoBehaviour
     public void StartGame()
     {
         AudioManager.Instance.PlayGameplayMusic();
+        pm.isMainActive = false;
 
         mainMenuScroll.CloseMenu(() => {
             Time.timeScale = 1f;

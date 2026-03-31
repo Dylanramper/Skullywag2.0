@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.ParticleSystem;
 
 public class BossController : MonoBehaviour
 {
@@ -40,6 +41,17 @@ public class BossController : MonoBehaviour
     private bool damagedFX;
 
     public GameObject cannonballPrefab;
+
+    [Header("Death VFX")]
+    [SerializeField] private ParticleSystem explsion1;
+    [SerializeField] private ParticleSystem explsion2;
+    [SerializeField] private ParticleSystem explsion3;
+    [SerializeField] private ParticleSystem explsion4;
+    private Rigidbody2D rb;
+
+    [SerializeField] private float explosionDelay = 0.5f;
+    [SerializeField] private float secondExplosions = 0.4f;
+    [SerializeField] private float thirdExplosions = 0.2f;
 
     [Header("Barrel")]
     public GameObject barrelPrefab;
@@ -91,13 +103,15 @@ public class BossController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        AudioManager.Instance.bossActive = true;
+        AudioManager.Instance.PlayCombatMusic();
+
         damagedFX = false;
         health = maxHealth;
-
         mortarParticles = GetComponentInChildren<ParticleSystem>();
         healthbar = GetComponentInChildren<FloatingHealthbar>();
         healthbar.UpdateHealthbar(health, maxHealth);
-
+        rb = GetComponent<Rigidbody2D>();
         if (bossHealthbar != null)
             bossHealthbar.UpdateHealth(health, maxHealth);
 
@@ -484,13 +498,79 @@ public class BossController : MonoBehaviour
     void Die()
     {
         Debug.Log("Boss Defeated!");
-
+        AudioManager.Instance.bossActive = false;
+        EnemyShip.activeEnemiesInCombat--;
         BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
         if (indicator != null)
         {
             indicator.ClearBoss();
         }
 
+        StartCoroutine(DeathSequence());
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        //Stop moving
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        //Disable Collider
+        PolygonCollider2D col = GetComponent<PolygonCollider2D>();
+        if (col != null)
+            col.enabled = false;
+
+        //First Explosion
+        if (explsion1 != null)
+        {
+            explsion1.transform.parent = null;
+            explsion1.Play();
+            AudioManager.Instance.PlayExplosion();
+
+            float totalDuration1 = explsion1.main.duration + explsion1.main.startLifetime.constantMax;
+
+            Destroy(explsion1.gameObject, totalDuration1);
+        }
+
+        yield return new WaitForSeconds(explosionDelay);
+
+        //Second Explosion
+        if (explsion2 != null)
+        {
+            explsion2.transform.parent = null;
+            explsion2.Play();
+            AudioManager.Instance.PlayExplosion();
+
+            float totalDuration2 = explsion2.main.duration + explsion2.main.startLifetime.constantMax;
+
+            Destroy(explsion2.gameObject, totalDuration2);
+        }
+
+        yield return new WaitForSeconds(secondExplosions);
+        //Third Explosion
+        if (explsion3 != null)
+        {
+            explsion3.transform.parent = null;
+            explsion3.Play();
+            AudioManager.Instance.PlayExplosion();
+
+            float totalDuration3 = explsion3.main.duration + explsion3.main.startLifetime.constantMax;
+
+            Destroy(explsion3.gameObject, totalDuration3);
+        }
+        yield return new WaitForSeconds(thirdExplosions);
+
+        //Forth Explosion
+        if (explsion4 != null)
+        {
+            explsion4.transform.parent = null;
+            explsion4.Play();
+            AudioManager.Instance.PlayExplosion();
+
+            float totalDuration4 = explsion4.main.duration + explsion4.main.startLifetime.constantMax;
+
+            Destroy(explsion4.gameObject, totalDuration4);
+        }
         Destroy(gameObject);
     }
 }
