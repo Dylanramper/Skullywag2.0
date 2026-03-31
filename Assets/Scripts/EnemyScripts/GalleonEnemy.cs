@@ -37,8 +37,6 @@ public class GalleonEnemy : EnemyShip
     [SerializeField] private ParticleSystem explsion3;
     [SerializeField] private ParticleSystem explsion4;
     [SerializeField] private ParticleSystem trail1;
-    [SerializeField] private ParticleSystem trail2;
-    [SerializeField] private ParticleSystem trail3;
     [SerializeField] private ParticleSystem smokeFX1;
     [SerializeField] private ParticleSystem smokeFX2;
     [SerializeField] private ParticleSystem smokeFX3;
@@ -224,8 +222,6 @@ public class GalleonEnemy : EnemyShip
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
         trail1.Stop();
-        trail2.Stop();
-        trail3.Stop();
 
         //Disable Collider
         PolygonCollider2D col = GetComponent<PolygonCollider2D>();

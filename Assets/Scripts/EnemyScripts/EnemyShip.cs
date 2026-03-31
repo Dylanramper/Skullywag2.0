@@ -101,8 +101,10 @@ public abstract class EnemyShip : MonoBehaviour
         //Always move forward
         rb.linearVelocity = transform.up * moveSpeed * 0.5f;
 
+        Vector2 pos = transform.position;
+
         //Occasionally turn
-        if(Time.time > nextWanderChangeTime)
+        if (Time.time > nextWanderChangeTime)
         {
             int choice = Random.Range(0, 3); //0 = left : 2 = right
             wanderTurnDirection = choice == 0 ? -1 : choice == 2 ? 1f : 0f;
@@ -111,6 +113,18 @@ public abstract class EnemyShip : MonoBehaviour
 
         //Apply turn
         rb.MoveRotation(rb.rotation + wanderTurnDirection * wanderTurnStrength * Time.fixedDeltaTime);
+
+            if (MapBounds.Instance.IsNearEdge(pos, 1f))
+            {
+                Vector2 toCenter = (Vector2.zero - pos).normalized;
+
+                // Get current forward direction
+                Vector2 forward = transform.up;
+
+            // Determine which way to turn (-1 = left, 1 = right)
+            float turnDirection = Vector3.Cross(forward, toCenter).z;
+            wanderTurnDirection = Mathf.Lerp(wanderTurnDirection, turnDirection, Time.deltaTime * 2f);
+        }
     }
 
     protected abstract void AggroBehavior();

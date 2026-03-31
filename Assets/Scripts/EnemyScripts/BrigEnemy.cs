@@ -26,7 +26,6 @@ public class BrigEnemy : EnemyShip
     [SerializeField] private ParticleSystem explsion2;
     [SerializeField] private ParticleSystem explsion3;
     [SerializeField] private ParticleSystem trail1;
-    [SerializeField] private ParticleSystem trail2;
     [SerializeField] private ParticleSystem leftCannonFX;
     [SerializeField] private ParticleSystem rightCannonFX;
     [SerializeField] private ParticleSystem SmokeFX1;
@@ -127,7 +126,6 @@ public class BrigEnemy : EnemyShip
         rb.angularVelocity = 0f;
 
         trail1.Stop();
-        trail2.Stop();
 
         //Disable Collider
         PolygonCollider2D col = GetComponent<PolygonCollider2D>();

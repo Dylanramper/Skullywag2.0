@@ -76,7 +76,26 @@ public class PlayerMovement : MonoBehaviour
                 float rotationAmount = -horizontalInput * turnSpeed * Time.fixedDeltaTime;
                 rb.MoveRotation(rb.rotation + rotationAmount);
             }
-        } 
+        }
+        HandleMapBoundary();
+    }
+
+    private void HandleMapBoundary()
+    {
+        Vector2 playerPos = transform.position;
+
+        if (MapBounds.Instance.IsNearEdge(playerPos, 0f)) // buffer optional
+        {
+            // Direction from player to center
+            Vector2 pushDir = MapBounds.Instance.GetDirectionToCenter(playerPos);
+
+            // Optional: add a little forward blending
+            Vector2 forward = transform.up;
+            Vector2 finalDir = Vector2.Lerp(pushDir, forward, 0.2f); // 0 = pure push, 1 = full forward
+
+            // Apply velocity toward center
+            rb.linearVelocity = finalDir.normalized * currentMoveSpeed * 1.2f; // 1.2 = push stronger than normal speed
+        }
     }
 
     //if isBoosting is true, apply the speed boost

@@ -64,7 +64,7 @@ public class BossController : MonoBehaviour
     public float summonCooldown = 8f;
 
     public float moveSpeed = 1f;
-    public float rotationSpeed = 1.2f;
+    public float rotationSpeed = 0.2f;
 
     private float summonTimer;
 
