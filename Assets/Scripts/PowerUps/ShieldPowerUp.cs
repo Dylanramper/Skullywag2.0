@@ -58,7 +58,6 @@ public class ShieldPowerUp : MonoBehaviour
                 Instantiate(pickupEffect, transform.position, Quaternion.identity);
             }
 
-<<<<<<< HEAD
             // Show UI icon (requires PowerUpUIManager in scene)
             PowerUpUIManager uiManager = FindAnyObjectByType<PowerUpUIManager>();
             if (uiManager != null && iconSprite != null)
@@ -72,10 +71,7 @@ public class ShieldPowerUp : MonoBehaviour
                 timer.StartTimer(powerUpDuration);
             }
 
-=======
->>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
             // Destroy the power-up
-            Destroy(gameObject);
         }
     }
 }
