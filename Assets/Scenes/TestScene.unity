@@ -119,7 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &20666574
+=======
+--- !u!1 &153708736
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,22 +131,328 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 20666575}
   - component: {fileID: 20666576}
   m_Layer: 5
   m_Name: BackgroundVolume
+=======
+  - component: {fileID: 153708737}
+  - component: {fileID: 153708739}
+  - component: {fileID: 153708738}
+  m_Layer: 5
+  m_Name: PaperRight
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!224 &20666575
+=======
+--- !u!224 &153708737
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 20666574}
+=======
+  m_GameObject: {fileID: 153708736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8.6083, y: 8.6083, z: 8.6083}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1708457866}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 726.03, y: 0}
+  m_SizeDelta: {x: 84.205, y: 100}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &153708738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153708736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 2045492094208909694, guid: a8adc85b44f22b8448ffd7f80e687641, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &153708739
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153708736}
+  m_CullTransparentMesh: 1
+--- !u!1 &166269985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166269986}
+  - component: {fileID: 166269988}
+  - component: {fileID: 166269987}
+  m_Layer: 5
+  m_Name: QuitTXT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &166269986
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166269985}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 281195561}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &166269987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166269985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Quit
+
+'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &166269988
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166269985}
+  m_CullTransparentMesh: 1
+--- !u!1 &236392909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236392911}
+  - component: {fileID: 236392910}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &236392910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236392909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9159f082cb6e005469d5d87d4809a548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - rowboats: 6
+    brigs: 0
+    galleons: 0
+  - rowboats: 6
+    brigs: 1
+    galleons: 0
+  - rowboats: 6
+    brigs: 2
+    galleons: 0
+  - rowboats: 6
+    brigs: 3
+    galleons: 0
+  - rowboats: 4
+    brigs: 2
+    galleons: 1
+  - rowboats: 4
+    brigs: 3
+    galleons: 2
+  - rowboats: 2
+    brigs: 3
+    galleons: 3
+  countdownManager: {fileID: 2958602485188248753}
+  enemyCountText: {fileID: 1226869816}
+  rowboatPrefab: {fileID: 7378332656579810395, guid: a728955a399151c4ea51f33526c79fcb, type: 3}
+  brigPrefab: {fileID: 5193873732804398788, guid: f7ee6dc056a72d344a2d0a8294408a90, type: 3}
+  galleonPrefab: {fileID: 462078149943355466, guid: ddc8d920efed87c4d8e7c61e669577c1, type: 3}
+  initialDelay: 5
+  spawnWithinCameraView: 0
+  spawnAreaSize: {x: 10, y: 6}
+  minDistanceFromPlayer: 10
+  maxEnemiesOnScreen: 10
+  indicatorPrefab: {fileID: 7128717156821998975, guid: 4b6ad71e4120da4429a7d9dd4d833683, type: 3}
+  indicatorParent: {fileID: 1047672679}
+--- !u!4 &236392911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236392909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &241041956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 241041957}
+  - component: {fileID: 241041958}
+  m_Layer: 5
+  m_Name: SFXVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &241041957
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241041956}
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -474,7 +784,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215029833}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &236392909
+=======
+--- !u!1 &373292808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 307628357025742025, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &373292809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 307628357025742021, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373292808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &466072109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8040983407608808190, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &511508693
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3506,6 +3841,7 @@ MonoBehaviour:
     m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1482865257
 GameObject:
+<<<<<<< HEAD
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3742,6 +4078,17 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1611159775
+=======
+  m_CorrespondingSourceObject: {fileID: 3633827481874373122, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1443171921 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2172179433786690747, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1540431565
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3899,13 +4246,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658480494}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!224 &1658480498
+=======
+--- !u!114 &1708457869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708457865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc3e6b991e9bc842b309c1b32e39b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollPanel: {fileID: 1708457866}
+  paperLeft: {fileID: 942863113}
+  paperRight: {fileID: 153708738}
+  Buttons: {fileID: 2008032003}
+  scrollLeft: {fileID: 1324120547}
+  scrollCenter: {fileID: 511508693}
+  scrollRight: {fileID: 1174149453}
+  scrollLeftGO: {fileID: 1324120546}
+  scrollRightGO: {fileID: 1174149452}
+  openDuration: 0.8
+  slideDuration: 0.5
+  startYOffset: -800
+  bounceHeight: 40
+  bounceDuration: 0.15
+--- !u!114 &1800813612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8969392774943420511, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1833269751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3877493878862865620, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1926670981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926670982}
+  - component: {fileID: 1926670984}
+  - component: {fileID: 1926670983}
+  m_Layer: 5
+  m_Name: GameOverTXT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1926670982
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1658480494}
+=======
+  m_GameObject: {fileID: 1926670981}
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -3922,6 +4337,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
+<<<<<<< HEAD
   m_SizeDelta: {x: -560.6, y: -66.5078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1663318595
@@ -3962,15 +4378,27 @@ RectTransform:
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1663318597
+=======
+  m_SizeDelta: {x: 815.4003, y: 95.633606}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1926670983
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1663318595}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+=======
+  m_GameObject: {fileID: 1926670981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -3981,6 +4409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -3992,11 +4421,86 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1663318598
+=======
+  m_text: Game Over
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: ac5841667938f494eaf273cd758bdf8e, type: 2}
+  m_sharedMaterial: {fileID: 4742589075542148548, guid: ac5841667938f494eaf273cd758bdf8e, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4279703551
+  m_fontColor: {r: 1, g: 0.09119487, b: 0.09119487, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 0.34591186, g: 0.25797367, b: 0.1316205, a: 1}
+    topRight: {r: 1, g: 0, b: 0, a: 1}
+    bottomLeft: {r: 0.14465404, g: 0.030477395, b: 0.030477395, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 68.95
+  m_fontSizeBase: 68
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1926670984
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1663318595}
   m_CullTransparentMesh: 1
 --- !u!1 &1708457865 stripped
@@ -4016,6 +4520,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1723343665
+=======
+  m_GameObject: {fileID: 1926670981}
+  m_CullTransparentMesh: 1
+--- !u!1 &2008032003
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4821,6 +5330,7 @@ MonoBehaviour:
   pauseButton: {fileID: 743742437789515975}
   player: {fileID: 562066993}
   manager: {fileID: 801506865}
+<<<<<<< HEAD
 --- !u!114 &2958602485188248754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4842,6 +5352,9 @@ MonoBehaviour:
   continueTXT: {fileID: 290489316}
   pm: {fileID: 801506865}
 --- !u!114 &4587613708224092063 stripped
+=======
+--- !u!114 &4484495395694977022 stripped
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6578271367201508826, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
   m_PrefabInstance: {fileID: 8237194161567820466}
@@ -4876,7 +5389,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 163447046593935603, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
+=======
+    - target: {fileID: 13496018830540544, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 801506865}
+    - target: {fileID: 307628357025742024, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 144.2812
+      objectReference: {fileID: 0}
+    - target: {fileID: 307628357025742024, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 142.0207
+      objectReference: {fileID: 0}
+    - target: {fileID: 307628357025742024, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 307628357025742027, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_Color.a
+      value: 0.58431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 401358948569186728, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 801506865}
+    - target: {fileID: 586613190640555730, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 262932414}
+    - target: {fileID: 586613190640555730, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 262932414}
+    - target: {fileID: 609074043314015733, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 801506865}
+    - target: {fileID: 2406267539626757681, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5168,6 +5721,7 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 801506866}
+<<<<<<< HEAD
     - target: {fileID: 7504427018397866323, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5197,6 +5751,48 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 262932414}
     - target: {fileID: 8439796866212618777, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
+=======
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1123553300}
+    - targetCorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1708457866}
+    - targetCorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1047672679}
+    - targetCorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1226869815}
+    - targetCorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2114832577}
+    - targetCorrespondingSourceObject: {fileID: 2172179433786690747, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1232876337}
+    - targetCorrespondingSourceObject: {fileID: 2172179433786690747, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 241041957}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+--- !u!224 &7333269771150328378 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7541917832107165225, guid: d454f1d6b9379434499c04f32c88adc2, type: 3}
+  m_PrefabInstance: {fileID: 7333269771150328377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9165233177846412577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2655388485092061385, guid: aed96631543918d46bbb39823e6cd535, type: 3}
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
       propertyPath: m_Name
       value: MainCanvas
       objectReference: {fileID: 0}
@@ -5284,4 +5880,7 @@ SceneRoots:
   - {fileID: 858068806}
   - {fileID: 236392911}
   - {fileID: 1345539314}
+<<<<<<< HEAD
   - {fileID: 1591366539}
+=======
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)

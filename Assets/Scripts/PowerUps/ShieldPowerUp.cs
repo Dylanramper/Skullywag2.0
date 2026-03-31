@@ -8,27 +8,15 @@ public class ShieldPowerUp : MonoBehaviour
     public float rotationSpeed = 90f;  // Visual rotation
     public float floatSpeed = 2f;      // Up/down floating
     public float floatHeight = 0.3f;   // How high it floats
-    public PowerUpTimerUI timerUI;
-    public float powerUpDuration = 5f;
-
 
     [Header("Effects")]
     public AudioClip pickupSound;
     public GameObject pickupEffect;
 
-    [Header("UI")]
-    public Sprite iconSprite;           // Drag the shield icon here
     private Vector3 startPosition;
 
     void Start()
     {
-        // Try to grab a sprite from a child SpriteRenderer if no explicit icon set
-        if (iconSprite == null)
-        {
-            SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-            if (sr != null)
-                iconSprite = sr.sprite;
-        }
         // Remember starting position for floating animation
         startPosition = transform.position;
 
@@ -70,6 +58,7 @@ public class ShieldPowerUp : MonoBehaviour
                 Instantiate(pickupEffect, transform.position, Quaternion.identity);
             }
 
+<<<<<<< HEAD
             // Show UI icon (requires PowerUpUIManager in scene)
             PowerUpUIManager uiManager = FindAnyObjectByType<PowerUpUIManager>();
             if (uiManager != null && iconSprite != null)
@@ -83,6 +72,8 @@ public class ShieldPowerUp : MonoBehaviour
                 timer.StartTimer(powerUpDuration);
             }
 
+=======
+>>>>>>> parent of 4839b2b (UI Power Up Icon Implemented)
             // Destroy the power-up
             Destroy(gameObject);
         }
