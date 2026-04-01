@@ -45,15 +45,17 @@ public class SettingsMenu : MonoBehaviour
     {
         if(usejoystick)
         {
+            PlayerPrefs.GetInt("ControlMode", 0);
             playerMovement.SetControlMode(PlayerMovement.ControlMode.Joystick);
-            joystickUI.SetActive(true);
-            buttonsUI.SetActive(false);
+            joystickUI.SetActive(false);
+            buttonsUI.SetActive(true);
         }
         else
         {
+            PlayerPrefs.GetInt("ControlMode", 0);
             playerMovement.SetControlMode(PlayerMovement.ControlMode.Buttons);
-            joystickUI?.SetActive(false);
-            buttonsUI?.SetActive(true);
+            joystickUI?.SetActive(true);
+            buttonsUI?.SetActive(false);
         }
     }
     public void OnMusicSliderChanged(float value)

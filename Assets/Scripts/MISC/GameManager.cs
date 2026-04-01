@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class GameManager : MonoBehaviour
     private Coroutine shakeCoroutine;
 
     [Header("UI Elements")]
-    public Text scoreText;
-    public Text highScoreText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
 
     private int currentScore = 0;
     private int highScore = 0;
@@ -67,12 +68,13 @@ public class GameManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = $"Score: {currentScore}";
+            scoreText.text = currentScore.ToString();
         }
 
         if (highScoreText != null)
         {
-            highScoreText.text = $"High Score: {highScore}";
+            highScoreText.text = highScore.ToString();
+                //enemyCountText.text = alive + " / " + totalEnemiesThisWave;
         }
     }
 

@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip explosion;
     [SerializeField] private AudioClip textSFX;
     [SerializeField] private AudioClip fogHorn;
+    [SerializeField] private AudioClip pageTurn;
+    [SerializeField] private AudioClip coinPickup;
     [SerializeField] private AudioSource backgroundAudioSource;
     [SerializeField] private Slider backgroundSlider;
 
@@ -86,6 +88,18 @@ public class AudioManager : MonoBehaviour
     public void PlayFogHorn()
     {
         foghornSource.PlayOneShot(fogHorn, 0.9f * sfxVolume);
+    }
+
+    public void TurnPage()
+    {
+        audioSource.pitch = 1f;
+        audioSource.PlayOneShot(pageTurn, 0.2f * sfxVolume);
+    }
+
+    public void CoinPickUp()
+    {
+        audioSource.pitch = 1f;
+        audioSource.PlayOneShot(coinPickup, 0.2f * sfxVolume);
     }
     #endregion
 

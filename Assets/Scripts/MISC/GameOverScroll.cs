@@ -76,7 +76,6 @@ public class GameOverScroll : MonoBehaviour
     {
         // Hide buttons immediately
         Buttons.SetActive(false);
-
         yield return StartCoroutine(CloseScrollAnimation());
         yield return StartCoroutine(SlideOut());
         onComplete?.Invoke();
@@ -158,7 +157,7 @@ public class GameOverScroll : MonoBehaviour
         scrollRightGO.SetActive(true);
 
         float elapsed = 0f;
-
+        AudioManager.Instance.TurnPage();
         while (elapsed < openDuration)
         {
             elapsed += Time.unscaledDeltaTime; //Unscaled if game is paused
@@ -183,6 +182,7 @@ public class GameOverScroll : MonoBehaviour
 
     private IEnumerator CloseScrollAnimation()
     {
+        AudioManager.Instance.TurnPage();
         float elapsed = 0f;
         //AudioManager (Page Turn)
         while (elapsed < openDuration)

@@ -10270,6 +10270,9 @@ MonoBehaviour:
   maxHealth: 100
   loseAggroRange: 9
   healthbar: {fileID: 4797639895565846031}
+  coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
+  minCoins: 2
+  maxCoins: 5
   chargeCooldown: 4
   broadsideRange: 4
   broadsideAngle: 90

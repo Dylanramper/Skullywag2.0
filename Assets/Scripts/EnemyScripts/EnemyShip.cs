@@ -25,7 +25,6 @@ public abstract class EnemyShip : MonoBehaviour
     protected Rigidbody2D rb;
     protected Transform player;
     protected bool playerDetected;
-
     [Header("Aggro Settings")]
     public float loseAggroRange = 14f;
 
@@ -33,6 +32,11 @@ public abstract class EnemyShip : MonoBehaviour
 
     public static int activeEnemiesInCombat;
     private bool countedInCombat = false;
+
+    [Header("Drops")]
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private int minCoins = 1;
+    [SerializeField] private int maxCoins = 3;
 
     protected virtual void Awake()
     {
@@ -144,6 +148,13 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void Die()
     {
+        int coinCount = Random.Range(minCoins, maxCoins + 1);
+        for (int i = 0; i < coinCount; i++)
+        {
+            // Slight random offset so coins don't stack
+            Vector3 spawnPos = transform.position + (Vector3)(Random.insideUnitCircle * 0.5f);
+            Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+        }
         // Remove from combat if it was EVER counted
         if (countedInCombat)
         {

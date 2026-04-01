@@ -25201,6 +25201,9 @@ MonoBehaviour:
   maxHealth: 50
   loseAggroRange: 14
   healthbar: {fileID: 677932061326998601}
+  coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
+  minCoins: 1
+  maxCoins: 4
   idealRange: 6
   tooCloseRange: 3.5
   broadsideSpeed: 1.5

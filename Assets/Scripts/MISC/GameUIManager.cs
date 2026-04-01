@@ -8,7 +8,6 @@ public class GameUIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
     public GameObject hud;
-    public GameObject mainMenuButtons;
     private bool hasTapped = false;
     private Coroutine blinkRoutine;
     private EnemySpawner spawner;
@@ -17,6 +16,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameOverScroll pauseMenuScroll;
     [SerializeField] private TextMeshProUGUI continueTXT;
     [SerializeField] private PauseManager pm;
+    [SerializeField] private GameObject loadingScreen;
 
     bool IsTap()
     {
@@ -31,15 +31,9 @@ public class GameUIManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 0f;
-        spawner = FindFirstObjectByType<EnemySpawner>();
-        spawner.enabled = false;
-
-        continueTXT.gameObject.SetActive(true);
-        blinkRoutine = StartCoroutine(BlinkLoop());
-        hud.SetActive(false);
-        pm = pm.GetComponent<PauseManager>();
+        StartCoroutine(StartupSequence());
     }
+
 
     void Update()
     {
@@ -52,18 +46,51 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
+    private IEnumerator StartupLoadingRoutine()
+    {
+        loadingScreen.SetActive(true);
+
+        // Ensure game is paused during loading
+        Time.timeScale = 0f;
+
+        // Small delay so player actually sees it
+        yield return new WaitForSecondsRealtime(2.5f);
+
+        loadingScreen.SetActive(false);
+
+        // Now allow your normal start flow
+    }
+
+    private IEnumerator StartupSequence()
+    {
+        // Run loading screen first
+        yield return StartCoroutine(StartupLoadingRoutine());
+
+        // THEN run your original Start logic
+        Time.timeScale = 0f;
+
+        spawner = FindFirstObjectByType<EnemySpawner>();
+        spawner.enabled = false;
+
+        continueTXT.gameObject.SetActive(true);
+        blinkRoutine = StartCoroutine(BlinkLoop());
+        hud.SetActive(false);
+        pm = pm.GetComponent<PauseManager>();
+    }
+
     void OnFirstTap()
     {
         if (blinkRoutine != null)
+        {
             StopCoroutine(blinkRoutine);
-        continueTXT.gameObject.SetActive(false);
+        }
 
         ShowMainMenu();
     }
 
     public void ShowMainMenu()
     {
-
+        continueTXT.gameObject.SetActive(false);
         Time.timeScale = 0f;
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
@@ -78,9 +105,7 @@ public class GameUIManager : MonoBehaviour
     {
         AudioManager.Instance.PlayGameplayMusic();
         pm.isMainActive = false;
-
         mainMenuScroll.CloseMenu(() => {
-            Time.timeScale = 1f;
 
             hud.SetActive(true);
             spawner.enabled = true; });
@@ -97,6 +122,7 @@ public class GameUIManager : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuScroll.CloseMenu(OnResumeComplete);
+        Time.timeScale = 1f;
     }
 
     private void OnResumeComplete()
@@ -119,7 +145,18 @@ public class GameUIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        //AudioManager.Instance.PlayMusic(gameplayMusic);
+        StartCoroutine(RestartRoutine());
+    }
+
+    private IEnumerator RestartRoutine()
+    {
+        loadingScreen.SetActive(true);
+
+        // Optional: small delay so player sees it
+        yield return new WaitForSecondsRealtime(1f);
+
+        Time.timeScale = 1f; // IMPORTANT: reset timescale before reload
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 

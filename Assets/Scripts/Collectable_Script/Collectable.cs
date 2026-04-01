@@ -31,6 +31,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.Instance.CoinPickUp();
             particleFX.Play();
             Collect();
             Debug.Log("collected");
@@ -40,9 +41,9 @@ public class Collectable : MonoBehaviour
     protected virtual void Collect()
     {
         // Add score using ScoreManager
-        if (ScoreManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            ScoreManager.Instance.AddScore(scoreValue);
+            GameManager.Instance.AddScore(scoreValue);
         }
         else
         {

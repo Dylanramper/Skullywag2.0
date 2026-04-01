@@ -9,8 +9,8 @@ public class PowerUpWaveSpawner : MonoBehaviour
         public string waveName = "Wave 1";
         public GameObject[] powerUpPrefabs; // Which power-ups to spawn
         public int spawnCount = 3;          // How many to spawn
-        public float waveDelay = 10f;       // Wait time before wave
-        public float spawnDelay = 1f;       // Time between each spawn
+        public float waveDelay = 15f;       // Wait time before wave
+        public float spawnDelay = 5f;       // Time between each spawn
     }
 
     [Header("Wave Settings")]
@@ -35,6 +35,12 @@ public class PowerUpWaveSpawner : MonoBehaviour
 
     public void StartNextWave()
     {
+        if (waves == null || waves.Count == 0)
+        {
+            Debug.LogWarning("No waves set up in PowerUpWaveSpawner!");
+            return;
+        }
+
         if (currentWaveIndex >= waves.Count)
         {
             if (loopWaves)
