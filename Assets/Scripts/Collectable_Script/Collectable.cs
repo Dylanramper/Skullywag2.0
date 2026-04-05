@@ -13,18 +13,30 @@ public class Collectable : MonoBehaviour
     private Vector3 startPosition;
     public ParticleSystem particleFX;
 
+    private Rigidbody2D rb;
+    private bool isFloating = false;
+    private float startFloatingAt;
+
     protected virtual void Start()
     {
+        startFloatingAt = Random.Range(0.7f, 1.2f);
         particleFX = GetComponentInChildren<ParticleSystem>();
+        rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
-        Destroy(gameObject, 15f);
+
+        // Start floating after a short delay
+        Invoke(nameof(EnableFloating), startFloatingAt);
     }
 
     void Update()
     {
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
-        float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+        if (isFloating)
+        {
+            float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +48,20 @@ public class Collectable : MonoBehaviour
             Collect();
             Debug.Log("collected");
         }
+    }
+
+    void EnableFloating()
+    {
+        isFloating = true;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.bodyType = RigidbodyType2D.Kinematic; // stop physics
+        }
+
+        startPosition = transform.position;
     }
 
     protected virtual void Collect()
@@ -64,4 +90,4 @@ public class Collectable : MonoBehaviour
 
         Destroy(gameObject);
     }
-} // <-- This brace closes the class
+}

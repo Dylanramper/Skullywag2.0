@@ -10273,6 +10273,10 @@ MonoBehaviour:
   coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
   minCoins: 2
   maxCoins: 5
+  powerUpPrefab: {fileID: 998232002606329433, guid: 6d58d1fd3bb93bd4aa24aeb37d099d5f, type: 3}
+  powerUpDropChance: 1
+  minDropForce: 2
+  maxDropForce: 4
   chargeCooldown: 4
   broadsideRange: 4
   broadsideAngle: 90

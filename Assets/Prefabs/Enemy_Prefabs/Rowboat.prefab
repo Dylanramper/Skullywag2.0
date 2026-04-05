@@ -15443,8 +15443,12 @@ MonoBehaviour:
   loseAggroRange: 14
   healthbar: {fileID: 7906383211204316842}
   coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
-  minCoins: 1
-  maxCoins: 3
+  minCoins: 8
+  maxCoins: 8
+  powerUpPrefab: {fileID: 998232002606329433, guid: 6d58d1fd3bb93bd4aa24aeb37d099d5f, type: 3}
+  powerUpDropChance: 0.2
+  minDropForce: 6
+  maxDropForce: 8
   explodeDelay: 1.2
   flashInterval: 0.15
   explosionRadius: 2

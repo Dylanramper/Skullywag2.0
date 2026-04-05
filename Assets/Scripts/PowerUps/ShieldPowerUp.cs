@@ -8,7 +8,6 @@ public class ShieldPowerUp : MonoBehaviour
     public float rotationSpeed = 90f;  // Visual rotation
     public float floatSpeed = 2f;      // Up/down floating
     public float floatHeight = 0.3f;   // How high it floats
-    public PowerUpTimerUI timerUI;
     public float powerUpDuration = 5f;
 
 
@@ -20,30 +19,54 @@ public class ShieldPowerUp : MonoBehaviour
     public Sprite iconSprite;           // Drag the shield icon here
     private Vector3 startPosition;
 
+    private Rigidbody2D rb;
+    private bool isFloating = false;
+    private float startFloatingAt;
+
     void Start()
     {
-        // Try to grab a sprite from a child SpriteRenderer if no explicit icon set
+        rb = GetComponent<Rigidbody2D>();
+
+        startFloatingAt = Random.Range(0.7f, 1.2f);
+
+        // Try to grab sprite
         if (iconSprite == null)
         {
             SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
             if (sr != null)
                 iconSprite = sr.sprite;
         }
-        // Remember starting position for floating animation
+
         startPosition = transform.position;
 
-        // Destroy after 10 seconds if not picked up
+        Invoke(nameof(EnableFloating), startFloatingAt);
+
         Destroy(gameObject, 10f);
     }
 
     void Update()
     {
-        // Make it rotate slowly
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
 
-        // Make it float up and down
-        float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        if (isFloating)
+        {
+            float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        }
+    }
+
+    void EnableFloating()
+    {
+        isFloating = true;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        startPosition = transform.position;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -75,12 +98,6 @@ public class ShieldPowerUp : MonoBehaviour
             if (uiManager != null && iconSprite != null)
             {
                 uiManager.ShowPowerUpIcon(iconSprite);
-            }
-
-            PowerUpTimerUI timer = FindAnyObjectByType<PowerUpTimerUI>();
-            if (timer != null)
-            {
-                timer.StartTimer(powerUpDuration);
             }
 
             // Destroy the power-up

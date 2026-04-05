@@ -38,6 +38,13 @@ public abstract class EnemyShip : MonoBehaviour
     [SerializeField] private int minCoins = 1;
     [SerializeField] private int maxCoins = 3;
 
+    [Header("Power-Up Drops")]
+    [SerializeField] private GameObject powerUpPrefab;
+    [SerializeField, Range(0f, 1f)] private float powerUpDropChance = 0.2f;
+
+    [SerializeField] private float minDropForce = 2f;
+    [SerializeField] private float maxDropForce = 4f;
+
     protected virtual void Awake()
     {
         healthbar = GetComponentInChildren<FloatingHealthbar>();
@@ -51,7 +58,6 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Debug.Log("Enemies in combat: " + activeEnemiesInCombat);
         CheckPlayerDetection();
 
         if (playerDetected)
@@ -89,14 +95,14 @@ public abstract class EnemyShip : MonoBehaviour
 
                 if (!countedInCombat)
 {
-    countedInCombat = true;
-    activeEnemiesInCombat++;
+                    countedInCombat = true;
+                    activeEnemiesInCombat++;
 
-    if (!AudioManager.Instance.bossActive && activeEnemiesInCombat >= 1)
-    {
-        AudioManager.Instance.PlayCombatMusic();
-    }
-}
+                    if (!AudioManager.Instance.bossActive && activeEnemiesInCombat >= 1)
+                    {
+                        AudioManager.Instance.PlayCombatMusic();
+                    }
+                }
             }
         }
 
@@ -148,13 +154,31 @@ public abstract class EnemyShip : MonoBehaviour
 
     protected virtual void Die()
     {
+        //Drop coins
         int coinCount = Random.Range(minCoins, maxCoins + 1);
         for (int i = 0; i < coinCount; i++)
         {
             // Slight random offset so coins don't stack
             Vector3 spawnPos = transform.position + (Vector3)(Random.insideUnitCircle * 0.5f);
-            Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+            GameObject coin = Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+
+            // Add push force
+            Rigidbody2D rbCoin = coin.GetComponent<Rigidbody2D>();
+            if (rbCoin != null)
+            {
+                float angle = Random.Range(0f, Mathf.PI * 2f);
+                Vector2 forceDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+                float force = Random.Range(minDropForce, maxDropForce);
+                rbCoin.AddForce(forceDir * force, ForceMode2D.Impulse);
+            }
         }
+        
+        //Drop Power up
+        if(powerUpPrefab != null && Random.value < powerUpDropChance)
+        {
+            PowerUpManager.Instance.SpawnWithPush(powerUpPrefab, transform.position);
+        }
+
         // Remove from combat if it was EVER counted
         if (countedInCombat)
         {
