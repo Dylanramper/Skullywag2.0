@@ -39,8 +39,7 @@ public abstract class EnemyShip : MonoBehaviour
     [SerializeField] private int maxCoins = 3;
 
     [Header("Power-Up Drops")]
-    [SerializeField] private GameObject powerUpPrefab;
-    [SerializeField, Range(0f, 1f)] private float powerUpDropChance = 0.2f;
+    [SerializeField, Range(0f, 1f)] private float powerUpDropChance = 0.8f;
 
     [SerializeField] private float minDropForce = 2f;
     [SerializeField] private float maxDropForce = 4f;
@@ -172,11 +171,12 @@ public abstract class EnemyShip : MonoBehaviour
                 rbCoin.AddForce(forceDir * force, ForceMode2D.Impulse);
             }
         }
-        
-        //Drop Power up
-        if(powerUpPrefab != null && Random.value < powerUpDropChance)
+
+        // Drop Power-up
+        if (Random.value < powerUpDropChance)
         {
-            PowerUpManager.Instance.SpawnWithPush(powerUpPrefab, transform.position);
+            PowerUpManager.Instance.SpawnRandom(transform.position, true);
+            Debug.Log("Power up dropped");
         }
 
         // Remove from combat if it was EVER counted

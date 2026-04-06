@@ -10271,9 +10271,8 @@ MonoBehaviour:
   loseAggroRange: 9
   healthbar: {fileID: 4797639895565846031}
   coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
-  minCoins: 2
-  maxCoins: 5
-  powerUpPrefab: {fileID: 998232002606329433, guid: 6d58d1fd3bb93bd4aa24aeb37d099d5f, type: 3}
+  minCoins: 5
+  maxCoins: 8
   powerUpDropChance: 1
   minDropForce: 2
   maxDropForce: 4

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4024572667149015082}
   - component: {fileID: 7091681062855895522}
   - component: {fileID: 328492636052026473}
-  - component: {fileID: -7498719815209976469}
   m_Layer: 0
   m_Name: ShieldPowerUp
   m_TagString: Untagged
@@ -177,27 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a92ebba59bb04d46914383210f26c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldDuration: 5
+  data: {fileID: 0}
+  duration: 5
   defenseBoost: 50
-  rotationSpeed: 0
-  floatSpeed: 2
-  floatHeight: 0.3
-  powerUpDuration: 5
-  pickupSound: {fileID: 0}
-  pickupEffect: {fileID: 0}
-  iconSprite: {fileID: 21300000, guid: 76692340afcc33c4aa31a93dc7125fd7, type: 3}
---- !u!114 &-7498719815209976469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998232002606329433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42c6556dd226e4841ad06dd61591bace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4950367664767111979
 GameObject:
   m_ObjectHideFlags: 0
