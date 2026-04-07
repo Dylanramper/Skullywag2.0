@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9b427a18d546034fb8f1b3ce73f1add, type: 3}
-  m_Name: SpeedPowerUpData
+  m_Name: DoubleDamageData
   m_EditorClassIdentifier: 
-  powerUpName: SpeedPowerUp
-  prefab: {fileID: 998232002606329433, guid: 403182e258d58534bb907fd37801f6c0, type: 3}
-  icon: {fileID: -2678394577819576460, guid: a5790a5b6acecdc469e0b5dbb6c0c35c, type: 3}
-  spawnWeight: 80
+  powerUpName: DoubleDamagePowerUp
+  prefab: {fileID: 998232002606329433, guid: bd71c48c5658b024b9e7416d25ea7f13, type: 3}
+  icon: {fileID: -5611821322528383009, guid: cf33cb9622a37d24f9471257df463dad, type: 3}
+  spawnWeight: 30

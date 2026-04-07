@@ -7,7 +7,6 @@ public class PlayerCannons : MonoBehaviour
 {
     public Transform leftCannonPoint;
     public Transform rightCannonPoint;
-    public GameObject CannonBall;
 
     [SerializeField] private ParticleSystem leftFX;
     [SerializeField] private ParticleSystem rightFX;
@@ -16,10 +15,9 @@ public class PlayerCannons : MonoBehaviour
     public float force = 8f;
     public float defaultCoolDown = 0.4f;
     public int defaultDamage = 10;
-
     // Current values (can be boosted)
     private float currentCoolDown;
-    private int currentDamage;
+    public int currentDamage;
     private float currentForce;
 
     private float lastLeftFireTime;
@@ -29,6 +27,10 @@ public class PlayerCannons : MonoBehaviour
     [Header("Weapon Boost")]
     private float weaponBoostEndTime = 0f;
     private bool isWeaponBoosted = false;
+    [SerializeField] private GameObject normalCannonBall;
+    [SerializeField] private GameObject boostedCannonBall;
+
+    private GameObject currentCannonBall;
 
     [Header("Visual FX")]
     public GameObject leftCannonBoostEffect;
@@ -52,6 +54,7 @@ public class PlayerCannons : MonoBehaviour
         currentCoolDown = defaultCoolDown;
         currentDamage = defaultDamage;
         currentForce = force;
+        currentCannonBall = normalCannonBall;
 
         // Store original cannon color if we have sprites
         if (leftCannonSprite != null)
@@ -95,7 +98,7 @@ public class PlayerCannons : MonoBehaviour
     void Fire(Transform firePoint)
     {
 
-        GameObject ball = Instantiate(CannonBall, firePoint.position, firePoint.rotation);
+        GameObject ball = Instantiate(currentCannonBall, firePoint.position, firePoint.rotation);
         AudioManager.Instance.PlayCannon();
 
         // Apply force to cannon ball
@@ -158,10 +161,10 @@ public class PlayerCannons : MonoBehaviour
     }
 
     // ========== WEAPON BOOST METHODS ==========
-
-    // Called by WeaponPowerUp script
     public void ApplyWeaponBoost(float fireRateMultiplier, float damageMultiplier, float duration)
     {
+        currentCannonBall = boostedCannonBall;
+
         // Apply fire rate boost (lower cooldown = faster shooting)
         currentCoolDown = defaultCoolDown / fireRateMultiplier;
 
@@ -174,8 +177,6 @@ public class PlayerCannons : MonoBehaviour
         // Set boost end time
         weaponBoostEndTime = Time.time + duration;
         isWeaponBoosted = true;
-
-        Debug.Log($"Weapon Boosted! Fire Rate: {fireRateMultiplier}x, Damage: {currentDamage}, Duration: {duration}s");
 
         // Visual feedback
         if (leftCannonBoostEffect != null) leftCannonBoostEffect.SetActive(true);
@@ -195,6 +196,7 @@ public class PlayerCannons : MonoBehaviour
         currentDamage = defaultDamage;
         currentForce = force;
         isWeaponBoosted = false;
+        currentCannonBall = normalCannonBall;
 
         Debug.Log("Weapon boost ended");
 
@@ -216,10 +218,5 @@ public class PlayerCannons : MonoBehaviour
         {
             ApplyWeaponBoost(2f, 2f, 5f);
         }
-    }
-
-    public void testClick()
-    {
-        Debug.Log("Clicking");
     }
 }
