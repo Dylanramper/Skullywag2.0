@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SpeedPowerUp : MonoBehaviour
+public class SpeedStamPowerUp : MonoBehaviour
 {
     public PlayerMovement playerMove;
     [Header("Boost Settings")]
@@ -27,8 +27,7 @@ public class SpeedPowerUp : MonoBehaviour
 
     void Update()
     {
-        // Float and rotate (faster rotation than shield for visual cue)
-        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        // Float
         float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }

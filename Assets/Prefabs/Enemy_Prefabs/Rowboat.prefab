@@ -15445,7 +15445,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 8043289377675930562, guid: 60a7bbe20676f8549ad222d31f83624c, type: 3}
   minCoins: 0
   maxCoins: 3
-  powerUpDropChance: 1
+  powerUpDropChance: 0.35
   minDropForce: 6
   maxDropForce: 8
   explodeDelay: 1.2

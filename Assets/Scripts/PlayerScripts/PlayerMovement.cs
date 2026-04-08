@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
-using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,9 +15,16 @@ public class PlayerMovement : MonoBehaviour
     private float currentStamina = 100;
     private bool isBoosting;
 
+    [Header("Trail")]
+    [SerializeField] private TrailRenderer trail;
+
+    private AnimationCurve normalWidthCurve;
+    private AnimationCurve boostedWidthCurve;
+
     [Header("Speed Power-up")]
-    private float currentMoveSpeed;
-    private float speedBoostEndTime = 2f; // Time when the boost wears off
+    private float speedPowerUpMultiplier = 1f;
+    private float speedBoostEndTime = 0f;
+    private bool isSpeedBoostActive = false;
 
     private Rigidbody2D rb;
     public float speed;
@@ -30,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentMoveSpeed = 1.5f;
-        speed = currentMoveSpeed;
         currentStamina = maxStamina;
         originalColor = staminaFillImage.color;
 
@@ -40,44 +45,53 @@ public class PlayerMovement : MonoBehaviour
         {
             controlMode = (ControlMode)PlayerPrefs.GetInt("ControlMode");
         }
+
+        if (trail != null)
+        {
+            // Store original width curve
+            normalWidthCurve = trail.widthCurve;
+
+            // Create a boosted curve (thicker at the end)
+            boostedWidthCurve = new AnimationCurve();
+            boostedWidthCurve.AddKey(0f, 0.47f);  // start width
+            boostedWidthCurve.AddKey(1f, 1f);  // end width (thicker)
+        }
     }
 
     private void FixedUpdate()
     {
-        // Check if a speed boost has expired
-        if (Time.time > speedBoostEndTime && currentMoveSpeed != speed)
-        {
-            currentMoveSpeed = speed;
-        }
-
-        //Method for handling the boost button and stamina regain/drain
         HandleBoost();
+        HandleSpeedPowerUp();
 
-        //Move Forward 
-        rb.linearVelocity = (Vector2)transform.up * currentMoveSpeed;
+        float finalSpeed = speed;
 
-        //If the player is pressing left or right buttons on screen or is using the joystick; calculate rotation and speed.
-        //Rotate the player
-
-        if(controlMode == ControlMode.Buttons)
+        // Apply stamina boost
+        if (isBoosting && currentStamina > 0f)
         {
-            if(turnDir != 0)
-            {
-                float rotationAmount = -turnDir * turnSpeed * Time.fixedDeltaTime;
-                rb.MoveRotation(rb.rotation + rotationAmount);
-            }
+            finalSpeed *= boostMultiplier;
         }
-        else if (controlMode == ControlMode.Joystick && joystick != null)
-        {
-            float horizontalInput = joystick.Horizontal;
 
-            if(Mathf.Abs(horizontalInput) > 0.1f)
-            {
-                float rotationAmount = -horizontalInput * turnSpeed * Time.fixedDeltaTime;
-                rb.MoveRotation(rb.rotation + rotationAmount);
-            }
-        }
+        // Apply power-up boost
+        finalSpeed *= speedPowerUpMultiplier;
+
+        // Move player
+        rb.linearVelocity = (Vector2)transform.up * finalSpeed;
+
+        HandleRotation();
         HandleMapBoundary();
+    }
+
+    private void HandleSpeedPowerUp()
+    {
+        if (isSpeedBoostActive && Time.time > speedBoostEndTime)
+        {
+            speedPowerUpMultiplier = 1f;
+            isSpeedBoostActive = false;
+
+            // Reset trail
+            if (trail != null)
+                trail.widthCurve = normalWidthCurve;
+        }
     }
 
     private void HandleMapBoundary()
@@ -94,7 +108,18 @@ public class PlayerMovement : MonoBehaviour
             Vector2 finalDir = Vector2.Lerp(pushDir, forward, 0.2f); // 0 = pure push, 1 = full forward
 
             // Apply velocity toward center
-            rb.linearVelocity = finalDir.normalized * currentMoveSpeed * 1.2f; // 1.2 = push stronger than normal speed
+            float finalSpeed = speed;
+
+            // Apply stamina boost
+            if (isBoosting && currentStamina > 0f)
+            {
+                finalSpeed *= boostMultiplier;
+            }
+
+            // Apply power-up boost
+            finalSpeed *= speedPowerUpMultiplier;
+
+            rb.linearVelocity = finalDir.normalized * finalSpeed * 1.2f;
         }
     }
 
@@ -102,15 +127,14 @@ public class PlayerMovement : MonoBehaviour
     //if not, regen stamina and stop when filled to max
     private void HandleBoost()
     {
-        if(isBoosting && currentStamina > 0f)
+        if (isBoosting && currentStamina > 0f)
         {
-            currentMoveSpeed = speed * boostMultiplier;
             currentStamina -= staminaDrainRate * Time.fixedDeltaTime;
 
-            if(staminaFillImage != null) 
+            if (staminaFillImage != null)
                 staminaFillImage.color = Color.white;
 
-            if(currentStamina <= 0f)
+            if (currentStamina <= 0f)
             {
                 currentStamina = 0f;
                 isBoosting = false;
@@ -118,8 +142,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            currentMoveSpeed = speed;
-            if(currentStamina < maxStamina)
+            if (currentStamina < maxStamina)
             {
                 currentStamina += staminaRegenRate * Time.fixedDeltaTime;
                 currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
@@ -132,6 +155,27 @@ public class PlayerMovement : MonoBehaviour
         if (staminaFillImage != null)
             staminaFillImage.fillAmount = currentStamina / maxStamina;
     }
+    private void HandleRotation()
+    {
+        if (controlMode == ControlMode.Buttons)
+        {
+            if (turnDir != 0)
+            {
+                float rotationAmount = -turnDir * turnSpeed * Time.fixedDeltaTime;
+                rb.MoveRotation(rb.rotation + rotationAmount);
+            }
+        }
+        else if (controlMode == ControlMode.Joystick && joystick != null)
+        {
+            float horizontalInput = joystick.Horizontal;
+
+            if (Mathf.Abs(horizontalInput) > 0.1f)
+            {
+                float rotationAmount = -horizontalInput * turnSpeed * Time.fixedDeltaTime;
+                rb.MoveRotation(rb.rotation + rotationAmount);
+            }
+        }
+    }
 
     public void AddStamina(float amount)
     {
@@ -142,17 +186,15 @@ public class PlayerMovement : MonoBehaviour
     // === ADD THIS ENTIRE METHOD to your PlayerMove script ===
     public void ApplySpeedBoost(float multiplier, float duration)
     {
-        // Calculate new speed
-        currentMoveSpeed = speed * multiplier;
-
-        // Set the time when the boost should end
+        speedPowerUpMultiplier = multiplier;
         speedBoostEndTime = Time.time + duration;
+        isSpeedBoostActive = true;
 
-        // Optional: Visual/audio feedback on the player
-        Debug.Log($"Speed boosted! Current speed: {currentMoveSpeed} (Boost ends in {duration}s)");
-
-        // Optional: You could trigger a particle effect on the player here
+        // Visual indicator: trail
+        if (trail != null)
+            trail.widthCurve = boostedWidthCurve;
     }
+
     //Functions for buttons to turn payer.
     public void TurnLeftDown() => turnDir = -1;
     public void TurnRightDown() => turnDir = 1;

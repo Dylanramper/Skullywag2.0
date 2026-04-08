@@ -13,6 +13,9 @@ public class PlayerHealth : MonoBehaviour
     public float shieldTimeLeft = 0f;
     public int shieldDefense = 0;
     public GameObject shieldVisual; // Optional: shield graphic on player
+    [SerializeField] private SpriteRenderer playerSprite;
+    private Color originalPlayerColor;
+
 
     [Header("UI Elements")]
     public Image shieldBar;
@@ -28,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        originalPlayerColor = playerSprite.color;
         originalColor = fillImage.color;
         currentHealth = maxHealth;
 
@@ -130,7 +134,12 @@ public class PlayerHealth : MonoBehaviour
             shieldVisual.SetActive(true);
         }
 
-        Debug.Log("Shield activated! Defense +" + defense + " for " + duration + " seconds");
+        if (playerSprite != null)
+        {
+            playerSprite.color = new Color(0.5f, 0.8f, 1f); // light blue tint
+        }
+
+            Debug.Log("Shield activated! Defense +" + defense + " for " + duration + " seconds");
 
     }
 
@@ -144,6 +153,11 @@ public class PlayerHealth : MonoBehaviour
         if (shieldVisual != null)
         {
             shieldVisual.SetActive(false);
+        }
+
+        if (playerSprite != null)
+        {
+            playerSprite.color = originalPlayerColor;
         }
 
         Debug.Log("Shield deactivated");

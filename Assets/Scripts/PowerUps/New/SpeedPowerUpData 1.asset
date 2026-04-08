@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9b427a18d546034fb8f1b3ce73f1add, type: 3}
-  m_Name: SpeedPowerUpData
+  m_Name: SpeedPowerUpData 1
   m_EditorClassIdentifier: 
   powerUpName: SpeedPowerUp
-  prefab: {fileID: 998232002606329433, guid: 403182e258d58534bb907fd37801f6c0, type: 3}
-  icon: {fileID: -2678394577819576460, guid: a5790a5b6acecdc469e0b5dbb6c0c35c, type: 3}
-  spawnWeight: 80
+  prefab: {fileID: 998232002606329433, guid: c879fb8c55090434080c0ee069e9f8dd, type: 3}
+  icon: {fileID: 2123992692, guid: 7fcdf522e0023bf4485781934a85f92b, type: 3}
+  spawnWeight: 40
