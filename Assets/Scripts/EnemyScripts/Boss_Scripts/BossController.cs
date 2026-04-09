@@ -1,14 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.ParticleSystem;
 
-public class BossController : MonoBehaviour
+public class BossController : BaseBoss
 {
-    public Transform player;
-
     [Header("Base Stats")]
-    [SerializeField] FloatingHealthbar healthbar;
     [SerializeField] BossHPBar bossHealthbar;
 
     [Header("Mortar")]
@@ -72,21 +67,11 @@ public class BossController : MonoBehaviour
     private float cannonTimer;
     private float barrelTimer;
 
-    private int currentPhase = 1;
-    private int previousPhase = 1;
-
-    private float health;
-    private float maxHealth = 100;
-
     private int broadsideSide = 1; // 1 = right, -1 = left
     private float broadsideSwitchCooldown = 2f;
     private float broadsideSwitchTimer;
     float broadsideLockTimer = 0f;
     float requiredLockTime = 0.1f;
-    public float GetHealthPercent()
-    {
-        return health / maxHealth;
-    }
     bool IsBroadsideLocked(float tolerance = 6f)
     {
         Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
@@ -101,17 +86,33 @@ public class BossController : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
+        base.Start(); // sets health = maxHealth
+
+        if (barrelDropPoint == null)
+        {
+            GameObject barrelPointObj = GameObject.Find("BarrelPoint"); // Name of your child object in hierarchy
+            if (barrelPointObj != null)
+            {
+                barrelDropPoint = barrelPointObj.transform;
+                Debug.Log("Auto-assigned barrelDropPoint to " + barrelPointObj.name);
+            }
+            else
+            {
+                Debug.LogWarning("Cannot find BarrelPoint in the scene!");
+            }
+        }
+
+        if (mortarFirePoint == null) Debug.LogError("mortarFirePoint is NULL!");
+        if (leftCannon1 == null || rightCannon1 == null) Debug.LogError("Cannon(s) missing!");
+
         AudioManager.Instance.bossActive = true;
         AudioManager.Instance.PlayCombatMusic();
 
         damagedFX = false;
-        health = maxHealth;
-        mortarParticles = GetComponentInChildren<ParticleSystem>();
-        healthbar = GetComponentInChildren<FloatingHealthbar>();
-        healthbar.UpdateHealthbar(health, maxHealth);
         rb = GetComponent<Rigidbody2D>();
+
         if (bossHealthbar != null)
             bossHealthbar.UpdateHealth(health, maxHealth);
 
@@ -123,12 +124,14 @@ public class BossController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        UpdatePhase();
+        base.Update(); // IMPORTANT
+
         HandleCooldowns();
         DecideAttack();
         Move();
+
         broadsideSwitchTimer -= Time.deltaTime;
 
         if (broadsideSwitchTimer <= 0f)
@@ -136,66 +139,13 @@ public class BossController : MonoBehaviour
             ChooseBroadsideSide();
             broadsideSwitchTimer = broadsideSwitchCooldown;
         }
+
         if (IsBroadsideLocked())
-        {
             broadsideLockTimer += Time.deltaTime;
-        }
         else
-        {
             broadsideLockTimer = 0f;
-        }
-        if (health <= 40f)
-        {
-            damagedFX = true;
-        }
-        else { damagedFX = false; }
-    }
 
-    void UpdatePhase()
-    {
-        float healthPercent = health / maxHealth;
-
-        int newPhase;
-
-        if (healthPercent <= 0.3f)
-        {
-            newPhase = 3;
-        }
-        else if (healthPercent <= 0.7f)
-        {
-            newPhase = 2;
-            
-        }
-        else
-        {
-            newPhase = 1;
-        }
-
-        if (damagedFX)
-        {
-            damageFX1.Play();
-            damageFX2.Play();
-            damageFX3.Play();
-        }
-
-        // Detect phase change
-        if (newPhase != currentPhase)
-        {
-            OnPhaseChanged(newPhase);
-        }
-
-        previousPhase = currentPhase;
-        currentPhase = newPhase;
-    }
-
-    void OnPhaseChanged(int newPhase)
-    {
-        if (newPhase == 3)
-        {
-            // Only play foghorn and summon rowboats when entering phase 3
-            StartCoroutine(SummonRowboatsSequence());
-            summonTimer = summonCooldown; // initialize cooldown
-        }
+        damagedFX = health <= 40f;
     }
 
     public void SetBossHealthbar(BossHPBar hpBar)
@@ -256,11 +206,6 @@ public class BossController : MonoBehaviour
         transform.Rotate(0, 0, turnStrength * rotationSpeed * 120f * Time.deltaTime);
     }
 
-    public void SetPlayer(Transform playerTransform)
-    {
-        player = playerTransform;
-    }
-
     void DecideAttack()
     {
         float distance = Vector2.Distance(transform.position, player.position);
@@ -292,9 +237,9 @@ public class BossController : MonoBehaviour
     }
     void FireSingleCannon(Transform cannon)
     {
-        if (cannon == null)
+        if (cannon == null || cannonballPrefab == null)
         {
-            Debug.LogWarning("Cannon transform missing!");
+            Debug.LogWarning("Cannot fire cannon: missing reference!");
             return;
         }
 
@@ -383,25 +328,48 @@ public class BossController : MonoBehaviour
 
     void DropBarrel()
     {
-        if (barrelPrefab == null || barrelDropPoint == null)
+        // Auto-assign barrelDropPoint if null
+        if (barrelDropPoint == null)
         {
-            Debug.LogError("Barrel setup missing!");
-            return;
-        }
-
-        GameObject barrelInstance = Instantiate(barrelPrefab, barrelDropPoint.position, Quaternion.identity);
-
-        Rigidbody2D rb = barrelInstance.GetComponent<Rigidbody2D>();
-
-        if (rb != null)
-        {
-            rb.AddForce(-transform.up * barrelPushForce, ForceMode2D.Impulse);
-        }
-        else
-        {
-            Debug.LogWarning("Barrel has no Rigidbody2D!");
+         // First try as a child of this boss
+         Transform child = transform.Find("BarrelPoint");
+         if (child != null)
+         {
+              barrelDropPoint = child;
+              Debug.Log("Auto-assigned barrelDropPoint as child: " + child.name);
+         }
+         else
+         {
+              // Fallback: search in the scene
+              GameObject obj = GameObject.Find("BarrelPoint");
+            if (obj != null)
+            {
+                barrelDropPoint = obj.transform;
+                Debug.Log("Auto-assigned barrelDropPoint in scene: " + obj.name);
+            }
+            else
+            {
+                Debug.LogWarning("Cannot drop barrel: BarrelPoint not found!");
+                return; // exit early since we can't drop
+            }
         }
     }
+
+    if (barrelPrefab == null)
+    {
+        Debug.LogWarning("Cannot drop barrel: barrelPrefab missing!");
+        return;
+    }
+
+    // Instantiate and push
+    GameObject barrelInstance = Instantiate(barrelPrefab, barrelDropPoint.position, Quaternion.identity);
+
+    Rigidbody2D rb = barrelInstance.GetComponent<Rigidbody2D>();
+    if (rb != null)
+        rb.AddForce(-transform.up * barrelPushForce, ForceMode2D.Impulse);
+    else
+        Debug.LogWarning("Barrel has no Rigidbody2D!");
+}
 
     void SideCannons()
     {
@@ -415,6 +383,11 @@ public class BossController : MonoBehaviour
             StartCoroutine(FireCannonsDelayed(leftCannon1, leftCannon2));
             StartCoroutine(FireLeftCannonsFX());
         }
+    }
+
+    public void SetMortarIndicator(GameObject indicatorPrefab)
+    {
+        mortarIndicatorPrefab = indicatorPrefab;
     }
 
     void SummonRowboats()
@@ -478,24 +451,18 @@ public class BossController : MonoBehaviour
         return dot < -0.3f;
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Die();
-        }
-        healthbar.UpdateHealthbar(health, maxHealth);
+        base.TakeDamage(damage); // handles health + death
 
         if (bossHealthbar != null)
             bossHealthbar.UpdateHealth(health, maxHealth);
 
         AudioManager.Instance.PlayHit();
         GameManager.Instance.ShakeCamera(0.1f, 0.08f);
-}
+    }
 
-    void Die()
+    protected override void Die()
     {
         Debug.Log("Boss Defeated!");
         AudioManager.Instance.bossActive = false;

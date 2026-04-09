@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform bossSpawnPoint;
     [SerializeField] private BossHPBar bossHPBar;
     [SerializeField] private BossIndicator bossIndicator;
+    [SerializeField] private GameObject mortarIndicatorPrefab;
 
     [Header("Spawn Timing")]
     public float initialDelay = 5f;
@@ -208,6 +209,11 @@ public class EnemySpawner : MonoBehaviour
         {
             bossController.SetBossHealthbar(bossHPBar);
             bossController.SetPlayer(player);
+        }
+
+        if(mortarIndicatorPrefab != null)
+        {
+            bossController.SetMortarIndicator(mortarIndicatorPrefab);
         }
 
         if (bossIndicator != null)
