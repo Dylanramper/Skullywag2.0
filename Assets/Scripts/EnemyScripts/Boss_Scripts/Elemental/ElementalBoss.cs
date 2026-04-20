@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class ElementalBoss : BaseBoss
 {
@@ -8,6 +9,10 @@ public class ElementalBoss : BaseBoss
     [SerializeField] private int scatterShotCount = 10;
     [SerializeField] private float scatterRadius = 6f;
     [SerializeField] private float scatterDelayBetweenShots = 0.2f;
+
+    [SerializeField] private ReticleSpawner reticleSpawner;
+    [SerializeField] private Transform scatterPoint;
+
 
     private enum BossState
     {
@@ -33,6 +38,12 @@ public class ElementalBoss : BaseBoss
         base.Update();
 
         HandleState();
+
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            TestScatterAttack();
+        }
+
     }
     void HandleState()
     {
@@ -174,5 +185,27 @@ public class ElementalBoss : BaseBoss
                 // Go crazy mode
                 break;
         }
+    }
+
+    void TestScatterAttack()
+    {
+        // Step 1: Spawn reticles
+        reticleSpawner.SpawnReticles();
+
+        // Step 2: Get center target (player area)
+        Vector2 target = Vector2.zero;
+
+        foreach (var pos in reticleSpawner.reticlePositions)
+        {
+            target += pos;
+        }
+
+        target /= reticleSpawner.reticlePositions.Count;
+
+        // Step 3: Spawn projectile
+        GameObject proj = Instantiate(scatterProjectilePrefab, scatterPoint.position, Quaternion.identity);
+
+        proj.GetComponent<ScatterProjectile>()
+            .Initialize(scatterPoint.position, target, reticleSpawner.reticlePositions);
     }
 }

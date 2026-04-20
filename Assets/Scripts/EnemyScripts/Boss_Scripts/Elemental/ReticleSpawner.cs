@@ -5,7 +5,8 @@ public class ReticleSpawner : MonoBehaviour
 {
     [Header("References")]
     public GameObject reticlePrefab;
-    public Transform player;
+
+    private Transform player;
 
     [Header("Spawn Settings")]
     public int reticleCount = 6;
@@ -14,11 +15,29 @@ public class ReticleSpawner : MonoBehaviour
     [Header("Timing")]
     public float reticleLifetime = 1.0f;
 
-    // Store positions for ScatterProjectile later
     public List<Vector2> reticlePositions = new List<Vector2>();
+
+    void Awake()
+    {
+        // Try to find player automatically
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
+            player = playerObj.transform;
+        else
+            Debug.LogError("Player not found! Make sure it has the 'Player' tag.");
+    }
+
+    //Temp (Delete this method after) 
+    void Start()
+    {
+        Invoke(nameof(SpawnReticles), 1f);
+    }
 
     public void SpawnReticles()
     {
+        if (player == null) return;
+
         reticlePositions.Clear();
 
         Vector2 basePosition = player.position;
@@ -27,12 +46,10 @@ public class ReticleSpawner : MonoBehaviour
         {
             Vector2 offset = Random.insideUnitCircle * spawnRadius;
             Vector2 spawnPos = basePosition + offset;
-            
+
             reticlePositions.Add(spawnPos);
 
             GameObject reticle = Instantiate(reticlePrefab, spawnPos, Quaternion.identity);
-
-            // Auto destroy (visual only)
             Destroy(reticle, reticleLifetime);
         }
     }

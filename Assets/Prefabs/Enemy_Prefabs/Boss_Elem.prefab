@@ -9847,6 +9847,7 @@ GameObject:
   - component: {fileID: 6862136046046413429}
   - component: {fileID: 7113789758626709022}
   - component: {fileID: -5810703421623649616}
+  - component: {fileID: 1428909430540178496}
   m_Layer: 6
   m_Name: Boss_Elem
   m_TagString: Boss
@@ -9983,6 +9984,25 @@ MonoBehaviour:
   scatterShotCount: 10
   scatterRadius: 6
   scatterDelayBetweenShots: 0.2
+  reticleSpawner: {fileID: 1428909430540178496}
+  scatterPoint: {fileID: 1511937886404751353}
+--- !u!114 &1428909430540178496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462078149943355466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c29fc682b863954cb62bf7814dbc3b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reticlePrefab: {fileID: 9074132819785736204, guid: 30708273a804d6c4bbd53df2d43cbe4c, type: 3}
+  reticleCount: 6
+  spawnRadius: 4
+  reticleLifetime: 1
+  reticlePositions: []
 --- !u!1 &553436179866757545
 GameObject:
   m_ObjectHideFlags: 0

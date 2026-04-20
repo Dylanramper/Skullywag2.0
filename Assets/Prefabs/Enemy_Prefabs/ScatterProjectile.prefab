@@ -131,6 +131,4 @@ MonoBehaviour:
   travelTime: 0.8
   minScale: 0.4
   maxScale: 1
-  explosionPrefab: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}
-  scatterCount: 6
-  scatterRadius: 5
+  explosionFX: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}

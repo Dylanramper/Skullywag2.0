@@ -1,28 +1,27 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ScatterProjectile : MonoBehaviour
 {
-    [Header("Travel Settings")]
+    [Header("Travel")]
     public float travelTime = 0.8f;
-    public float minScale = 0.4f;
-    public float maxScale = 1f;
+    public float minScale = 0.5f;
+    public float maxScale = 1.2f;
 
     [Header("Explosion")]
-    public GameObject explosionPrefab;
-    public int scatterCount = 6;
-    public float scatterRadius = 2.5f;
-
-    public GameObject scatterShotPrefab;
-    public GameObject scatterProjectilePrefab;
+    public GameObject explosionFX;
 
     private Vector2 startPos;
     private Vector2 targetPos;
 
-    public void Launch(Vector2 start, Vector2 target)
+    private List<Vector2> targetPoints;
+
+    public void Initialize(Vector2 start, Vector2 target, List<Vector2> reticleTargets)
     {
         startPos = start;
         targetPos = target;
+        targetPoints = reticleTargets;
 
         StartCoroutine(Travel());
     }
@@ -35,12 +34,12 @@ public class ScatterProjectile : MonoBehaviour
         {
             float t = time / travelTime;
 
-            // Move in arc (simple lerp for top-down fake arc)
+            // Move
             transform.position = Vector2.Lerp(startPos, targetPos, t);
 
-            // Fake vertical motion using scale
-            float scale = Mathf.Sin(t * Mathf.PI); // smooth up & down
-            transform.localScale = Vector3.one * Mathf.Lerp(minScale, maxScale, scale);
+            // Scale up (simulate going up)
+            float scale = Mathf.Lerp(minScale, maxScale, t);
+            transform.localScale = Vector3.one * scale;
 
             time += Time.deltaTime;
             yield return null;
@@ -51,23 +50,11 @@ public class ScatterProjectile : MonoBehaviour
 
     void Explode()
     {
-        Instantiate(explosionPrefab, targetPos, Quaternion.identity);
-        AudioManager.Instance.PlayExplosion();
+        Instantiate(explosionFX, transform.position, Quaternion.identity);
 
-        // Spawn scatter shots
-        for (int i = 0; i < scatterCount; i++)
-        {
-            Vector2 offset = Random.insideUnitCircle * scatterRadius;
-            Vector2 hitPoint = targetPos + offset;
+        Debug.Log("ScatterProjectile exploded — next step: spawn ScatterShotBalls");
 
-            //GameObject proj = Instantiate(explosionPrefab, targetPos, Quaternion.identity);
-
-            // If you instead have a "small projectile prefab", swap this line:
-            GameObject proj = Instantiate(scatterProjectilePrefab, targetPos, Quaternion.identity);
-            GameObject ball = Instantiate(scatterShotPrefab, targetPos, Quaternion.identity);
-
-            // Optional: if scatter is ALSO a projectile, you'd call Launch again
-        }
+        // We'll add the actual scatter shots NEXT step
 
         Destroy(gameObject);
     }
