@@ -128,7 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91672785cf106c34aa184a9fc43fff45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scatterShotBallPrefab: {fileID: 3606931892842474823, guid: 7b87e10fbadfd6c499e034d7ea231681, type: 3}
   travelTime: 0.8
   minScale: 0.4
   maxScale: 1
   explosionFX: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}
+  scatterShotSpawnerPrefab: {fileID: 7992039319779339874, guid: 988a3826eca804843a7b0be5df25700f, type: 3}

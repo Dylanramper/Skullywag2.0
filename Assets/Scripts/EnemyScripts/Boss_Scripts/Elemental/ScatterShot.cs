@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ScatterShot : MonoBehaviour
@@ -7,40 +8,29 @@ public class ScatterShot : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectileSpeed = 10f;
 
-    [Header("Scatter Settings")]
-    public int projectileCount = 8;
-    public float scatterRadius = 3f;
-    public float spawnHeight = 8f;
-    public float damage = 10f;
-
     [Header("Timing")]
-    public float delayBetweenShots = 0.1f;
+    public float delayBetweenShots = 0.05f;
 
-    private Transform player;
+    private List<Vector2> targetPosition;
 
-    public void Initialize(Transform targetPlayer)
+    public void Initialize(List<Vector2> targets)
     {
-        player = targetPlayer;
+        targetPosition = targets;
         StartCoroutine(FireScatter());
     }
 
     private IEnumerator FireScatter()
     {
-        Vector3 baseTarget = player.position;
-
-        for (int i = 0; i < projectileCount; i++)
+        foreach (var target in targetPosition)
         {
-            Vector2 randomOffset = Random.insideUnitCircle * scatterRadius;
-
-            Vector3 spawnPos = baseTarget + new Vector3(randomOffset.x, spawnHeight, randomOffset.y);
-            Vector3 hitPoint = baseTarget + new Vector3(randomOffset.x, 0f, randomOffset.y);
+            Vector3 spawnPos = transform.position;
 
             GameObject proj = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
 
-            Rigidbody rb = proj.GetComponent<Rigidbody>();
-            if (rb != null)
+            Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
+            if(rb != null)
             {
-                Vector3 direction = (hitPoint - spawnPos).normalized;
+                Vector2 direction = (target - (Vector2)spawnPos).normalized;
                 rb.linearVelocity = direction * projectileSpeed;
             }
 

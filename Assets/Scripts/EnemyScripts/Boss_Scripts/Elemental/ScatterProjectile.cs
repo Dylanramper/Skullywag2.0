@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScatterProjectile : MonoBehaviour
 {
+    [SerializeField] private GameObject scatterShotBallPrefab;
     [Header("Travel")]
     public float travelTime = 0.8f;
     public float minScale = 0.5f;
@@ -11,6 +12,7 @@ public class ScatterProjectile : MonoBehaviour
 
     [Header("Explosion")]
     public GameObject explosionFX;
+    [SerializeField] private GameObject scatterShotSpawnerPrefab;
 
     private Vector2 startPos;
     private Vector2 targetPos;
@@ -21,7 +23,7 @@ public class ScatterProjectile : MonoBehaviour
     {
         startPos = start;
         targetPos = target;
-        targetPoints = reticleTargets;
+        targetPoints = new List<Vector2>(reticleTargets);
 
         StartCoroutine(Travel());
     }
@@ -52,9 +54,10 @@ public class ScatterProjectile : MonoBehaviour
     {
         Instantiate(explosionFX, transform.position, Quaternion.identity);
 
-        Debug.Log("ScatterProjectile exploded — next step: spawn ScatterShotBalls");
+        GameObject scatter = Instantiate(scatterShotSpawnerPrefab, transform.position, Quaternion.identity);
 
-        // We'll add the actual scatter shots NEXT step
+        ScatterShot ss = scatter.GetComponent<ScatterShot>();
+        ss.Initialize(targetPoints);
 
         Destroy(gameObject);
     }

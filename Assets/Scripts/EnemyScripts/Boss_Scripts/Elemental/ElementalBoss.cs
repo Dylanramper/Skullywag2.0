@@ -205,7 +205,6 @@ public class ElementalBoss : BaseBoss
         // Step 3: Spawn projectile
         GameObject proj = Instantiate(scatterProjectilePrefab, scatterPoint.position, Quaternion.identity);
 
-        proj.GetComponent<ScatterProjectile>()
-            .Initialize(scatterPoint.position, target, reticleSpawner.reticlePositions);
+        proj.GetComponent<ScatterProjectile>().Initialize(scatterPoint.position, target, reticleSpawner.reticlePositions);
     }
 }
