@@ -13,7 +13,7 @@ public class ReticleSpawner : MonoBehaviour
     public float spawnRadius = 4f;
 
     [Header("Timing")]
-    public float reticleLifetime = 1.0f;
+    public float reticleLifetime = 1f;
 
     public List<Vector2> reticlePositions = new List<Vector2>();
 

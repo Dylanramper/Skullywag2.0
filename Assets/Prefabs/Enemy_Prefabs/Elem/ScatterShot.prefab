@@ -165,10 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411d72f04b60a9a468ce6f7e546d3a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3606931892842474823, guid: 9be4fe84760b7f24785728a7f3176e33, type: 3}
-  projectileSpeed: 10
-  projectileCount: 8
-  scatterRadius: 3
-  spawnHeight: 8
-  damage: 10
-  delayBetweenShots: 0.1
+  travelTime: 0.5
+  startScale: 1
+  endScale: 0.1
+  impactFX: {fileID: 4444318277757059754, guid: adfef2eb254da3c4bb79c32e105d4aae, type: 3}

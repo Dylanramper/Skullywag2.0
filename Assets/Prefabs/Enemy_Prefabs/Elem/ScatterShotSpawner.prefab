@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3303364369590752604}
-  - component: {fileID: 4648883250986009891}
+  - component: {fileID: -5148878156371898074}
   m_Layer: 0
   m_Name: ScatterShotSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4648883250986009891
+--- !u!114 &-5148878156371898074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7992039319779339874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411d72f04b60a9a468ce6f7e546d3a87, type: 3}
+  m_Script: {fileID: 11500000, guid: ea095964d56d66746848d7bce5b17a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3606931892842474823, guid: 9be4fe84760b7f24785728a7f3176e33, type: 3}
-  projectileSpeed: 10
-  delayBetweenShots: 0.05
+  scatterShotBallPrefab: {fileID: 3606931892842474823, guid: 7b87e10fbadfd6c499e034d7ea231681, type: 3}

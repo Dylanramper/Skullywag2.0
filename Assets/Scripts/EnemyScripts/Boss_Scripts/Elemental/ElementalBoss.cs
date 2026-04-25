@@ -30,6 +30,16 @@ public class ElementalBoss : BaseBoss
     {
         base.Start();
 
+        if(player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+
+            if(p != null)
+            {
+                player = p.transform;
+            }
+        }
+
         currentState = BossState.Idle;
     }
 
@@ -52,7 +62,8 @@ public class ElementalBoss : BaseBoss
         switch (currentState)
         {
             case BossState.Idle:
-                ChooseNextAttack();
+                if (stateTimer <= 0)
+                    ChooseNextAttack();
                 break;
 
             case BossState.ScatterShot:
@@ -100,51 +111,37 @@ public class ElementalBoss : BaseBoss
     {
         stateTimer = 3f;
 
-        StartCoroutine(ScatterShotRoutine());
+        StartCoroutine(ScatterAttackRoutine());
     }
-    IEnumerator ScatterShotRoutine()
+    IEnumerator ScatterAttackRoutine()
     {
-        if (player == null) yield break;
-
-        for (int i = 0; i < scatterShotCount; i++)
+        if(player == null)
         {
-            Vector2 target = GetScatterTarget();
-
-            SpawnScatterProjectile(target);
-
-            yield return new WaitForSeconds(scatterDelayBetweenShots);
+            Debug.Log("Player is Null");
+            yield break;
         }
-    }
+        Debug.Log("ScatterShot STARTED");
 
-    Vector2 GetScatterTarget()
-    {
-        Vector2 playerPos = player.position;
+        //Spawn Reticles
+        reticleSpawner.SpawnReticles();
 
-        float angle = Random.Range(0f, 360f);
-        float radius = Random.Range(1.5f, scatterRadius);
+        //Delay before attacking (Warning indicator)
+        yield return new WaitForSeconds(0.8f);
 
-        Vector2 offset = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * radius;
+        Vector2 target = Vector2.zero;
 
-        return playerPos + offset;
-    }
-    void SpawnScatterProjectile(Vector2 target)
-    {
-        if (scatterProjectilePrefab == null) return;
-
-        Vector2 spawnPos = transform.position;
-
-        GameObject proj = Instantiate(scatterProjectilePrefab, spawnPos, Quaternion.identity);
-
-        Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        foreach(var pos in reticleSpawner.reticlePositions)
         {
-            Vector2 dir = (target - spawnPos).normalized;
-
-            float force = 8f; // tweak later
-            rb.linearVelocity = dir * force;
+            target += pos;
         }
-    }
 
+        target /= reticleSpawner.reticlePositions.Count;
+
+        //Fire scatter container projectile
+        GameObject proj = Instantiate(scatterProjectilePrefab, scatterPoint.position, Quaternion.identity);
+
+        proj.GetComponent<ScatterProjectile>().Initialize(scatterPoint.position, target, reticleSpawner.reticlePositions);
+    }
     void StartNapalmAttack()
     {
         stateTimer = 4f;
@@ -161,6 +158,8 @@ public class ElementalBoss : BaseBoss
 
     void ChooseNextAttack()
     {
+        ChangeState(BossState.ScatterShot);
+        /*
         int choice = Random.Range(0, 3);
 
         if (choice == 0)
@@ -168,7 +167,7 @@ public class ElementalBoss : BaseBoss
         else if (choice == 1)
             ChangeState(BossState.NapalmAttack);
         else
-            ChangeState(BossState.FlameBurst);
+            ChangeState(BossState.FlameBurst); */
     }
 
     protected override void OnPhaseChanged(int newPhase)

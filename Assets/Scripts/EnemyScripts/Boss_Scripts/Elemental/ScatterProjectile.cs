@@ -56,7 +56,7 @@ public class ScatterProjectile : MonoBehaviour
 
         GameObject scatter = Instantiate(scatterShotSpawnerPrefab, transform.position, Quaternion.identity);
 
-        ScatterShot ss = scatter.GetComponent<ScatterShot>();
+        ScatterShotSpawner ss = scatter.GetComponent<ScatterShotSpawner>();
         ss.Initialize(targetPoints);
 
         Destroy(gameObject);
