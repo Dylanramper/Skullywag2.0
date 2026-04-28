@@ -6,12 +6,12 @@ public class ElementalBoss : BaseBoss
 {
     [Header("Scatter Mortar Shot")]
     [SerializeField] private GameObject scatterProjectilePrefab;
-    [SerializeField] private int scatterShotCount = 10;
-    [SerializeField] private float scatterRadius = 6f;
-    [SerializeField] private float scatterDelayBetweenShots = 0.2f;
 
     [SerializeField] private ReticleSpawner reticleSpawner;
     [SerializeField] private Transform scatterPoint;
+
+    [Header("Napalm Attack")]
+    [SerializeField] private NapalmEmitter napalmEmitter;
 
 
     private enum BossState
@@ -73,7 +73,10 @@ public class ElementalBoss : BaseBoss
 
             case BossState.NapalmAttack:
                 if (stateTimer <= 0)
+                {
+                    napalmEmitter.StopFiring();
                     ChangeState(BossState.FlameBurst);
+                }
                 break;
 
             case BossState.FlameBurst:
@@ -146,7 +149,7 @@ public class ElementalBoss : BaseBoss
     {
         stateTimer = 4f;
 
-        // TODO: Spawn napalm zones
+        napalmEmitter.StartFiring();
     }
 
     void StartFlameBurst()

@@ -1898,11 +1898,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3367898711633754119, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.24
+      value: 4.39
       objectReference: {fileID: 0}
     - target: {fileID: 3367898711633754119, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 2.68
       objectReference: {fileID: 0}
     - target: {fileID: 3367898711633754119, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3618,6 +3618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_Elem
       objectReference: {fileID: 0}
+    - target: {fileID: 763578054624537458, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
+      propertyPath: napalmPuddlePrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1428909430540178496, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: spawnRadius
       value: 6
@@ -3632,11 +3636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.959273
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.28754854
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9071,6 +9075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1591366539}
   - component: {fileID: 1591366538}
+  - component: {fileID: 1591366540}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -9148,6 +9153,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1591366540
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591366537}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 458d34d41204ef442b1f704eb215564d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1611159775
 GameObject:
   m_ObjectHideFlags: 0

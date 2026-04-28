@@ -11,8 +11,7 @@ public class ScatterShotSpawner : MonoBehaviour
         {
             GameObject shot = Instantiate(scatterShotBallPrefab, transform.position, Quaternion.identity);
 
-            shot.GetComponent<ScatterShotBall>()
-                .Launch(transform.position, target);
+            shot.GetComponent<ScatterShotBall>().Launch(transform.position, target);
         }
 
         // Destroy self after spawning everything

@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: bb62dba38ac124a4baf7d1eb17176873
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2346081640033704415
+    second: FlameStream_0
+  - first:
+      213: 1171149223002886532
+    second: FlameStream_1
+  - first:
+      213: 4846409853596743780
+    second: FlameStream_2
+  - first:
+      213: -5040207918834554414
+    second: FlameStream_3
+  - first:
+      213: -5891909951685235775
+    second: FlameStream_4
+  - first:
+      213: -2049300058402407781
+    second: FlameStream_5
+  - first:
+      213: 44997422352484090
+    second: FlameStream_6
+  - first:
+      213: -8590245543485020137
+    second: FlameStream_7
+  - first:
+      213: -2031973281717256298
+    second: FlameStream_8
+  - first:
+      213: 5106578910717843391
+    second: FlameStream_9
+  - first:
+      213: -1947835077612676196
+    second: FlameStream_10
+  - first:
+      213: -5237049569495457884
+    second: FlameStream_11
+  - first:
+      213: -8095973588030756509
+    second: FlameStream_12
+  - first:
+      213: 5445532110065415326
+    second: FlameStream_13
+  - first:
+      213: 1647572663938351456
+    second: FlameStream_14
+  - first:
+      213: 7290437053908976428
+    second: FlameStream_15
+  - first:
+      213: 8205416225060840918
+    second: FlameStream_16
+  - first:
+      213: 7039249844702143219
+    second: FlameStream_17
+  - first:
+      213: 2971318642306686980
+    second: FlameStream_18
+  - first:
+      213: -2287015062464895794
+    second: FlameStream_19
+  - first:
+      213: -2032857528654332588
+    second: FlameStream_20
+  - first:
+      213: 5927938551504354608
+    second: FlameStream_21
+  - first:
+      213: 1535144403984126285
+    second: FlameStream_22
+  - first:
+      213: 5676575705736380482
+    second: FlameStream_23
+  - first:
+      213: 6108590862550663392
+    second: FlameStream_24
+  - first:
+      213: -1341604817411021803
+    second: FlameStream_25
+  - first:
+      213: 1339640398324006842
+    second: FlameStream_26
+  - first:
+      213: 7567838736262359571
+    second: FlameStream_27
+  - first:
+      213: 1016290843883095832
+    second: FlameStream_28
+  - first:
+      213: -4135669921723590178
+    second: FlameStream_29
+  - first:
+      213: -5929834762943069347
+    second: FlameStream_30
+  - first:
+      213: 8458875463709186024
+    second: FlameStream_31
+  - first:
+      213: -3961554829761351402
+    second: FlameStream_32
+  - first:
+      213: -6886053177524076081
+    second: FlameStream_33
+  - first:
+      213: -7053259918753098987
+    second: FlameStream_34
+  - first:
+      213: -2868984978872861640
+    second: FlameStream_35
+  - first:
+      213: -5069323007009520428
+    second: FlameStream_36
+  - first:
+      213: 1467073627172297707
+    second: FlameStream_37
+  - first:
+      213: 6523991355651889468
+    second: FlameStream_38
+  - first:
+      213: 1954812321083068951
+    second: FlameStream_39
+  - first:
+      213: 4160567436567746212
+    second: FlameStream_40
+  - first:
+      213: -7882878596796214620
+    second: FlameStream_41
+  - first:
+      213: 6633001616895752635
+    second: FlameStream_42
+  - first:
+      213: 520463754306417301
+    second: FlameStream_43
+  - first:
+      213: 3540411135092930320
+    second: FlameStream_44
+  - first:
+      213: 7488513971035204655
+    second: FlameStream_45
+  - first:
+      213: -9199486788595432029
+    second: FlameStream_46
+  - first:
+      213: 6460696554677815532
+    second: FlameStream_47
+  - first:
+      213: 8823110089624207989
+    second: FlameStream_48
+  - first:
+      213: 8925455135247343115
+    second: FlameStream_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FlameStream_0
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 873
+        width: 54
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 126a9bfad2b017fd0800000000000000
+      internalID: -2346081640033704415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 606
+        width: 170
+        height: 70
+      alignment: 9
+      pivot: {x: 0.07374874, y: 0.5000009}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 481df086302c04010800000000000000
+      internalID: 1171149223002886532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream1
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 879
+        width: 53
+        height: 27
+      alignment: 9
+      pivot: {x: 0.36174387, y: 0.56031406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 468369f9518e14340800000000000000
+      internalID: 4846409853596743780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream5
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 599
+        width: 197
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d961cb1a959d0ab0800000000000000
+      internalID: -5040207918834554414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream3
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 855
+        width: 169
+        height: 70
+      alignment: 9
+      pivot: {x: 0.104951575, y: 0.5232649}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cb66399d1bbb3ea0800000000000000
+      internalID: -5891909951685235775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream6
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 584
+        width: 403
+        height: 121
+      alignment: 9
+      pivot: {x: 0.02637794, y: 0.4704605}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9abcbc547c6f83e0800000000000000
+      internalID: -2049300058402407781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream2
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 866
+        width: 94
+        height: 56
+      alignment: 9
+      pivot: {x: 0.12755439, y: 0.47092438}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af6c02fcaecdf9000800000000000000
+      internalID: 44997422352484090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 985
+        width: 59
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7186137f03159c880800000000000000
+      internalID: -8590245543485020137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream7
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 581
+        width: 324
+        height: 124
+      alignment: 9
+      pivot: {x: 0.019611124, y: 0.47751936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69f782ee01bfcc3e0800000000000000
+      internalID: -2031973281717256298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_9
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 972
+        width: 78
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb796d6a6763ed640800000000000000
+      internalID: 5106578910717843391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 349
+        width: 341
+        height: 123
+      alignment: 9
+      pivot: {x: 0.014683674, y: 0.457852}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9bd9d52156e7f4e0800000000000000
+      internalID: -1947835077612676196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_11
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 960
+        width: 69
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4af5c13e9234257b0800000000000000
+      internalID: -5237049569495457884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream9
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 345
+        width: 397
+        height: 127
+      alignment: 9
+      pivot: {x: 0.012500446, y: 0.48185837}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3696b7e7ae255af80800000000000000
+      internalID: -8095973588030756509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream10
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 350
+        width: 395
+        height: 123
+      alignment: 9
+      pivot: {x: 0.022982132, y: 0.44550604}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e94be693a9a629b40800000000000000
+      internalID: 5445532110065415326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_14
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 962
+        width: 69
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06180bfcb9a5dd610800000000000000
+      internalID: 1647572663938351456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_15
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 923
+        width: 101
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c230797cfd5dc2560800000000000000
+      internalID: 7290437053908976428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_16
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 976
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d56af0259e7fd170800000000000000
+      internalID: 8205416225060840918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream11
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 349
+        width: 324
+        height: 101
+      alignment: 9
+      pivot: {x: 0.01983002, y: 0.5551435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f2e1be207070b160800000000000000
+      internalID: 7039249844702143219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_18
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 955
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 400af2dff8e3c3920800000000000000
+      internalID: 2971318642306686980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_19
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 922
+        width: 76
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4efc5fae3e240e0800000000000000
+      internalID: -2287015062464895794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_20
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 988
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d749529d6d9c3e0800000000000000
+      internalID: -2032857528654332588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_21
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 973
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03db2cc74b4444250800000000000000
+      internalID: 5927938551504354608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_22
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 245
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41176ea3bded4510800000000000000
+      internalID: 1535144403984126285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_23
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 269
+        width: 60
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2408701578f37ce40800000000000000
+      internalID: 5676575705736380482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_24
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 264
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e08788560316c450800000000000000
+      internalID: 6108590862550663392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 271
+        height: 89
+      alignment: 9
+      pivot: {x: 0.0022755803, y: 0.600313}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5146345d689a16de0800000000000000
+      internalID: -1341604817411021803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_26
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 254
+        width: 54
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf7dd438db579210800000000000000
+      internalID: 1339640398324006842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream13
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 113
+        width: 342
+        height: 83
+      alignment: 9
+      pivot: {x: 0.028592294, y: 0.50000054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31aeb580c3d560960800000000000000
+      internalID: 7567838736262359571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_28
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 292
+        width: 38
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817422253279a1e00800000000000000
+      internalID: 1016290843883095832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_29
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 243
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9d56f2e162b96c0800000000000000
+      internalID: -4135669921723590178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream14
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 125
+        width: 343
+        height: 61
+      alignment: 9
+      pivot: {x: 0.039558075, y: 0.5087178}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53040263bef4bda0800000000000000
+      internalID: -5929834762943069347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_31
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 254
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e757adca66f36570800000000000000
+      internalID: 8458875463709186024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_32
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 288
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61177dd1fdab509c0800000000000000
+      internalID: -3961554829761351402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_33
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 243
+        width: 42
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc14a317e13df60a0800000000000000
+      internalID: -6886053177524076081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_34
+      rect:
+        serializedVersion: 2
+        x: 1306
+        y: 276
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51398324979cd1e90800000000000000
+      internalID: -7053259918753098987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_35
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 309
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83cf95cbc515f28d0800000000000000
+      internalID: -2868984978872861640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_36
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 318
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d48b73659526a9b0800000000000000
+      internalID: -5069323007009520428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_37
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 254
+        width: 28
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bebd2f6e0b71c5410800000000000000
+      internalID: 1467073627172297707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_38
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 310
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c399957829fd98a50800000000000000
+      internalID: 6523991355651889468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_39
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 217
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71296b0f273e02b10800000000000000
+      internalID: 1954812321083068951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_40
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 304
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a69da83a0e4db930800000000000000
+      internalID: 4160567436567746212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_41
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 312
+        width: 20
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a29e667ea36a9290800000000000000
+      internalID: -7882878596796214620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_42
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 980
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb9b9a1d3d72d0c50800000000000000
+      internalID: 6633001616895752635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_43
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 236
+        width: 36
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59276e9e60f093700800000000000000
+      internalID: 520463754306417301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_44
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 261
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0173d026b21122130800000000000000
+      internalID: 3540411135092930320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_45
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 103
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2c6a13e7cb8ce760800000000000000
+      internalID: 7488513971035204655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_46
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 209
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a5ced9b18bd45080800000000000000
+      internalID: -9199486788595432029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_47
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 276
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce84927494109a950800000000000000
+      internalID: 6460696554677815532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_48
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 284
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572473231ebf17a70800000000000000
+      internalID: 8823110089624207989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameStream_49
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 247
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e9a1b08269ddb70800000000000000
+      internalID: 8925455135247343115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cf97b9a2c1fe655458254e6d2e38933c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FlameStream1: 4846409853596743780
+      FlameStream10: 5445532110065415326
+      FlameStream11: 7039249844702143219
+      FlameStream12: -1341604817411021803
+      FlameStream13: 7567838736262359571
+      FlameStream14: -5929834762943069347
+      FlameStream2: 44997422352484090
+      FlameStream3: -5891909951685235775
+      FlameStream4: 1171149223002886532
+      FlameStream5: -5040207918834554414
+      FlameStream6: -2049300058402407781
+      FlameStream7: -2031973281717256298
+      FlameStream8: -1947835077612676196
+      FlameStream9: -8095973588030756509
+      FlameStream_0: -2346081640033704415
+      FlameStream_11: -5237049569495457884
+      FlameStream_14: 1647572663938351456
+      FlameStream_15: 7290437053908976428
+      FlameStream_16: 8205416225060840918
+      FlameStream_18: 2971318642306686980
+      FlameStream_19: -2287015062464895794
+      FlameStream_20: -2032857528654332588
+      FlameStream_21: 5927938551504354608
+      FlameStream_22: 1535144403984126285
+      FlameStream_23: 5676575705736380482
+      FlameStream_24: 6108590862550663392
+      FlameStream_26: 1339640398324006842
+      FlameStream_28: 1016290843883095832
+      FlameStream_29: -4135669921723590178
+      FlameStream_31: 8458875463709186024
+      FlameStream_32: -3961554829761351402
+      FlameStream_33: -6886053177524076081
+      FlameStream_34: -7053259918753098987
+      FlameStream_35: -2868984978872861640
+      FlameStream_36: -5069323007009520428
+      FlameStream_37: 1467073627172297707
+      FlameStream_38: 6523991355651889468
+      FlameStream_39: 1954812321083068951
+      FlameStream_40: 4160567436567746212
+      FlameStream_41: -7882878596796214620
+      FlameStream_42: 6633001616895752635
+      FlameStream_43: 520463754306417301
+      FlameStream_44: 3540411135092930320
+      FlameStream_45: 7488513971035204655
+      FlameStream_46: -9199486788595432029
+      FlameStream_47: 6460696554677815532
+      FlameStream_48: 8823110089624207989
+      FlameStream_49: 8925455135247343115
+      FlameStream_7: -8590245543485020137
+      FlameStream_9: 5106578910717843391
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
