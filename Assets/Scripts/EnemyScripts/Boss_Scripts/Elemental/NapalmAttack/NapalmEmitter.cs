@@ -15,6 +15,7 @@ public class NapalmEmitter : MonoBehaviour
     [SerializeField] private float spawnInterval = 0.15f;
     [SerializeField] private float range = 6f;
     [SerializeField] private float spreadAngle = 8f;
+    [SerializeField] private float damagePerSecond = 10f;
 
     private Transform player;
     private Coroutine fireRoutine;
@@ -53,17 +54,15 @@ public class NapalmEmitter : MonoBehaviour
 
                 if (dist <= range)
                 {
-                    // Start flame visuals
-                        leftFlame.StartFiring();
+                    leftFlame.StartFiring();
+                    rightFlame.StartFiring();
 
-                        rightFlame.StartFiring();
+                    DealDamage();
                 }
-                else if(dist >= range)
+                else
                 {
-                    // Stop flame visuals when out of range
-                        leftFlame.StopFiring();
-
-                        rightFlame.StopFiring();
+                    leftFlame.StopFiring();
+                    rightFlame.StopFiring();
                 }
             }
 
@@ -76,5 +75,12 @@ public class NapalmEmitter : MonoBehaviour
         GameObject flame = Instantiate(napalmProjectilePrefab, point.position, Quaternion.identity);
 
         flame.GetComponent<FlameProjectile>().Initialize(direction);
+    }
+
+    void DealDamage()
+    {
+        if (player == null) return;
+
+        //Deal Damage from PlayerHealth.cs-------------------------------------------------------------------------------------------------------
     }
 }
