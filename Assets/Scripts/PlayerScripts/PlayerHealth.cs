@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // For UI if you want
@@ -28,6 +29,10 @@ public class PlayerHealth : MonoBehaviour
 
     private float fillSmoothSpeed = 5;
     private Color originalColor;
+
+    private float burnTimer;
+    private float burnDPS;
+    private float burnDamageAccumulator;
 
     void Start()
     {
@@ -71,6 +76,22 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
+        if(burnTimer > 0)
+        {
+            burnDamageAccumulator += burnDPS * Time.deltaTime;
+
+            if(burnDamageAccumulator >= 1f)
+            {
+                int damageToApply = Mathf.FloorToInt(burnDamageAccumulator);
+                burnDamageAccumulator -= damageToApply;
+
+                TakeDamage(damageToApply);
+
+                StartCoroutine(BurnFlash());
+            }
+            burnTimer -= Time.deltaTime;
+        }
+
         // Smooth health bar animation
         if (fillImage != null)
         {
@@ -112,6 +133,19 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void ApplyBurn(float dps, float duration)
+    {
+        burnDPS = Mathf.Max(burnDPS, dps);
+        burnTimer = Mathf.Max(burnTimer, duration);
+    }
+
+    private IEnumerator BurnFlash()
+    {
+        playerSprite.color = new Color(1f, 0.4f, 0.4f);
+        yield return new WaitForSeconds(0.5f);
+        playerSprite.color = originalPlayerColor;
     }
 
     private IEnumerator HealthFlash()

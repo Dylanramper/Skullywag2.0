@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6425921119475691616}
   - component: {fileID: 7592910298492635130}
   - component: {fileID: 7662324598851638334}
+  - component: {fileID: 250113432697450252}
+  - component: {fileID: -8944149996089400438}
   m_Layer: 0
   m_Name: NapalmVFXRight
   m_TagString: Untagged
@@ -123,3 +125,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ce54ce5b7c58d46b9149f6cc415b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &250113432697450252
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541696329351480527}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 1.5372686, y: 0.017568707}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.025704123, y: 0.46968362}
+    oldSize: {x: 0.33, y: 0.27}
+    newSize: {x: 0.53, y: 0.27}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.1057768, y: 0.33568454}
+  m_EdgeRadius: 0
+--- !u!114 &-8944149996089400438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541696329351480527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a88df742c3608840a583160aad57258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dot: 5
+  burnDuration: 2

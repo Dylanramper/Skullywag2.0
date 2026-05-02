@@ -289,12 +289,12 @@ TextureImporter:
       name: FlameStream_0
       rect:
         serializedVersion: 2
-        x: 106
+        x: 123
         y: 873
-        width: 54
+        width: 20
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.01272049, y: 0.49691263}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -311,12 +311,12 @@ TextureImporter:
       name: FlameStream4
       rect:
         serializedVersion: 2
-        x: 7
-        y: 606
-        width: 170
-        height: 70
+        x: 11
+        y: 614
+        width: 163
+        height: 59
       alignment: 9
-      pivot: {x: 0.07374874, y: 0.5000009}
+      pivot: {x: 0.007280701, y: 0.46288234}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -333,12 +333,12 @@ TextureImporter:
       name: FlameStream1
       rect:
         serializedVersion: 2
-        x: 497
+        x: 505
         y: 879
-        width: 53
+        width: 33
         height: 27
       alignment: 9
-      pivot: {x: 0.36174387, y: 0.56031406}
+      pivot: {x: 0.025704123, y: 0.46968362}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -355,12 +355,12 @@ TextureImporter:
       name: FlameStream5
       rect:
         serializedVersion: 2
-        x: 415
-        y: 599
-        width: 197
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 418
+        y: 614
+        width: 188
+        height: 62
+      alignment: 9
+      pivot: {x: 0.008491516, y: 0.44470412}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -399,12 +399,12 @@ TextureImporter:
       name: FlameStream6
       rect:
         serializedVersion: 2
-        x: 779
-        y: 584
+        x: 782
+        y: 586
         width: 403
-        height: 121
+        height: 117
       alignment: 9
-      pivot: {x: 0.02637794, y: 0.4704605}
+      pivot: {x: 0.004520085, y: 0.46670038}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -421,12 +421,12 @@ TextureImporter:
       name: FlameStream2
       rect:
         serializedVersion: 2
-        x: 911
+        x: 916
         y: 866
-        width: 94
+        width: 85
         height: 56
       alignment: 9
-      pivot: {x: 0.12755439, y: 0.47092438}
+      pivot: {x: 0.015711168, y: 0.46073914}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -470,7 +470,7 @@ TextureImporter:
         width: 324
         height: 124
       alignment: 9
-      pivot: {x: 0.019611124, y: 0.47751936}
+      pivot: {x: 0.002638075, y: 0.47617513}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -510,11 +510,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 349
-        width: 341
-        height: 123
+        y: 352
+        width: 339
+        height: 118
       alignment: 9
-      pivot: {x: 0.014683674, y: 0.457852}
+      pivot: {x: 0.000017050677, y: 0.46181902}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -553,12 +553,12 @@ TextureImporter:
       name: FlameStream9
       rect:
         serializedVersion: 2
-        x: 363
-        y: 345
-        width: 397
-        height: 127
+        x: 364
+        y: 349
+        width: 396
+        height: 121
       alignment: 9
-      pivot: {x: 0.012500446, y: 0.48185837}
+      pivot: {x: 0.00833814, y: 0.47256446}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -575,12 +575,12 @@ TextureImporter:
       name: FlameStream10
       rect:
         serializedVersion: 2
-        x: 785
-        y: 350
-        width: 395
-        height: 123
+        x: 789
+        y: 352
+        width: 391
+        height: 119
       alignment: 9
-      pivot: {x: 0.022982132, y: 0.44550604}
+      pivot: {x: 0.003945743, y: 0.44183847}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -664,11 +664,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1204
-        y: 349
+        y: 352
         width: 324
-        height: 101
+        height: 96
       alignment: 9
-      pivot: {x: 0.01983002, y: 0.5551435}
+      pivot: {x: 0.005313073, y: 0.55365944}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -840,9 +840,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 102
+        y: 104
         width: 271
-        height: 89
+        height: 87
       alignment: 9
       pivot: {x: 0.0022755803, y: 0.600313}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -883,12 +883,12 @@ TextureImporter:
       name: FlameStream13
       rect:
         serializedVersion: 2
-        x: 359
+        x: 361
         y: 113
-        width: 342
-        height: 83
+        width: 328
+        height: 79
       alignment: 9
-      pivot: {x: 0.028592294, y: 0.50000054}
+      pivot: {x: 0.008115629, y: 0.52871066}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -949,12 +949,12 @@ TextureImporter:
       name: FlameStream14
       rect:
         serializedVersion: 2
-        x: 778
+        x: 784
         y: 125
-        width: 343
-        height: 61
+        width: 243
+        height: 53
       alignment: 9
-      pivot: {x: 0.039558075, y: 0.5087178}
+      pivot: {x: 0.0125046, y: 0.5128964}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
