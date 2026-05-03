@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI; // For UI if you want
 
@@ -25,6 +25,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem smokeFX1;
     [SerializeField] private ParticleSystem smokeFX2;
 
+    [Header("On-Screen Damage")]
+    [SerializeField] private Image burnScreenFX;
+    private float burnScreenIntensity;
+    [SerializeField] private float burnFadeSpeed = 3f;
+
     [SerializeField] private GameOverScroll gameOverScroll;
 
     private float fillSmoothSpeed = 5;
@@ -33,9 +38,12 @@ public class PlayerHealth : MonoBehaviour
     private float burnTimer;
     private float burnDPS;
     private float burnDamageAccumulator;
+    private bool isBurning;
+    private Color burnFXOriginalColor;
 
     void Start()
     {
+        burnFXOriginalColor = burnScreenFX.color;
         originalPlayerColor = playerSprite.color;
         originalColor = fillImage.color;
         currentHealth = maxHealth;
@@ -82,6 +90,7 @@ public class PlayerHealth : MonoBehaviour
 
             if(burnDamageAccumulator >= 1f)
             {
+                isBurning = true;
                 int damageToApply = Mathf.FloorToInt(burnDamageAccumulator);
                 burnDamageAccumulator -= damageToApply;
 
@@ -90,6 +99,31 @@ public class PlayerHealth : MonoBehaviour
                 StartCoroutine(BurnFlash());
             }
             burnTimer -= Time.deltaTime;
+        }
+
+        //On screen burning effect
+        if(burnTimer > 0)
+        {
+            isBurning = true;
+            burnScreenIntensity = 1f;
+        }
+        else
+        {
+            isBurning = false;
+            burnScreenIntensity = 0f;
+            burnScreenFX.color = burnFXOriginalColor;
+        }
+
+        if (burnScreenFX != null && isBurning)
+        {
+            Color c = burnScreenFX.color;
+
+            float pulse = Mathf.Sin(Time.time * 10f) * 0.08f;
+
+            //Controls strength of intensity
+            c.a = Mathf.Lerp(c.a, (burnScreenIntensity * 0.2f) + pulse, burnFadeSpeed * Time.deltaTime);
+
+            burnScreenFX.color = c;
         }
 
         // Smooth health bar animation
