@@ -4,6 +4,16 @@ using UnityEngine.InputSystem;
 
 public class ElementalBoss : BaseBoss
 {
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float turnSpeed = 80f;
+
+    [SerializeField] private float idealRange = 6f;
+    [SerializeField] private float tooCloseRange = 3.5f;
+
+    [SerializeField] private float broadsideAngle = 90f;
+    [SerializeField] private float angleTolerance = 8f;
+
     [Header("Scatter Mortar Shot")]
     [SerializeField] private GameObject scatterProjectilePrefab;
 
@@ -48,6 +58,7 @@ public class ElementalBoss : BaseBoss
         base.Update();
 
         HandleState();
+        HandleMovement();
 
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
@@ -55,6 +66,70 @@ public class ElementalBoss : BaseBoss
         }
 
     }
+
+    void HandleMovement()
+    {
+        if (player == null) return;
+
+        switch (currentState)
+        {
+            case BossState.Idle:
+                ShipMovement();
+                break;
+            case BossState.ScatterShot:
+                ShipMovement();
+                break;
+            case BossState.NapalmAttack:
+                ShipMovement();
+                break;
+            case BossState.FlameBurst:
+                //PlaceHolder-----------Make new ability----------------------------
+                ShipMovement();
+                break;
+        }
+    }
+
+    void ShipMovement()
+    {
+        if(player == null) return;
+
+        Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        //Constant forward movement
+        transform.position += transform.up * moveSpeed * Time.deltaTime;
+        float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
+        float turnDirection = Mathf.Sign(angleToPlayer);
+
+        if(currentState == BossState.NapalmAttack)
+        {
+            MaintainBroadside(angleToPlayer);
+        }
+        else
+        {
+            //Turn To player
+            float turnAmount = turnDirection * turnSpeed * 0.6f * Time.deltaTime;
+            transform.Rotate(0, 0, turnAmount);
+        }
+
+        if(distance < tooCloseRange)
+        {
+            //Slow down if too close to player
+            transform.position -= transform.up * (moveSpeed * 0.5f * Time.deltaTime);
+        }
+    }
+
+    void MaintainBroadside(float angleToPlayer)
+    {
+        float targetAngle = Mathf.Abs(angleToPlayer - broadsideAngle) < Mathf.Abs(angleToPlayer + broadsideAngle) ? broadsideAngle : -broadsideAngle;
+
+        float angleDiff = Mathf.DeltaAngle(angleToPlayer, targetAngle);
+
+        float turnDir = -Mathf.Sign(angleDiff);
+
+        transform.Rotate(0, 0, turnDir * turnSpeed * 0.5f * Time.deltaTime);
+    }
+
     void HandleState()
     {
         stateTimer -= Time.deltaTime;
@@ -74,6 +149,7 @@ public class ElementalBoss : BaseBoss
             case BossState.NapalmAttack:
                 if (stateTimer <= 0)
                 {
+                    moveSpeed /= 1.3f;
                     napalmEmitter.StopFiring();
                     ChangeState(BossState.FlameBurst);
                 }
@@ -149,6 +225,7 @@ public class ElementalBoss : BaseBoss
     {
         stateTimer = 4f;
 
+        moveSpeed *= 1.3f;
         napalmEmitter.StartFiring();
     }
 
