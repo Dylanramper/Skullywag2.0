@@ -9985,10 +9985,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7957c0f0c308b8498da122c3eca5970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 2
+  turnSpeed: 80
+  idealRange: 6
+  tooCloseRange: 3.5
+  broadsideAngle: 90
+  angleTolerance: 8
   scatterProjectilePrefab: {fileID: 3606931892842474823, guid: 9be4fe84760b7f24785728a7f3176e33, type: 3}
   reticleSpawner: {fileID: 1428909430540178496}
   scatterPoint: {fileID: 1511937886404751353}
   napalmEmitter: {fileID: 763578054624537458}
+  flamePrefab: {fileID: 4638541416947560410, guid: 4e4dc0a0c7fddc840b0db64316176000, type: 3}
+  orbCount: 3
+  orbitRadius: 1.5
+  orbitSpeed: 180
+  orbitDuration: 3
 --- !u!114 &1428909430540178496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10027,6 +10038,7 @@ MonoBehaviour:
   spawnInterval: 0.15
   range: 6
   spreadAngle: 8
+  damagePerSecond: 10
 --- !u!1 &553436179866757545
 GameObject:
   m_ObjectHideFlags: 0

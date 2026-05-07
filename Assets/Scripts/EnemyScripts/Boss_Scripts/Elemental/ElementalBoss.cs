@@ -7,6 +7,7 @@ public class ElementalBoss : BaseBoss
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float turnSpeed = 80f;
+    private float baseMoveSpeed;
 
     [SerializeField] private float idealRange = 6f;
     [SerializeField] private float tooCloseRange = 3.5f;
@@ -22,6 +23,13 @@ public class ElementalBoss : BaseBoss
 
     [Header("Napalm Attack")]
     [SerializeField] private NapalmEmitter napalmEmitter;
+
+    [Header("Flame Burst")]
+    [SerializeField] private GameObject flamePrefab;
+    [SerializeField] private int orbCount = 3;
+    [SerializeField] private float orbitRadius = 1.5f;
+    [SerializeField] private float orbitSpeed = 180f;
+    [SerializeField] private float orbitDuration = 1.5f;
 
 
     private enum BossState
@@ -39,6 +47,7 @@ public class ElementalBoss : BaseBoss
     protected override void Start()
     {
         base.Start();
+        baseMoveSpeed = moveSpeed;
 
         if(player == null)
         {
@@ -149,7 +158,7 @@ public class ElementalBoss : BaseBoss
             case BossState.NapalmAttack:
                 if (stateTimer <= 0)
                 {
-                    moveSpeed /= 1.3f;
+                    moveSpeed = baseMoveSpeed;
                     napalmEmitter.StopFiring();
                     ChangeState(BossState.FlameBurst);
                 }
@@ -169,7 +178,7 @@ public class ElementalBoss : BaseBoss
         switch (newState)
         {
             case BossState.Idle:
-                stateTimer = 1.5f;
+                stateTimer = 4.5f;
                 break;
 
             case BossState.ScatterShot:
@@ -188,7 +197,7 @@ public class ElementalBoss : BaseBoss
 
     void StartScatterShot()
     {
-        stateTimer = 3f;
+        stateTimer = 9f;
 
         StartCoroutine(ScatterAttackRoutine());
     }
@@ -223,7 +232,7 @@ public class ElementalBoss : BaseBoss
     }
     void StartNapalmAttack()
     {
-        stateTimer = 4f;
+        stateTimer = 9f;
 
         moveSpeed *= 1.3f;
         napalmEmitter.StartFiring();
@@ -231,23 +240,61 @@ public class ElementalBoss : BaseBoss
 
     void StartFlameBurst()
     {
-        stateTimer = 2f;
+        stateTimer = 9f;
 
-        // TODO: Flame cone attack
+        StartCoroutine(FlameBurstRoutine());
+    }
+
+    IEnumerator FlameBurstRoutine()
+    {
+
+        GameObject[] orbs = new GameObject[orbCount];
+
+        //Spawn orbs in circle
+        for(int i = 0; i < orbCount; i++)
+        {
+
+            Debug.Log("Timer Started");//----------------------------------------------------------------------------------------------
+            float spawnDelay = 1.5f * i;
+
+            float angle = ((360f / orbCount) * i) - (orbitSpeed * spawnDelay);
+
+            Vector2 offset = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * orbitRadius;
+
+            //GameObject orb = Instantiate(flamePrefab, (Vector2)transform.position + offset, Quaternion.identity);
+            Quaternion rotation = Quaternion.Euler(0, 0, angle - 90f);
+
+            GameObject orb = Instantiate(flamePrefab, (Vector2)transform.position + offset, rotation);
+
+            orb.GetComponent<FlameOrb>().Initialize(transform, angle);
+
+            orbs[i] = orb;
+            Debug.Log("Orbs Spawned");
+
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        yield return new WaitForSeconds(orbitDuration);
+
+        //Fire
+        foreach(var orb in orbs)
+        {
+            if (orb != null)
+            {
+                orb.GetComponent<FlameOrb>().Launch(player);
+
+                Debug.Log("Orb Launched");
+
+                yield return new WaitForSeconds(0.8f);
+            }
+                
+
+        }
     }
 
     void ChooseNextAttack()
     {
         ChangeState(BossState.ScatterShot);
-        /*
-        int choice = Random.Range(0, 3);
-
-        if (choice == 0)
-            ChangeState(BossState.ScatterShot);
-        else if (choice == 1)
-            ChangeState(BossState.NapalmAttack);
-        else
-            ChangeState(BossState.FlameBurst); */
     }
 
     protected override void OnPhaseChanged(int newPhase)
