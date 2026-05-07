@@ -3619,6 +3619,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5810703421623649616, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5810703421623649616, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: flamePrefab
       value: 
       objectReference: {fileID: 4638541416947560410, guid: 4e4dc0a0c7fddc840b0db64316176000, type: 3}
@@ -3644,11 +3648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: -25.79
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: 15.85
       objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: beb3cb5bbe77a0e48aea6c1ddc7c9e5f, type: 3}
       propertyPath: m_LocalPosition.z

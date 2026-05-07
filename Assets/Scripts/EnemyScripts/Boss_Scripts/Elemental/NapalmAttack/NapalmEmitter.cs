@@ -19,6 +19,7 @@ public class NapalmEmitter : MonoBehaviour
 
     private Transform player;
     private Coroutine fireRoutine;
+    public bool IsFiring => fireRoutine != null;
 
     private void Awake()
     {
@@ -37,11 +38,14 @@ public class NapalmEmitter : MonoBehaviour
 
     public void StopFiring()
     {
-        if(fireRoutine != null)
+        if (fireRoutine != null)
         {
             StopCoroutine(fireRoutine);
             fireRoutine = null;
         }
+
+        leftFlame.StopFiring();
+        rightFlame.StopFiring();
     }
 
     IEnumerator FireRoutine()

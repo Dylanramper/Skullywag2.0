@@ -68,12 +68,6 @@ public class ElementalBoss : BaseBoss
 
         HandleState();
         HandleMovement();
-
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            TestScatterAttack();
-        }
-
     }
 
     void HandleMovement()
@@ -190,7 +184,8 @@ public class ElementalBoss : BaseBoss
                 break;
 
             case BossState.FlameBurst:
-                StartFlameBurst();
+                //StartFlameBurst();
+                StartNapalmAttack();
                 break;
         }
     }
