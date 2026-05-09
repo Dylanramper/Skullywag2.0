@@ -184,8 +184,7 @@ public class ElementalBoss : BaseBoss
                 break;
 
             case BossState.FlameBurst:
-                //StartFlameBurst();
-                StartNapalmAttack();
+                StartFlameBurst();
                 break;
         }
     }

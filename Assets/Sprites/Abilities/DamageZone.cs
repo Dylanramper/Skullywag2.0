@@ -3,7 +3,7 @@ using UnityEngine;
 public class DamageZone : MonoBehaviour
 {
     [SerializeField] private float dot = 5f;
-    [SerializeField] private float burnDuration = 2f;
+    [SerializeField] private float burnDuration = 3f;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -12,6 +12,19 @@ public class DamageZone : MonoBehaviour
             PlayerHealth player = collision.GetComponent<PlayerHealth>();
 
             if(player != null )
+            {
+                player.ApplyBurn(dot, burnDuration);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerHealth player = collision.GetComponent<PlayerHealth>();
+
+            if (player != null)
             {
                 player.ApplyBurn(dot, burnDuration);
             }
