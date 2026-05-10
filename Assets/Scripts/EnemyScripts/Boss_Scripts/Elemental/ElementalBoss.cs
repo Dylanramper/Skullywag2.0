@@ -86,7 +86,6 @@ public class ElementalBoss : BaseBoss
                 ShipMovement();
                 break;
             case BossState.FlameBurst:
-                //PlaceHolder-----------Make new ability----------------------------
                 ShipMovement();
                 break;
         }
@@ -176,11 +175,13 @@ public class ElementalBoss : BaseBoss
                 break;
 
             case BossState.ScatterShot:
-                StartScatterShot();
+                //StartScatterShot();
+                StartFlameBurst();
                 break;
 
             case BossState.NapalmAttack:
-                StartNapalmAttack();
+                //StartNapalmAttack();
+                StartFlameBurst();
                 break;
 
             case BossState.FlameBurst:
@@ -276,8 +277,6 @@ public class ElementalBoss : BaseBoss
             if (orb != null)
             {
                 orb.GetComponent<FlameOrb>().Launch(player);
-
-                Debug.Log("Orb Launched");
 
                 yield return new WaitForSeconds(0.8f);
             }

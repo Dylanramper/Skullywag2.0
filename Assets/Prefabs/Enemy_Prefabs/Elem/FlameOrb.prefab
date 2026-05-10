@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchSpeed: 6
   turnSpeed: 4
+  explosionFXPrefab: {fileID: 4444318277757059754, guid: 4bc85cfafc87c7a458a5e739669e89c7, type: 3}
 --- !u!198 &5836525163525776435
 ParticleSystem:
   m_ObjectHideFlags: 0

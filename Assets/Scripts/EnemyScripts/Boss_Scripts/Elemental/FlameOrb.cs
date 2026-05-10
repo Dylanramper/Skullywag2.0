@@ -12,8 +12,11 @@ public class FlameOrb : MonoBehaviour
     private Vector2 velocity;
 
     [Header("Launch")]
-    public float launchSpeed = 6f;
+    public float launchSpeed = 8f;
     public float turnSpeed = 4f;
+
+    [Header("Explosion")]
+    [SerializeField] private GameObject explosionFXPrefab;
 
     public void Initialize(Transform bossTransform, float startAngle)
     {
@@ -52,7 +55,6 @@ public class FlameOrb : MonoBehaviour
         velocity = transform.up * launchSpeed;
 
         StartCoroutine(HomeTowards(player));
-        Destroy(gameObject, 4f);
     }
 
     void Fly()
@@ -74,6 +76,14 @@ public class FlameOrb : MonoBehaviour
 
             yield return null;
         }
+        yield return new WaitForSeconds(1.5f);
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
+
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        Instantiate(explosionFXPrefab, transform.position, rotation);
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
