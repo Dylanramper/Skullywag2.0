@@ -35,7 +35,7 @@ public class PlayerCannonball : MonoBehaviour
         if(collision.gameObject.tag == "Boss")
         {
             // Hit Boss
-            BossController boss = collision.GetComponent<BossController>();
+            BaseBoss boss = collision.GetComponent<BaseBoss>();
             if (boss != null)
             {
                 boss.TakeDamage(damage); // adjust damage

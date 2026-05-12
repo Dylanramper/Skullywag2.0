@@ -28,12 +28,6 @@ public class ReticleSpawner : MonoBehaviour
             Debug.LogError("Player not found! Make sure it has the 'Player' tag.");
     }
 
-    //Temp (Delete this method after) 
-    void Start()
-    {
-        Invoke(nameof(SpawnReticles), 1f);
-    }
-
     public void SpawnReticles()
     {
         if (player == null) return;

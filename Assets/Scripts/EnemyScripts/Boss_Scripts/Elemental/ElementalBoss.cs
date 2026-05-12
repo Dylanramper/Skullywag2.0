@@ -175,13 +175,11 @@ public class ElementalBoss : BaseBoss
                 break;
 
             case BossState.ScatterShot:
-                //StartScatterShot();
-                StartFlameBurst();
+                StartScatterShot();
                 break;
 
             case BossState.NapalmAttack:
-                //StartNapalmAttack();
-                StartFlameBurst();
+                StartNapalmAttack();
                 break;
 
             case BossState.FlameBurst:
@@ -287,7 +285,22 @@ public class ElementalBoss : BaseBoss
 
     void ChooseNextAttack()
     {
-        ChangeState(BossState.ScatterShot);
+        int choice = Random.Range(0, 3);
+
+        switch (choice)
+        {
+            case 0:
+                ChangeState(BossState.ScatterShot);
+                break;
+
+            case 1:
+                ChangeState(BossState.NapalmAttack);
+                break;
+
+            case 2:
+                ChangeState(BossState.FlameBurst);
+                break;
+        }
     }
 
     protected override void OnPhaseChanged(int newPhase)
