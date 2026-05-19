@@ -2109,6 +2109,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 6862136046046413429, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862136046046413429, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7984790508685028330, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.953041
@@ -2152,8 +2160,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 462078149943355466, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 663133139}
   m_SourcePrefab: {fileID: 100100000, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
+--- !u!1 &663133138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 462078149943355466, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
+  m_PrefabInstance: {fileID: 663133137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &663133139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663133138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9c114b20fbe1849a0fa39ecfa2a8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1.5
+  turnSpeed: 80
+  idealRange: 7
+  tooCloseRange: 4
 --- !u!1 &728271953
 GameObject:
   m_ObjectHideFlags: 0
