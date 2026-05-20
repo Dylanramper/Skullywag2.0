@@ -4,6 +4,12 @@ using UnityEngine.XR;
 
 public class GhostBoss : BaseBoss
 {
+    [Header("Visuals")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private PolygonCollider2D col;
+    private Vector3 originalScale;
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float turnSpeed = 80f;
@@ -33,6 +39,13 @@ public class GhostBoss : BaseBoss
         stateTimer = teleportCooldown;
 
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<PolygonCollider2D>();
+        originalScale = transform.localScale;
+
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
 
         if (player == null)
         {
@@ -103,13 +116,82 @@ public class GhostBoss : BaseBoss
 
         Debug.Log("Teleport Started");
 
-        yield return new WaitForSeconds(2f);
+        //Scale up to emulate hovering up
+        float timer = 0f;
+        float duration = 0.6f;
+
+        Vector3 targetScale = originalScale * 1.5f;
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, timer / duration);
+
+            yield return null;
+        }
+        //Disappear
+        col.enabled = false;
+        Color color = spriteRenderer.color;
+
+        timer = 0f;
+        duration = 0.5f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(1f, 0f, timer / duration);
+
+            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+
+            yield return null;
+        }
+
+        //Reposition
+        Vector2 randomDirection = Random.insideUnitCircle.normalized;
+
+        float randomDistance = Random.Range(4f, 5f);
+
+        Vector2 teleportPosition = (Vector2)player.position + randomDirection * randomDistance;
+
+        transform.position = teleportPosition;
+
+        //Reappear
+        timer = 0f;
+        duration = 0.4f; 
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(0f, 1f, timer / duration);
+
+            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+
+        //Scale back down to emulate a slamming motion on the water
+        timer = 0f;
+        duration = 0.3f;
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, timer / duration);
+
+            yield return null;
+        }
+
+        col.enabled = true;
 
         Debug.Log("Teleport Finished");
 
         isTeleporting = false;
 
         ChangeState(BossState.Chasing);
+
     }
 
     void ShipMovement()
