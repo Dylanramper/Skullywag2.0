@@ -2111,7 +2111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6862136046046413429, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
       propertyPath: m_Constraints
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6862136046046413429, guid: 32c96e20f1afb6846b0ff8b881105743, type: 3}
       propertyPath: m_CollisionDetection
@@ -2182,10 +2182,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9c114b20fbe1849a0fa39ecfa2a8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   moveSpeed: 1.5
   turnSpeed: 80
   idealRange: 7
   tooCloseRange: 4
+  teleportCooldown: 5
+  shockwavePrefab: {fileID: 4636161968312364799, guid: 6425e6d4d82d90c48868eb9d124be724, type: 3}
 --- !u!1 &728271953
 GameObject:
   m_ObjectHideFlags: 0

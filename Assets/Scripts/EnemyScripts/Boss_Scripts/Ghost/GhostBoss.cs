@@ -20,9 +20,11 @@ public class GhostBoss : BaseBoss
 
     [Header("Teleport")]
     [SerializeField] private float teleportCooldown = 5f;
-
     private float stateTimer;
     private bool isTeleporting;
+
+    [Header("Shockwave")]
+    [SerializeField] private GameObject shockwavePrefab;
 
     private enum BossState
     {
@@ -183,6 +185,7 @@ public class GhostBoss : BaseBoss
 
             yield return null;
         }
+        Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
 
         col.enabled = true;
 
