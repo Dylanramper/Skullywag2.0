@@ -186,6 +186,7 @@ public class GhostBoss : BaseBoss
             yield return null;
         }
         Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
+        GameManager.Instance.ShakeCamera(0.3f, 0.25f);
 
         col.enabled = true;
 
