@@ -22,13 +22,14 @@ public class GhostBoss : BaseBoss
     [SerializeField] private float teleportCooldown = 5f;
     private float stateTimer;
     private bool isTeleporting;
+    private TrailRenderer trailRenderer;
 
     [Header("Shockwave")]
     [SerializeField] private GameObject shockwavePrefab;
 
     private enum BossState
     {
-        Chasing, Teleporting, Attacking
+        Chasing, Teleporting, Attacking, Summmoning
     }
 
     private BossState currentState;
@@ -42,6 +43,7 @@ public class GhostBoss : BaseBoss
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<PolygonCollider2D>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
         originalScale = transform.localScale;
 
         if(spriteRenderer == null)
@@ -134,6 +136,7 @@ public class GhostBoss : BaseBoss
         }
         //Disappear
         col.enabled = false;
+        trailRenderer.enabled = false;
         Color color = spriteRenderer.color;
 
         timer = 0f;
@@ -189,6 +192,7 @@ public class GhostBoss : BaseBoss
         GameManager.Instance.ShakeCamera(0.3f, 0.25f);
 
         col.enabled = true;
+        trailRenderer.enabled = true;
 
         Debug.Log("Teleport Finished");
 
