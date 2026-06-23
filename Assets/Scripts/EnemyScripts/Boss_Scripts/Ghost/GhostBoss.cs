@@ -27,9 +27,14 @@ public class GhostBoss : BaseBoss
     [Header("Shockwave")]
     [SerializeField] private GameObject shockwavePrefab;
 
+    [Header("Ghost Boats")]
+    [SerializeField] private GameObject ghostBoatPrefab;
+    [SerializeField] private int boatsPerSummon = 4;
+    [SerializeField] private float summonCooldown = 8f;
+
     private enum BossState
     {
-        Chasing, Teleporting, Attacking, Summmoning
+        Chasing, Teleporting, Attacking, Summoning
     }
 
     private BossState currentState;
@@ -93,6 +98,14 @@ public class GhostBoss : BaseBoss
             case BossState.Attacking:
                 ShipMovement();
                 break;
+
+            case BossState.Summoning:
+                ShipMovement();
+                if (stateTimer <= 0)
+                {
+                    ChangeState(BossState.Summoning);
+                }
+                break;
         }
     }
 
@@ -113,6 +126,29 @@ public class GhostBoss : BaseBoss
                 break;
         }
     }
+
+    IEnumerator SummonRoutine()
+    {
+        Debug.Log("Summoning Minions!");
+
+        yield new WaitForSeconds(1f);
+
+        SpawnGhostBoats();
+
+        ChangeState(BossState.Chasing);
+    }
+
+    void SpawnGhostBoats()
+    {
+        for(int i = 0; i < boatsPerSummon; i++)
+        {
+            Vector2 direction = Random.insideUnitCircle.normalized;
+
+            Vector2 spawnPos = (Vector2)player.position + direction * Random.Range(6f, 8f);
+
+            Instantiate(ghostBoatPrefab, spawnPos, Quaternion.identity);
+        }
+    }//--------------------------------------------------------------------LEFT OFF HERE---------------------------
 
     IEnumerator TeleportRoutine()
     {
