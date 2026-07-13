@@ -2190,6 +2190,9 @@ MonoBehaviour:
   tooCloseRange: 4
   teleportCooldown: 5
   shockwavePrefab: {fileID: 4636161968312364799, guid: 6425e6d4d82d90c48868eb9d124be724, type: 3}
+  ghostBoatPrefab: {fileID: 0}
+  boatsPerSummon: 4
+  summonCooldown: 8
 --- !u!1 &728271953
 GameObject:
   m_ObjectHideFlags: 0

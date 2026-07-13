@@ -131,7 +131,7 @@ public class GhostBoss : BaseBoss
     {
         Debug.Log("Summoning Minions!");
 
-        yield new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
         SpawnGhostBoats();
 
