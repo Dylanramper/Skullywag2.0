@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -85,9 +86,9 @@ public class GhostBoss : BaseBoss
         {
             case BossState.Chasing:
                 ShipMovement();
-                if(stateTimer <= 0 && !isTeleporting)
+                if(stateTimer <= 0)
                 {
-                    ChangeState(BossState.Teleporting);
+                    ChangeState(BossState.Summoning);
                 }
                 break;
 
@@ -99,13 +100,13 @@ public class GhostBoss : BaseBoss
                 ShipMovement();
                 break;
 
-            case BossState.Summoning:
+            /*case BossState.Summoning:
                 ShipMovement();
                 if (stateTimer <= 0)
                 {
                     ChangeState(BossState.Summoning);
                 }
-                break;
+                break;*/
         }
     }
 
@@ -122,6 +123,11 @@ public class GhostBoss : BaseBoss
             case BossState.Teleporting:
                 StartCoroutine(TeleportRoutine());
                 break;
+
+            case BossState.Summoning:
+                StartCoroutine(SummonRoutine());
+                break;
+
             case BossState.Attacking:
                 break;
         }
@@ -146,9 +152,13 @@ public class GhostBoss : BaseBoss
 
             Vector2 spawnPos = (Vector2)player.position + direction * Random.Range(6f, 8f);
 
-            Instantiate(ghostBoatPrefab, spawnPos, Quaternion.identity);
+            Vector2 toPlayer = ((Vector2)player.position - spawnPos).normalized;
+
+            float angle = Mathf.Atan2(toPlayer.y, toPlayer.x) * Mathf.Rad2Deg - 90f;
+
+            Instantiate(ghostBoatPrefab, spawnPos, Quaternion.Euler(0f, 0f, angle));
         }
-    }//--------------------------------------------------------------------LEFT OFF HERE---------------------------
+    }
 
     IEnumerator TeleportRoutine()
     {
