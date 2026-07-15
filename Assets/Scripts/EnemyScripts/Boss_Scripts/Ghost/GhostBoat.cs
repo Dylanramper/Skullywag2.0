@@ -1,15 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class GhostBoat : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float turnSpeed = 120f;
 
-    [SerializeField] private int damage = 5;
+    [SerializeField] private int damage = 10;
     [SerializeField] private float lifeTime = 8f;
 
     private Transform player;
     private Rigidbody2D rb;
+    private bool canMove = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,11 +24,15 @@ public class GhostBoat : MonoBehaviour
            player = p.transform;
         
         Destroy(gameObject, lifeTime);
+
+        StartCoroutine(SpawnRoutine());
     }
 
     private void FixedUpdate()
     {
-        if(player == null) return;
+        if(!canMove) return;
+
+        if (player == null) return;
 
         Vector2 toPlayer = ((Vector2)player.position - rb.position).normalized;
 
@@ -37,19 +43,33 @@ public class GhostBoat : MonoBehaviour
         rb.linearVelocity = transform.up * moveSpeed;
     }
 
+    private IEnumerator SpawnRoutine()
+    {
+        canMove = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        canMove = true;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!collision.gameObject.CompareTag("Player")) 
            return;
 
         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+        PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
 
-        if(playerHealth != null)
+        if (playerHealth != null)
         {
             playerHealth.TakeDamage(damage);
-
-            //------------------------------------------------------------------------SLOW EFFECT------------------------
         }
+
+        if(playerMovement != null)
+        {
+            playerMovement.ApplySlow(0.6f, 3f);
+        }
+
         Destroy(gameObject);
     }
 }

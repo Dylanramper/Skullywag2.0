@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
     private float speedBoostEndTime = 0f;
     private bool isSpeedBoostActive = false;
 
+    [Header("Slow Effect")]
+    private float slowMultiplier = 1f;
+    private float slowEndTime = 0f;
+    private bool isSlowed = false;
+
     private Rigidbody2D rb;
     public float speed;
     public float turnSpeed;
@@ -74,6 +79,9 @@ public class PlayerMovement : MonoBehaviour
         // Apply power-up boost
         finalSpeed *= speedPowerUpMultiplier;
 
+        //Apply slow effect
+        finalSpeed *= slowMultiplier;
+
         // Move player
         rb.linearVelocity = (Vector2)transform.up * finalSpeed;
 
@@ -83,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSpeedPowerUp()
     {
+        if(isSlowed && Time.time > slowEndTime)
+        {
+            slowMultiplier = 1f;
+            isSlowed = false;
+        }
+
         if (isSpeedBoostActive && Time.time > speedBoostEndTime)
         {
             speedPowerUpMultiplier = 1f;
@@ -193,6 +207,13 @@ public class PlayerMovement : MonoBehaviour
         // Visual indicator: trail
         if (trail != null)
             trail.widthCurve = boostedWidthCurve;
+    }
+
+    public void ApplySlow(float multiplier, float duration)
+    {
+        slowMultiplier = multiplier;
+        slowEndTime = Time.time + duration;
+        isSlowed = true;
     }
 
     //Functions for buttons to turn payer.

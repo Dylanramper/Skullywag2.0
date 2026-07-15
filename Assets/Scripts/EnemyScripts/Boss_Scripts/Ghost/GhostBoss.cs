@@ -1,8 +1,5 @@
 using System.Collections;
-using Unity.Hierarchy;
 using UnityEngine;
-using UnityEngine.XR;
-
 public class GhostBoss : BaseBoss
 {
     [Header("Visuals")]
@@ -14,15 +11,11 @@ public class GhostBoss : BaseBoss
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float turnSpeed = 80f;
-    [SerializeField] private float idealRange = 7f;
     [SerializeField] private float tooCloseRange = 4f;
-
-    private Rigidbody2D rb;
 
     [Header("Teleport")]
     [SerializeField] private float teleportCooldown = 5f;
     private float stateTimer;
-    private bool isTeleporting;
     private TrailRenderer trailRenderer;
 
     [Header("Shockwave")]
@@ -45,9 +38,7 @@ public class GhostBoss : BaseBoss
     {
         base.Start();
         currentState = BossState.Chasing;
-        stateTimer = teleportCooldown;
-
-        rb = GetComponent<Rigidbody2D>();
+        stateTimer = Random.Range(5f, 8f);
         col = GetComponent<PolygonCollider2D>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
         originalScale = transform.localScale;
@@ -88,7 +79,7 @@ public class GhostBoss : BaseBoss
                 ShipMovement();
                 if(stateTimer <= 0)
                 {
-                    ChangeState(BossState.Summoning);
+                    ChooseNextAttack();
                 }
                 break;
 
@@ -100,13 +91,8 @@ public class GhostBoss : BaseBoss
                 ShipMovement();
                 break;
 
-            /*case BossState.Summoning:
-                ShipMovement();
-                if (stateTimer <= 0)
-                {
-                    ChangeState(BossState.Summoning);
-                }
-                break;*/
+            case BossState.Summoning:
+                break;
         }
     }
 
@@ -117,7 +103,7 @@ public class GhostBoss : BaseBoss
         switch (newState)
         {
             case BossState.Chasing:
-                stateTimer = teleportCooldown;
+                stateTimer = Random.Range(5f, 8f);
                 break;
 
             case BossState.Teleporting:
@@ -129,6 +115,24 @@ public class GhostBoss : BaseBoss
                 break;
 
             case BossState.Attacking:
+                break;
+        }
+    }
+
+    void ChooseNextAttack()
+    {
+        int attack = Random.Range(0, 2);
+
+        Debug.Log("Attack: " + attack);
+
+        switch (attack)
+        {
+            case 0:
+                ChangeState(BossState.Teleporting);
+                break;
+
+            case 1:
+                ChangeState(BossState.Summoning);
                 break;
         }
     }
@@ -146,26 +150,26 @@ public class GhostBoss : BaseBoss
 
     void SpawnGhostBoats()
     {
+        float radius = 3f;
+
         for(int i = 0; i < boatsPerSummon; i++)
         {
-            Vector2 direction = Random.insideUnitCircle.normalized;
+            float angle = (360f / boatsPerSummon) * i;
 
-            Vector2 spawnPos = (Vector2)player.position + direction * Random.Range(6f, 8f);
+            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
+            Vector2 spawnPos = (Vector2)transform.position + direction * radius;
+            
             Vector2 toPlayer = ((Vector2)player.position - spawnPos).normalized;
 
-            float angle = Mathf.Atan2(toPlayer.y, toPlayer.x) * Mathf.Rad2Deg - 90f;
+            float rotation = Mathf.Atan2(toPlayer.y, toPlayer.x) * Mathf.Rad2Deg - 90f;
 
-            Instantiate(ghostBoatPrefab, spawnPos, Quaternion.Euler(0f, 0f, angle));
+            Instantiate(ghostBoatPrefab, spawnPos, Quaternion.Euler(0f, 0f, rotation));
         }
     }
 
     IEnumerator TeleportRoutine()
     {
-        isTeleporting = true;
-
-        Debug.Log("Teleport Started");
-
         //Scale up to emulate hovering up
         float timer = 0f;
         float duration = 0.6f;
@@ -239,10 +243,6 @@ public class GhostBoss : BaseBoss
 
         col.enabled = true;
         trailRenderer.enabled = true;
-
-        Debug.Log("Teleport Finished");
-
-        isTeleporting = false;
 
         ChangeState(BossState.Chasing);
 

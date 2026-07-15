@@ -29,7 +29,6 @@ public class GhostShockwave : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (hasHitPlayer) return;
-        Debug.Log("Hit Player");
 
         if (collision.CompareTag("Player"))
         {

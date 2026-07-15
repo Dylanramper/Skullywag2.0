@@ -15433,7 +15433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81645c38c9d76b8499fb3df8855a287c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3
   turnSpeed: 120
   damage: 5
   lifeTime: 8
