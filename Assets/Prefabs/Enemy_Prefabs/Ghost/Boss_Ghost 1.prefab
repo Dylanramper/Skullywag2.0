@@ -19795,7 +19795,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   moveSpeed: 1.5
   turnSpeed: 80
-  idealRange: 7
   tooCloseRange: 4
   teleportCooldown: 5
   shockwavePrefab: {fileID: 4636161968312364799, guid: 6425e6d4d82d90c48868eb9d124be724, type: 3}

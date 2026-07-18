@@ -199,7 +199,7 @@ public class GhostBoss : BaseBoss
             float alpha = Mathf.Lerp(1f, 0f, timer / duration);
 
             spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-
+            
             yield return null;
         }
 
