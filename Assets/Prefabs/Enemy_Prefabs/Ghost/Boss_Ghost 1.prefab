@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1925124481835396872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595879826621210603}
+  m_Layer: 0
+  m_Name: LeftCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1595879826621210603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925124481835396872}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.253, y: -0.1, z: 4.1940007}
+  m_LocalScale: {x: 0.28571427, y: 0.28571427, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084489333458658639}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &2340710917132459226
 GameObject:
   m_ObjectHideFlags: 0
@@ -19495,6 +19526,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &3889184508215571677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6199054842221798128}
+  m_Layer: 0
+  m_Name: RightCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6199054842221798128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889184508215571677}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710695, w: 0.7071067}
+  m_LocalPosition: {x: 0.20499991, y: -0.092, z: 4.1940007}
+  m_LocalScale: {x: 0.28571427, y: 0.28571427, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084489333458658639}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &4123979449904833004
 GameObject:
   m_ObjectHideFlags: 0
@@ -19688,6 +19750,8 @@ Transform:
   - {fileID: 5909956592182261079}
   - {fileID: 4989284450406081881}
   - {fileID: 9013754728691468741}
+  - {fileID: 6199054842221798128}
+  - {fileID: 1595879826621210603}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7258841844261254302
@@ -19801,6 +19865,12 @@ MonoBehaviour:
   ghostBoatPrefab: {fileID: 7378332656579810395, guid: 689715619a300054e93f91c4c9e104a8, type: 3}
   boatsPerSummon: 4
   summonCooldown: 8
+  leftCannon: {fileID: 1595879826621210603}
+  rightCannon: {fileID: 6199054842221798128}
+  ghostProjectilePrefab: {fileID: 3606931892842474823, guid: 8d07a397decb1784e843acaa7ef5dfe7, type: 3}
+  reticlePrefab: {fileID: 9074132819785736204, guid: 0a310a49a3a817240accf2fc637ebed8, type: 3}
+  volleyShots: 6
+  timeBetweenShots: 0.25
 --- !u!1 &4602767590490309676
 GameObject:
   m_ObjectHideFlags: 0

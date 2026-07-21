@@ -26,9 +26,19 @@ public class GhostBoss : BaseBoss
     [SerializeField] private int boatsPerSummon = 4;
     [SerializeField] private float summonCooldown = 8f;
 
+    [Header("Volley")]
+    [SerializeField] private Transform leftCannon;
+    [SerializeField] private Transform rightCannon;
+
+    [SerializeField] private GameObject ghostProjectilePrefab;
+    [SerializeField] private GameObject reticlePrefab;
+
+    [SerializeField] private int volleyShots = 6;
+    [SerializeField] private float timeBetweenShots = 0.25f;
+
     private enum BossState
     {
-        Chasing, Teleporting, Attacking, Summoning
+        Chasing, Teleporting, Volley, Summoning
     }
 
     private BossState currentState;
@@ -87,7 +97,7 @@ public class GhostBoss : BaseBoss
                 //ShipMovement();
                 break;
 
-            case BossState.Attacking:
+            case BossState.Volley:
                 ShipMovement();
                 break;
 
@@ -114,14 +124,15 @@ public class GhostBoss : BaseBoss
                 StartCoroutine(SummonRoutine());
                 break;
 
-            case BossState.Attacking:
+            case BossState.Volley:
+                StartCoroutine(VolleyRoutine());
                 break;
         }
     }
 
     void ChooseNextAttack()
     {
-        int attack = Random.Range(0, 2);
+        int attack = Random.Range(0, 3);
 
         Debug.Log("Attack: " + attack);
 
@@ -134,7 +145,43 @@ public class GhostBoss : BaseBoss
             case 1:
                 ChangeState(BossState.Summoning);
                 break;
+
+            case 2:
+                ChangeState(BossState.Volley);
+                break;
         }
+    }
+
+    IEnumerator VolleyRoutine()
+    {
+        Debug.Log("Volley Attack!");
+
+        bool useLeft = true;
+
+        for (int i = 0; i < volleyShots; i++)
+        {
+            Transform cannon = useLeft ? leftCannon : rightCannon;
+
+            //Spawn reticle
+            GameObject reticle = Instantiate(reticlePrefab, player.position, Quaternion.identity);
+
+            //Spawn Projectile
+            GameObject projectile = Instantiate(ghostProjectilePrefab, cannon.position, cannon.rotation);
+
+            //calculate target
+            GhostVolleyShot ghostVolleyShot = projectile.GetComponent<GhostVolleyShot>();
+
+            if (ghostVolleyShot != null)
+                ghostVolleyShot.SetTarget(reticle.transform);
+
+            useLeft = !useLeft;
+
+            yield return new WaitForSeconds(timeBetweenShots);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        ChangeState(BossState.Chasing);
     }
 
     IEnumerator SummonRoutine()
