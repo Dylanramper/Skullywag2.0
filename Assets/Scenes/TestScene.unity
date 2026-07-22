@@ -10625,6 +10625,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2534205823674029114, guid: 0430301a960645346afba11bba0263ab, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4168874462424903476, guid: 0430301a960645346afba11bba0263ab, type: 3}
       propertyPath: m_Name
       value: Boss_Ghost

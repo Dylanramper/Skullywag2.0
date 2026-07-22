@@ -32,9 +32,10 @@ public class GhostBoss : BaseBoss
 
     [SerializeField] private GameObject ghostProjectilePrefab;
     [SerializeField] private GameObject reticlePrefab;
+    [SerializeField] private float reticleLeadDistance = 2.5f;
 
     [SerializeField] private int volleyShots = 6;
-    [SerializeField] private float timeBetweenShots = 0.25f;
+    [SerializeField] private float timeBetweenShots = .5f;
 
     private enum BossState
     {
@@ -113,7 +114,7 @@ public class GhostBoss : BaseBoss
         switch (newState)
         {
             case BossState.Chasing:
-                stateTimer = Random.Range(5f, 8f);
+                stateTimer = Random.Range(7f, 10f);
                 break;
 
             case BossState.Teleporting:
@@ -163,7 +164,18 @@ public class GhostBoss : BaseBoss
             Transform cannon = useLeft ? leftCannon : rightCannon;
 
             //Spawn reticle
-            GameObject reticle = Instantiate(reticlePrefab, player.position, Quaternion.identity);
+            //Predict player position based on velocity
+            Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
+
+            Vector2 predictedPosition = player.position;
+
+            if(playerRB != null)
+            {
+                predictedPosition += playerRB.linearVelocity.normalized * reticleLeadDistance;
+            }
+
+            //Spawn reticle ahead of player
+            GameObject reticle = Instantiate(reticlePrefab, predictedPosition, Quaternion.identity);
 
             //Spawn Projectile
             GameObject projectile = Instantiate(ghostProjectilePrefab, cannon.position, cannon.rotation);
