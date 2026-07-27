@@ -58,17 +58,6 @@ public class GhostBoss : BaseBoss
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
-
-        if (player == null)
-        {
-            GameObject p = GameObject.FindGameObjectWithTag("Player");
-
-            if (p != null)
-            {
-                player = p.transform;
-            }
-        }
-
         currentState = BossState.Chasing;
     }
 
