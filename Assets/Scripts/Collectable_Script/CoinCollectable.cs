@@ -5,6 +5,7 @@ public class CoinCollectable : Collectable
     protected override void Start()
     {
         // Override base values for coin
+        coinValue = 1;
         scoreValue = 5;
         rotationSpeed = 0f;
         floatSpeed = 3f;

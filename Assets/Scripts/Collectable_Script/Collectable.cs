@@ -3,6 +3,7 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     [Header("Collectable Settings")]
+    public int coinValue = 1;
     public int scoreValue = 5;
     public AudioClip pickupSound;
     public GameObject pickupEffect;
@@ -67,13 +68,13 @@ public class Collectable : MonoBehaviour
     protected virtual void Collect()
     {
         // Add score using ScoreManager
-        if (GameManager.Instance != null)
+        if (CurrencyManager.Instance != null)
         {
-            GameManager.Instance.AddScore(scoreValue);
+            CurrencyManager.Instance.AddCoins(coinValue);
         }
         else
         {
-            Debug.Log($"Collected! +{scoreValue} points");
+            Debug.Log($"Collected! +{coinValue} points");
         }
 
         // Play sound
