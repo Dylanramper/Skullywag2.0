@@ -506,9 +506,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - rowboats: 6
-    brigs: 0
-    galleons: 0
+  - rowboats: 4
+    brigs: 5
+    galleons: 5
   - rowboats: 6
     brigs: 1
     galleons: 0
@@ -546,7 +546,7 @@ MonoBehaviour:
   indicatorParent: {fileID: 1047672679}
   player: {fileID: 0}
   bossActive: 0
-  startAtLastWave: 1
+  startAtLastWave: 0
 --- !u!4 &236392911
 Transform:
   m_ObjectHideFlags: 0
@@ -10632,6 +10632,10 @@ PrefabInstance:
     - target: {fileID: 4168874462424903476, guid: 0430301a960645346afba11bba0263ab, type: 3}
       propertyPath: m_Name
       value: Boss_Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168874462424903476, guid: 0430301a960645346afba11bba0263ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
