@@ -1,12 +1,10 @@
-using NUnit.Framework.Internal.Commands;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ShopItems : MonoBehaviour
 {
     [Header("Shop Item")]
     [SerializeField] private string itemName;
-    [SerializeField] private string description;
+    [TextArea] [SerializeField] private string description;
     [SerializeField] private int price = 100;
 
 
