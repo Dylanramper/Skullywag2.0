@@ -49,16 +49,6 @@ public class ElementalBoss : BaseBoss
         base.Start();
         baseMoveSpeed = moveSpeed;
 
-        if(player == null)
-        {
-            GameObject p = GameObject.FindGameObjectWithTag("Player");
-
-            if(p != null)
-            {
-                player = p.transform;
-            }
-        }
-
         currentState = BossState.Idle;
     }
 
@@ -201,7 +191,6 @@ public class ElementalBoss : BaseBoss
             Debug.Log("Player is Null");
             yield break;
         }
-        Debug.Log("ScatterShot STARTED");
 
         //Spawn Reticles
         reticleSpawner.SpawnReticles();
@@ -246,8 +235,6 @@ public class ElementalBoss : BaseBoss
         //Spawn orbs in circle
         for(int i = 0; i < orbCount; i++)
         {
-
-            Debug.Log("Timer Started");//----------------------------------------------------------------------------------------------
             float spawnDelay = 1.5f * i;
 
             float angle = ((360f / orbCount) * i) - (orbitSpeed * spawnDelay);
@@ -262,7 +249,6 @@ public class ElementalBoss : BaseBoss
             orb.GetComponent<FlameOrb>().Initialize(transform, angle);
 
             orbs[i] = orb;
-            Debug.Log("Orbs Spawned");
 
             yield return new WaitForSeconds(1.5f);
         }
@@ -319,24 +305,8 @@ public class ElementalBoss : BaseBoss
         }
     }
 
-    void TestScatterAttack()
+    protected override void Die()
     {
-        // Step 1: Spawn reticles
-        reticleSpawner.SpawnReticles();
-
-        // Step 2: Get center target (player area)
-        Vector2 target = Vector2.zero;
-
-        foreach (var pos in reticleSpawner.reticlePositions)
-        {
-            target += pos;
-        }
-
-        target /= reticleSpawner.reticlePositions.Count;
-
-        // Step 3: Spawn projectile
-        GameObject proj = Instantiate(scatterProjectilePrefab, scatterPoint.position, Quaternion.identity);
-
-        proj.GetComponent<ScatterProjectile>().Initialize(scatterPoint.position, target, reticleSpawner.reticlePositions);
+        Destroy(gameObject);
     }
 }

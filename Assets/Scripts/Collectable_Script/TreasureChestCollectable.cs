@@ -9,7 +9,7 @@ public class TreasureChestCollectable : Collectable
     protected override void Start()
     {
         // Override base values for chest
-        scoreValue = 10;
+        coinValue = 10;
         rotationSpeed = 90f; // Slower rotation
         floatSpeed = 1.5f; // Slower float
 

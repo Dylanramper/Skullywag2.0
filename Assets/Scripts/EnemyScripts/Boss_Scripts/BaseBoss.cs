@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class BaseBoss : MonoBehaviour
 {
-    protected float health;
+    public float health;
     protected float maxHealth = 100f;
 
     protected int currentPhase = 1;
@@ -57,7 +57,7 @@ public abstract class BaseBoss : MonoBehaviour
 
     protected virtual void Die()
     {
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public float GetHealthPercent()

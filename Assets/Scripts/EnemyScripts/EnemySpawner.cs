@@ -25,11 +25,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject galleonPrefab;
 
     [Header("Boss")]
-    [SerializeField] private GameObject bossPrefab;
+    [SerializeField] private List<GameObject> bossPrefabs = new List<GameObject>();
     [SerializeField] private Transform bossSpawnPoint;
     [SerializeField] private BossHPBar bossHPBar;
     [SerializeField] private BossIndicator bossIndicator;
     [SerializeField] private GameObject mortarIndicatorPrefab;
+
+    public GameObject MortarIndicatorPrefab => mortarIndicatorPrefab;
+    private int currentBoss = 0;
 
     [Header("Spawn Timing")]
     public float initialDelay = 5f;
@@ -195,6 +198,8 @@ public class EnemySpawner : MonoBehaviour
         // Spawn boss
         Vector3 spawnPos = bossSpawnPoint != null ? bossSpawnPoint.position : GetRandomSpawnPosition(player.position);
 
+        GameObject bossPrefab = bossPrefabs[currentBoss];
+
         GameObject boss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
 
         if (bossIndicator != null)
@@ -204,16 +209,22 @@ public class EnemySpawner : MonoBehaviour
 
         activeEnemies.Add(boss);
 
-        BossController bossController = boss.GetComponent<BossController>();
-        if (bossController != null)
+        BaseBoss bossScript = boss.GetComponent<BaseBoss>();
+
+        if (bossScript != null)
         {
-            bossController.SetBossHealthbar(bossHPBar);
-            bossController.SetPlayer(player);
+            bossScript.SetPlayer(player);
         }
 
-        if(mortarIndicatorPrefab != null)
+        BossController pirateBoss = boss.GetComponent<BossController>();
+
+        if(pirateBoss != null)
         {
-            bossController.SetMortarIndicator(mortarIndicatorPrefab);
+            pirateBoss.SetBossHealthbar(bossHPBar);
+            if(mortarIndicatorPrefab != null)
+            {
+                pirateBoss.SetMortarIndicator(mortarIndicatorPrefab);
+            }
         }
 
         if (bossIndicator != null)
@@ -228,6 +239,13 @@ public class EnemySpawner : MonoBehaviour
 
         // Reset waves back to beginning
         currentWave = 0;
+        currentBoss++;
+
+        //Loop back to first boss if all bosses have been defeated
+        if (currentBoss >= bossPrefabs.Count)
+        {
+            currentBoss = 0;
+        }
 
         // Hide boss UI
         bossHPBar.Hide();

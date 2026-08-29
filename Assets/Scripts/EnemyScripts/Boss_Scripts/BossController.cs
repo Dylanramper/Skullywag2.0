@@ -464,7 +464,6 @@ public class BossController : BaseBoss
 
     protected override void Die()
     {
-        Debug.Log("Boss Defeated!");
         AudioManager.Instance.bossActive = false;
         EnemyShip.activeEnemiesInCombat--;
         BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
