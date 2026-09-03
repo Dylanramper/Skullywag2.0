@@ -780,8 +780,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - rowboats: 10
-    brigs: 0
+  - rowboats: 1
+    brigs: 10
     galleons: 0
   countdownManager: {fileID: 2958602485188248753}
   enemyCountText: {fileID: 1226869816}
@@ -2008,8 +2008,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08616934ad869749bc817d99f431ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShopItems: {fileID: 499390834}
+  shopItem: {fileID: 499390834}
   buyButton: {fileID: 1453437778}
+  itemNameText: {fileID: 94392965}
+  itemDescriptionText: {fileID: 1165441618}
+  itemPriceText: {fileID: 653854745}
 --- !u!1 &492360686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,9 +2117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0f62db6f8223c4989f5d7e1a1bf5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Test Upgrade
-  description: This is a test upgrade.
-  price: 5
+  itemName: Cannon Damage
+  description: Permanently upgrade cannon damage.
+  price: 10
+  upgradeType: 0
+  playerCannons: {fileID: 262932413}
 --- !u!4 &499390835
 Transform:
   m_ObjectHideFlags: 0
@@ -12030,7 +12035,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3118337585002624716, guid: 64325b3de917b324e943dfd66d6eadf7, type: 3}
       propertyPath: price
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118337585002624716, guid: 64325b3de917b324e943dfd66d6eadf7, type: 3}
+      propertyPath: itemName
+      value: Cannon Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118337585002624716, guid: 64325b3de917b324e943dfd66d6eadf7, type: 3}
+      propertyPath: description
+      value: Permanently upgrade cannon damage.
       objectReference: {fileID: 0}
     - target: {fileID: 4089985438138810644, guid: 64325b3de917b324e943dfd66d6eadf7, type: 3}
       propertyPath: m_LocalPosition.x

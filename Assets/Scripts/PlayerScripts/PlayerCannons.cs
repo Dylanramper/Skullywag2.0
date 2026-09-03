@@ -5,6 +5,8 @@ using System.Runtime.CompilerServices;
 
 public class PlayerCannons : MonoBehaviour
 {
+    private const string CannonDamageKey = "PlayerCannonDamage";
+
     public Transform leftCannonPoint;
     public Transform rightCannonPoint;
 
@@ -218,5 +220,13 @@ public class PlayerCannons : MonoBehaviour
         {
             ApplyWeaponBoost(2f, 2f, 5f);
         }
+    }
+
+    public void IncreasePermanentDamage(int amount)
+    {
+        defaultDamage += amount;
+        currentDamage = defaultDamage;
+
+        Debug.Log("Cannon's Damage Increased t: " + defaultDamage);
     }
 }

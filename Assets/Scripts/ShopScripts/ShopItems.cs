@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class ShopItems : MonoBehaviour
 {
+    public enum UpgradeType
+    {
+        CannonDamage
+    }
+
     [Header("Shop Item")]
     [SerializeField] private string itemName;
     [TextArea] [SerializeField] private string description;
     [SerializeField] private int price = 100;
-
+    [SerializeField] private UpgradeType upgradeType;
+    [SerializeField] private PlayerCannons playerCannons;
 
     public string ItemName => itemName;
     public string Description => description;
@@ -35,6 +41,14 @@ public class ShopItems : MonoBehaviour
 
     private void ApplyUpgrade()
     {
-        //Add upgrades here----------------------------------------------------------------------------------
+        switch (upgradeType)
+        {
+            case UpgradeType.CannonDamage:
+                if(playerCannons != null)
+                {
+                    playerCannons.IncreasePermanentDamage(5);
+                }
+                break;
+        }
     }
 }
