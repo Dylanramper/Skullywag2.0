@@ -54,7 +54,7 @@ public class PlayerCannons : MonoBehaviour
     {
         // Initialize with default values
         currentCoolDown = defaultCoolDown;
-        currentDamage = defaultDamage;
+        currentDamage = PlayerPrefs.GetInt(CannonDamageKey, defaultDamage); //Load Player's current cannon damae
         currentForce = force;
         currentCannonBall = normalCannonBall;
 

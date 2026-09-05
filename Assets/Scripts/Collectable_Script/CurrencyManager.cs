@@ -12,6 +12,7 @@ public class CurrencyManager : MonoBehaviour
 
     private const string CoinsKey = "PlayerCoins";
 
+
     private void Awake()
     {
         //Don't destroy this object when loading new scenes
