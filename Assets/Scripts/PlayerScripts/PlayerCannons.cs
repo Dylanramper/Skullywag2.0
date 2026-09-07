@@ -52,9 +52,10 @@ public class PlayerCannons : MonoBehaviour
 
     void Start()
     {
-        // Initialize with default values
+        // Initialize and load saved values
         currentCoolDown = defaultCoolDown;
-        currentDamage = PlayerPrefs.GetInt(CannonDamageKey, defaultDamage); //Load Player's current cannon damae
+        defaultDamage = PlayerPrefs.GetInt(CannonDamageKey, defaultDamage); //Load Player's current cannon damage
+        currentDamage = defaultDamage;
         currentForce = force;
         currentCannonBall = normalCannonBall;
 
@@ -226,6 +227,9 @@ public class PlayerCannons : MonoBehaviour
     {
         defaultDamage += amount;
         currentDamage = defaultDamage;
+
+        PlayerPrefs.SetInt(CannonDamageKey, defaultDamage);
+        PlayerPrefs.Save();
 
         Debug.Log("Cannon's Damage Increased t: " + defaultDamage);
     }
