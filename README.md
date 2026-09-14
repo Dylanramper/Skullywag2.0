@@ -18,7 +18,7 @@ Solo Developer — responsible for the game's programming, gameplay systems, ene
 
 ### Ship Combat With Enemy Brig
 
-![Skullywag Combat With Enemy Brig](Screenshots/Skully_BrigCombat.jpg)
+![Skullywag Combat With Enemy Brig](Screenshots/Skull_BrigCombat.jpg)
 
 ### Ship Combat With Enemy Galleon
 
