@@ -2,11 +2,11 @@
 
 ### Gameplay
 
-![Skullywag Gameplay](Screenshots/Skully_Explosion.jpg)
+![Skullywag Gameplay](Screenshots/Skull_Explosion.jpg)
 
 ### Ship Combat With Enemy Brig
 
-![Skullywag Combat With Enemy Brig](Screenshots/Skully_BrigCombat.jpg)
+![Skullywag Combat With Enemy Brig](Screenshots/Skull_BrigCombat.jpg)
 
 ### Ship Combat With Enemy Galleon
 
@@ -14,4 +14,4 @@
 
 ### Ship Combat With Enemy Rowboat
 
-![Skullywag Combat With Enemy Rowboat](Screenshots/SkullY_RowB.jpg)
+![Skullywag Combat With Enemy Rowboat](Screenshots/Skully_RowB.jpg)
