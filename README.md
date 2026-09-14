@@ -1,19 +1,17 @@
-# Skullywag
+## Screenshots
 
-Skullywag is a 2D top-down pirate shooter developed in Unity and released for Android.
+### Gameplay
 
-I designed and programmed the game from the ground up, implementing the core gameplay systems, enemy AI, combat, boss encounters, UI, progression systems, audio, and mobile optimization.
+![Skullywag Gameplay](Screenshots/Skully_Explosion.jpg)
 
-## Engine & Technologies
+### Ship Combat With Enemy Brig
 
-- Unity
-- C#
-- Unity Input System
-- Android
-- Git / GitHub
+![Skullywag Combat With Enemy Brig](Screenshots/Skully_BrigCombat.jpg)
 
-## My Role
+### Ship Combat With Enemy Galleon
 
-Solo Developer
+![Skullywag Combat With Enemy Galleon](Screenshots/Skully_GalCombat.jpg)
 
-I was responsible for the design and programming of the game, including gameplay systems, player controls, enemy AI, combat, bosses, UI, progression, audio, and mobile optimization.
+### Ship Combat With Enemy Rowboat
+
+![Skullywag Combat With Enemy Rowboat](Screenshots/SkullY_RowB.jpg)
