@@ -34,8 +34,8 @@ Solo Developer — responsible for the game's programming, gameplay systems, ene
 
 - Developed player movement and controls using Unity's Input System.
 - Implemented cannon-based combat and projectile systems.
-- Built configurable weapon damage, cooldown, projectile speed, and force systems.
-- Implemented mobile-friendly controls for Android.
+- Built upgradeable weapon damage, cooldown, projectile speed, and force systems.
+- Implemented mobile controls for Android.
 
 ### Enemy AI
 
