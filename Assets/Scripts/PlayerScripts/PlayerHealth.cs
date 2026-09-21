@@ -5,6 +5,8 @@ using UnityEngine.UI; // For UI if you want
 
 public class PlayerHealth : MonoBehaviour
 {
+    private const string MaxHealthKey = "PlayerMaxHealth";
+
     [Header("Health Settings")]
     public int maxHealth = 100;
     public int currentHealth;
@@ -46,6 +48,8 @@ public class PlayerHealth : MonoBehaviour
         burnFXOriginalColor = burnScreenFX.color;
         originalPlayerColor = playerSprite.color;
         originalColor = fillImage.color;
+
+        maxHealth = PlayerPrefs.GetInt(MaxHealthKey, maxHealth);
         currentHealth = maxHealth;
 
         if(fillImage != null)
@@ -238,19 +242,14 @@ public class PlayerHealth : MonoBehaviour
         gameOverScroll.ShowGameOver();
     }
 
-    // Optional: For testing with keyboard
-    void OnTestInput()
+    public void IncreaseMaxHealth(int amount)
     {
-        // Press T to test taking damage
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(20);
-        }
+        maxHealth += amount;
+        currentHealth = maxHealth; // Heal to full when increasing max health
 
-        // Press Y to test shield (for debugging)
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            ActivateShield(5f, 30);
-        }
+        PlayerPrefs.SetInt(MaxHealthKey, maxHealth);
+        PlayerPrefs.Save();
+
+        Debug.Log("Max health increased by " + amount + ". New max health: " + maxHealth);
     }
 }

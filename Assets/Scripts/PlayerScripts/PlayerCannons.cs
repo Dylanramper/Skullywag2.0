@@ -21,6 +21,7 @@ public class PlayerCannons : MonoBehaviour
     private float currentCoolDown;
     public int currentDamage;
     private float currentForce;
+    public int maxDamage => defaultDamage;
 
     private float lastLeftFireTime;
     private float lastRightFireTime;
@@ -235,6 +236,6 @@ public class PlayerCannons : MonoBehaviour
 
     public int GetCurrentDamage()
     {
-        return currentDamage;
+        return defaultDamage;
     }
 }

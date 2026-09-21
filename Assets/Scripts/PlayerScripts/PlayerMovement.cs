@@ -38,10 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private ControlMode controlMode = ControlMode.Buttons;
     [SerializeField] private Joystick joystick;
+    private const string SpeedKey = "PlayerSpeed";
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        speed = PlayerPrefs.GetFloat(SpeedKey, speed); // Load saved speed
         currentStamina = maxStamina;
         originalColor = staminaFillImage.color;
 
@@ -243,5 +245,15 @@ public class PlayerMovement : MonoBehaviour
     public void BoostUp()
     {
         isBoosting = false;
+    }
+
+    public void IncreasePermanentSpeed(float amount)
+    {
+        speed += amount;
+
+        PlayerPrefs.SetFloat(SpeedKey, speed);
+        PlayerPrefs.Save();
+
+        Debug.Log("Increase Player Speed to: " + speed);
     }
 }

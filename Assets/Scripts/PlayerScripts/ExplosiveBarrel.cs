@@ -6,6 +6,7 @@ public class ExplosiveBarrel : MonoBehaviour
     public float fuseTime = 3f;
     public float explosionRadius = 1f;
     public int damage = 30;
+    private const string BarrelDamageKey = "BarrelDamageKey";
 
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
@@ -21,6 +22,8 @@ public class ExplosiveBarrel : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        damage = PlayerPrefs.GetInt(BarrelDamageKey, damage);
+
         StartCoroutine(FuseTimer());
     }
 
@@ -125,5 +128,16 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    public static void IncreasePermanentBarrelDamage(int amount)
+    {
+        int currentDamage = PlayerPrefs.GetInt(BarrelDamageKey, 30);
+        currentDamage += amount;
+
+        PlayerPrefs.SetInt(BarrelDamageKey, currentDamage);
+        PlayerPrefs.Save();
+
+        Debug.Log("Permanent Barrel Damage Increased to: " + currentDamage);
     }
 }
