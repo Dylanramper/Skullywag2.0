@@ -48,7 +48,6 @@ public class PlayerCannons : MonoBehaviour
     public Transform barrelSpawnPoint;
     public float barrelCooldown = 5f;
 
-    
 
     void Start()
     {
@@ -232,5 +231,10 @@ public class PlayerCannons : MonoBehaviour
         PlayerPrefs.Save();
 
         Debug.Log("Cannon's Damage Increased t: " + defaultDamage);
+    }
+
+    public int GetCurrentDamage()
+    {
+        return currentDamage;
     }
 }

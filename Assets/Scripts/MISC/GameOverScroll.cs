@@ -42,7 +42,7 @@ public class GameOverScroll : MonoBehaviour
         scrollLeftStart = scrollLeft.anchoredPosition;
         scrollRightStart = scrollRight.anchoredPosition;
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         paperLeft.fillAmount = 0f;
         paperRight.fillAmount = 0f;
 
@@ -86,11 +86,11 @@ public class GameOverScroll : MonoBehaviour
         scrollLeftStart = scrollLeft.anchoredPosition;
         scrollRightStart = scrollRight.anchoredPosition;
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         paperLeft.fillAmount = 0f;
         paperRight.fillAmount = 0f;
         Time.timeScale = 1f;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     private IEnumerator GameOverSequence()

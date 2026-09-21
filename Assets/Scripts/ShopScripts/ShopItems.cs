@@ -12,11 +12,26 @@ public class ShopItems : MonoBehaviour
     [TextArea] [SerializeField] private string description;
     [SerializeField] private int price = 100;
     [SerializeField] private UpgradeType upgradeType;
-    [SerializeField] private PlayerCannons playerCannons;
+    private PlayerCannons playerCannons;
 
     public string ItemName => itemName;
     public string Description => description;
     public int Price => price;
+
+    public int GetCurrentDamage()
+    {
+        if(playerCannons == null)
+        {
+            return 0;
+        }
+        
+        return playerCannons.GetCurrentDamage();
+    }
+
+    private void Awake()
+    {
+        playerCannons = FindAnyObjectByType<PlayerCannons>();
+    }
 
     public bool Purchase()
     {
