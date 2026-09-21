@@ -77,6 +77,12 @@ public class CurrencyManager : MonoBehaviour
         return currentCoins;
     }
 
+    public void SetCoinText(TextMeshProUGUI newCoinText)
+    {
+        coinText = newCoinText;
+        UpdateCoinUI();
+    }
+
     //Save system for coins
     private void SaveCoins()
     {
