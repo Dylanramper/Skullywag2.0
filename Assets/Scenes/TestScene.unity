@@ -1737,7 +1737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 59.37, y: -42.16}
+  m_AnchoredPosition: {x: 59.370117, y: -42.16}
   m_SizeDelta: {x: 277.87646, y: 67.1255}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &452490174
@@ -10098,7 +10098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1445933550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10724,7 +10724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1658480495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12001,6 +12001,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114991316}
   m_CullTransparentMesh: 1
+--- !u!1 &2140830383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140830385}
+  - component: {fileID: 2140830384}
+  m_Layer: 0
+  m_Name: RepairKitItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2140830384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140830383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4b685215f14104eb672072e698c8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repairAmount: 20
+--- !u!4 &2140830385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140830383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1248.9926, y: 742.06494, z: 3.1429195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &386266810833120346 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2353805227776120735, guid: cf93c530b720d6d4ea6e8081a3e8777d, type: 3}
@@ -12350,6 +12395,10 @@ PrefabInstance:
       propertyPath: highScoreText
       value: 
       objectReference: {fileID: 1166005122}
+    - target: {fileID: 6506513843085754085, guid: f6e6fb2ea203c054291cf7da19dd2142, type: 3}
+      propertyPath: currencyManager
+      value: 
+      objectReference: {fileID: 336380002}
     - target: {fileID: 7291982351137097167, guid: f6e6fb2ea203c054291cf7da19dd2142, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -12870,7 +12919,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 163447046593935603, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 310381582789032566, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_IsActive
@@ -12902,7 +12951,7 @@ PrefabInstance:
       objectReference: {fileID: 262932413}
     - target: {fileID: 1089227210508792139, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1299984941752489728, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -13428,7 +13477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982156210903983674, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 59.35
+      value: 59.350098
       objectReference: {fileID: 0}
     - target: {fileID: 8982156210903983674, guid: 9de5c076b513a4241b247bfe78ca6921, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13555,3 +13604,4 @@ SceneRoots:
   - {fileID: 1350772583}
   - {fileID: 1377408402}
   - {fileID: 336380003}
+  - {fileID: 2140830385}

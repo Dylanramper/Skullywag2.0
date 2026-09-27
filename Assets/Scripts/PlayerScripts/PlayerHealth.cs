@@ -242,6 +242,22 @@ public class PlayerHealth : MonoBehaviour
         gameOverScroll.ShowGameOver();
     }
 
+    public bool Repair(int amount)
+    {
+        if(currentHealth >= maxHealth)
+        {
+            Debug.Log("Health is already full. Repair not needed.");
+            return false;
+        }
+
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log("Player repaired by " + amount + ". Current health: " + currentHealth);
+
+        return true;
+    }
+
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;

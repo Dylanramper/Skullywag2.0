@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     private int currentScore = 0;
     private int highScore = 0;
 
+    //--------------------------------------------------------------------Temp
+    [SerializeField] private CurrencyManager currencyManager;
+
     void Awake()
     {
         // Singleton pattern - only one GameManager
@@ -44,6 +47,19 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         originalCamPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, 0f);
+
+
+        //--------------------------------------------------------------------------------------------Temp
+        if (Keyboard.current.rKey.isPressed)
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            Debug.Log("PlayerPrefs deleted.");
+        }
+        if(Keyboard.current.tKey.isPressed)
+        {
+            currencyManager.AddCoins(100);
+        }
     }
 
     public void AddScore(int points)
