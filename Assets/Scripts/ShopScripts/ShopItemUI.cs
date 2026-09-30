@@ -15,7 +15,8 @@ public class ShopItemUI : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {   
+
         itemNameText.text = shopItem.ItemName;
         itemDescriptionText.text = shopItem.Description;
         itemPriceText.text = shopItem.Price + " Coins";
@@ -47,6 +48,9 @@ public class ShopItemUI : MonoBehaviour
                 break;
             case ShopItems.UpgradeType.BarrelDamage:
                 currentStatText.text = "Current Barrel Damage: " + shopItem.GetCurrentBarrelDamage();
+                break;
+            case ShopItems.UpgradeType.RepairKit:
+                currentStatText.text = "Repair Kits: " + shopItem.GetRepairKitCount();
                 break;
         }
     }

@@ -7,7 +7,8 @@ public class ShopItems : MonoBehaviour
         CannonDamage,
         MaxHealth,
         MaxSpeed,
-        BarrelDamage
+        BarrelDamage,
+        RepairKit
     }
 
     [Header("Shop Item")]
@@ -18,6 +19,7 @@ public class ShopItems : MonoBehaviour
     private PlayerCannons playerCannons;
     private PlayerHealth playerHealth;
     private PlayerMovement playerMovement;
+    private ItemInventory itemInventory;
 
     public string ItemName => itemName;
     public string Description => description;
@@ -59,11 +61,21 @@ public class ShopItems : MonoBehaviour
         return PlayerPrefs.GetInt("BarrelDamageKey", 30);
     }
 
+    public int GetRepairKitCount()
+    {
+        if(itemInventory == null)
+        {
+            return 0;
+        }
+        return itemInventory.GetRepairKitCount();
+    }
+
     private void Awake()
     {
         playerCannons = FindAnyObjectByType<PlayerCannons>();
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerMovement = FindAnyObjectByType<PlayerMovement>();
+        itemInventory = FindAnyObjectByType<ItemInventory>();
     }
 
     public bool Purchase()
@@ -111,6 +123,12 @@ public class ShopItems : MonoBehaviour
                 break;
             case UpgradeType.BarrelDamage:
                 ExplosiveBarrel.IncreasePermanentBarrelDamage(15);
+                break;
+            case UpgradeType.RepairKit:
+                if(itemInventory != null)
+                {
+                    itemInventory.AddRepairKit(1);
+                }
                 break;
         }
     }

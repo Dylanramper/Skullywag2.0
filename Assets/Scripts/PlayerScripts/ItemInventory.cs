@@ -18,7 +18,7 @@ public class ItemInventory : MonoBehaviour
 
     public void AddRepairKit(int amount)
     {
-        if (amount > 0)
+        if (amount <= 0)
             return;
 
         repairKitCount += amount;
