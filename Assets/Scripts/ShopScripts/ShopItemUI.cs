@@ -13,10 +13,12 @@ public class ShopItemUI : MonoBehaviour
 
     [SerializeField] private TMP_Text currentStatText;
 
+    private ItemInventory itemInventory;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {   
-
+        itemInventory = FindAnyObjectByType<ItemInventory>();
         itemNameText.text = shopItem.ItemName;
         itemDescriptionText.text = shopItem.Description;
         itemPriceText.text = shopItem.Price + " Coins";
@@ -50,7 +52,7 @@ public class ShopItemUI : MonoBehaviour
                 currentStatText.text = "Current Barrel Damage: " + shopItem.GetCurrentBarrelDamage();
                 break;
             case ShopItems.UpgradeType.RepairKit:
-                currentStatText.text = "Repair Kits: " + shopItem.GetRepairKitCount();
+                currentStatText.text = "Repair Kits: " + itemInventory.GetRepairKitCount();
                 break;
         }
     }

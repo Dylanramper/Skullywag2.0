@@ -61,15 +61,6 @@ public class ShopItems : MonoBehaviour
         return PlayerPrefs.GetInt("BarrelDamageKey", 30);
     }
 
-    public int GetRepairKitCount()
-    {
-        if(itemInventory == null)
-        {
-            return 0;
-        }
-        return itemInventory.GetRepairKitCount();
-    }
-
     private void Awake()
     {
         playerCannons = FindAnyObjectByType<PlayerCannons>();
