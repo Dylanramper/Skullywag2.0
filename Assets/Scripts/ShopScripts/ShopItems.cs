@@ -7,8 +7,8 @@ public class ShopItems : MonoBehaviour
         CannonDamage,
         MaxHealth,
         MaxSpeed,
-        BarrelDamage,
-        RepairKit
+        RepairKit,
+        ExplosiveBarrel
     }
 
     [Header("Shop Item")]
@@ -54,11 +54,6 @@ public class ShopItems : MonoBehaviour
         }
 
         return playerMovement.speed;
-    }
-
-    public int GetCurrentBarrelDamage()
-    {
-        return PlayerPrefs.GetInt("BarrelDamageKey", 30);
     }
 
     private void Awake()
@@ -112,13 +107,16 @@ public class ShopItems : MonoBehaviour
                     playerMovement.IncreasePermanentSpeed(0.5f);
                 }
                 break;
-            case UpgradeType.BarrelDamage:
-                ExplosiveBarrel.IncreasePermanentBarrelDamage(15);
-                break;
             case UpgradeType.RepairKit:
                 if(itemInventory != null)
                 {
                     itemInventory.AddRepairKit(1);
+                }
+                break;
+            case UpgradeType.ExplosiveBarrel:
+                if(itemInventory != null)
+                {
+                    itemInventory.AddBarrel(1);
                 }
                 break;
         }

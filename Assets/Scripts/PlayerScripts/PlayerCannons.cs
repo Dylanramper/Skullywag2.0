@@ -116,23 +116,24 @@ public class PlayerCannons : MonoBehaviour
         }
     }
 
-    public void DeployBarrel()
+    public bool DeployBarrel()
     {
         if (Time.time < lastBarrelTime + barrelCooldown)
-            return;
+            return false;
 
         lastBarrelTime = Time.time;
 
         GameObject barrel = Instantiate(explosiveBarrelPrefab, barrelSpawnPoint.position, Quaternion.identity);
 
         Rigidbody2D rb = barrel.GetComponent<Rigidbody2D>();
-
-        if (rb != null)
+        
+        if(rb != null)
         {
-            //Small push backwards when spawned
+            // Small push backwards when spawned
             Vector2 throwDirection = -transform.up;
             rb.AddForce(throwDirection * 4f, ForceMode2D.Impulse);
         }
+        return true;
     }
 
     private void UpdateCannonCooldownUI()
@@ -211,15 +212,6 @@ public class PlayerCannons : MonoBehaviour
         {
             leftCannonSprite.color = originalCannonColor;
             rightCannonSprite.color = originalCannonColor;
-        }
-    }
-
-    // For testing without power-up
-    void OnTestInput()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ApplyWeaponBoost(2f, 2f, 5f);
         }
     }
 

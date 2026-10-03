@@ -48,11 +48,11 @@ public class ShopItemUI : MonoBehaviour
             case ShopItems.UpgradeType.MaxSpeed:
                 currentStatText.text = "Current Speed: " + shopItem.GetCurrentSpeed();
                 break;
-            case ShopItems.UpgradeType.BarrelDamage:
-                currentStatText.text = "Current Barrel Damage: " + shopItem.GetCurrentBarrelDamage();
-                break;
             case ShopItems.UpgradeType.RepairKit:
                 currentStatText.text = "Repair Kits: " + itemInventory.GetRepairKitCount();
+                break;
+            case ShopItems.UpgradeType.ExplosiveBarrel:
+                currentStatText.text = "Barrels: " + itemInventory.GetBarrelCount();
                 break;
         }
     }
