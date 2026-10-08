@@ -8,12 +8,13 @@ public class ShopItems : MonoBehaviour
         MaxHealth,
         MaxSpeed,
         RepairKit,
-        ExplosiveBarrel
+        ExplosiveBarrel,
+        Shield
     }
 
     [Header("Shop Item")]
     [SerializeField] private string itemName;
-    [TextArea] [SerializeField] private string description;
+    [TextArea][SerializeField] private string description;
     [SerializeField] private int price = 100;
     [SerializeField] private UpgradeType upgradeType;
     private PlayerCannons playerCannons;
@@ -28,11 +29,11 @@ public class ShopItems : MonoBehaviour
 
     public int GetCurrentDamage()
     {
-        if(playerCannons == null)
+        if (playerCannons == null)
         {
             return 0;
         }
-        
+
         return playerCannons.GetCurrentDamage();
     }
 
@@ -48,7 +49,7 @@ public class ShopItems : MonoBehaviour
 
     public float GetCurrentSpeed()
     {
-        if(playerMovement == null)
+        if (playerMovement == null)
         {
             return 0;
         }
@@ -66,7 +67,7 @@ public class ShopItems : MonoBehaviour
 
     public bool Purchase()
     {
-        if(CurrencyManager.Instance == null)
+        if (CurrencyManager.Instance == null)
         {
             Debug.Log("CurrencyManager not found");
             return false;
@@ -90,33 +91,44 @@ public class ShopItems : MonoBehaviour
         switch (upgradeType)
         {
             case UpgradeType.CannonDamage:
-                if(playerCannons != null)
+                if (playerCannons != null)
                 {
                     playerCannons.IncreasePermanentDamage(5);
                 }
                 break;
+
             case UpgradeType.MaxHealth:
-                if(playerHealth != null)
+                if (playerHealth != null)
                 {
                     playerHealth.IncreaseMaxHealth(20);
                 }
                 break;
+
             case UpgradeType.MaxSpeed:
-                if(playerMovement != null)
+                if (playerMovement != null)
                 {
                     playerMovement.IncreasePermanentSpeed(0.5f);
                 }
                 break;
+
             case UpgradeType.RepairKit:
-                if(itemInventory != null)
+                if (itemInventory != null)
                 {
                     itemInventory.AddRepairKit(1);
                 }
                 break;
+
             case UpgradeType.ExplosiveBarrel:
-                if(itemInventory != null)
+                if (itemInventory != null)
                 {
                     itemInventory.AddBarrel(1);
+                }
+                break;
+
+            case UpgradeType.Shield:
+                if (itemInventory != null)
+                {
+                    itemInventory.AddShield(1);
                 }
                 break;
         }

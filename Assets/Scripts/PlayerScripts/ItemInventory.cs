@@ -15,6 +15,7 @@ public class ItemInventory : MonoBehaviour
     [Header("Item Icons")]
     [SerializeField] private Sprite repairKitIcon;
     [SerializeField] private Sprite barrelIcon;
+    [SerializeField] private Sprite shieldIcon;
 
     [Header("Old Repair Kit UI - Temporary")]
     [SerializeField] private Button repairKitButton;
@@ -24,9 +25,11 @@ public class ItemInventory : MonoBehaviour
 
     private const string RepairKitKey = "RepairKitCount";
     private const string BarrelKey = "BarrelCount";
+    private const string ShieldKey = "ShieldCount";
 
     [SerializeField] private int barrelCount = 0;
     [SerializeField] private int repairKitCount = 0;
+    [SerializeField] private int shieldCount = 0;
 
     private PlayerHealth playerHealth;
     private PlayerCannons playerCannons;
@@ -34,7 +37,8 @@ public class ItemInventory : MonoBehaviour
     private enum ItemType
     {
         RepairKit,
-        Barrel
+        Barrel,
+        Shield
     }
 
     private ItemType selectedItem = ItemType.RepairKit;
@@ -43,6 +47,7 @@ public class ItemInventory : MonoBehaviour
     {
         barrelCount = PlayerPrefs.GetInt(BarrelKey, 0);
         repairKitCount = PlayerPrefs.GetInt(RepairKitKey, 0);
+        shieldCount = PlayerPrefs.GetInt(ShieldKey, 0);
 
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerCannons = FindAnyObjectByType<PlayerCannons>();
@@ -101,7 +106,7 @@ public class ItemInventory : MonoBehaviour
 
         if ((int)selectedItem < 0)
         {
-            selectedItem = ItemType.Barrel;
+            selectedItem = ItemType.Shield;
         }
 
         UpdateSelectedItemUI();
@@ -119,6 +124,10 @@ public class ItemInventory : MonoBehaviour
 
                 case ItemType.Barrel:
                     itemButtonImage.sprite = barrelIcon;
+                    break;
+
+                case ItemType.Shield:
+                    itemButtonImage.sprite = shieldIcon;
                     break;
             }
         }
@@ -140,6 +149,10 @@ public class ItemInventory : MonoBehaviour
             case ItemType.Barrel:
                 itemCountText.text = "x" + barrelCount;
                 break;
+
+            case ItemType.Shield:
+                itemCountText.text = "x" + shieldCount;
+                break;
         }
     }
 
@@ -157,6 +170,10 @@ public class ItemInventory : MonoBehaviour
 
             case ItemType.Barrel:
                 UseBarrel();
+                break;
+
+            case ItemType.Shield:
+                UseShield();
                 break;
         }
     }
@@ -192,6 +209,40 @@ public class ItemInventory : MonoBehaviour
         Debug.Log("Barrel used. Remaining: " + barrelCount);
     }
 
+    private void UseShield()
+    {
+        if (shieldCount <= 0)
+        {
+            Debug.Log("No Shields available to use.");
+            return;
+        }
+
+        if (playerHealth == null)
+        {
+            Debug.LogError("PlayerHealth not found.");
+            return;
+        }
+
+        // Don't consume a shield if one is already active.
+        if (playerHealth.hasShield)
+        {
+            Debug.Log("Shield is already active. Shield item not used.");
+            return;
+        }
+
+        // Activate the existing shield system.
+        playerHealth.ActivateShield(5f, 50);
+
+        shieldCount--;
+
+        PlayerPrefs.SetInt(ShieldKey, shieldCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Shield used. Remaining: " + shieldCount);
+    }
+
     // =========================
     // INVENTORY
     // =========================
@@ -204,6 +255,11 @@ public class ItemInventory : MonoBehaviour
     public int GetRepairKitCount()
     {
         return repairKitCount;
+    }
+
+    public int GetShieldCount()
+    {
+        return shieldCount;
     }
 
     public void AddBarrel(int amount)
@@ -240,6 +296,21 @@ public class ItemInventory : MonoBehaviour
         UpdateItemCountUI();
 
         Debug.Log("Repair Kits added: " + repairKitCount);
+    }
+
+    public void AddShield(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        shieldCount += amount;
+
+        PlayerPrefs.SetInt(ShieldKey, shieldCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Shields added: " + shieldCount);
     }
 
     public bool UseRepairKit()
