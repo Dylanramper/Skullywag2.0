@@ -307,6 +307,7 @@ public class ElementalBoss : BaseBoss
 
     protected override void Die()
     {
+        ClearBossIndicator();
         Destroy(gameObject);
     }
 }

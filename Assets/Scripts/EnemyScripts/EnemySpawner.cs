@@ -214,6 +214,7 @@ public class EnemySpawner : MonoBehaviour
         if (bossScript != null)
         {
             bossScript.SetPlayer(player);
+            bossScript.SetBossHealthbar(bossHPBar);
         }
 
         BossController pirateBoss = boss.GetComponent<BossController>();
@@ -221,7 +222,7 @@ public class EnemySpawner : MonoBehaviour
         if(pirateBoss != null)
         {
             pirateBoss.SetBossHealthbar(bossHPBar);
-            if(mortarIndicatorPrefab != null)
+            if(pirateBoss != null && mortarIndicatorPrefab != null)
             {
                 pirateBoss.SetMortarIndicator(mortarIndicatorPrefab);
             }

@@ -21,7 +21,7 @@ public class ShopItemUI : MonoBehaviour
         itemNameText.text = shopItem.ItemName;
         itemDescriptionText.text = shopItem.Description;
         itemPriceText.text = shopItem.Price + " Coins";
-        UpdateCurrentStat();
+        RefreshCurrentStat();
 
         buyButton.onClick.AddListener(BuyItem);
     }
@@ -30,12 +30,21 @@ public class ShopItemUI : MonoBehaviour
     {
         if (shopItem.Purchase())
         {
-            UpdateCurrentStat();
+            RefreshCurrentStat();
         }
     }
 
-    private void UpdateCurrentStat()
+
+    public void RefreshCurrentStat()
     {
+        if (itemInventory == null)
+        {
+            itemInventory = FindAnyObjectByType<ItemInventory>();
+        }
+
+        if (currentStatText == null)
+            return;
+
         switch (shopItem.Type)
         {
             case ShopItems.UpgradeType.CannonDamage:
@@ -61,6 +70,10 @@ public class ShopItemUI : MonoBehaviour
             case ShopItems.UpgradeType.Shield:
                 currentStatText.text = "Shields: " + itemInventory.GetShieldCount();
                 break;
+            case ShopItems.UpgradeType.MortarShot:
+                currentStatText.text = "Mortar Shots: " + itemInventory.GetMortarShotCount();
+                break;
         }
     }
+
 }

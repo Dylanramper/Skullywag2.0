@@ -6,9 +6,25 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject upgradesShopPanel;
     [SerializeField] private GameObject itemsShopPanel;
 
+
+    private void RefreshShopItems()
+    {
+        ShopItemUI[] shopItems = FindObjectsByType<ShopItemUI>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None
+        );
+
+        foreach (ShopItemUI item in shopItems)
+        {
+            item.RefreshCurrentStat();
+        }
+    }
+
+
     public void OpenShopPanel()
     {
         shopPanel.SetActive(true);
+        RefreshShopItems();
         Time.timeScale = 0f;
     }
 
@@ -25,12 +41,14 @@ public class ShopManager : MonoBehaviour
     {
         shopPanel.SetActive(false);
         upgradesShopPanel.SetActive(true);
+        RefreshShopItems();
     }
 
     public void OpenItemsPanel()
     {
         shopPanel.SetActive(false);
         itemsShopPanel.SetActive(true);
+        RefreshShopItems();
     }
 
     public void BackToShop()
@@ -38,5 +56,6 @@ public class ShopManager : MonoBehaviour
         upgradesShopPanel.SetActive(false);
         itemsShopPanel.SetActive(false);
         shopPanel.SetActive(true);
+        RefreshShopItems();
     }
 }

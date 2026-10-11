@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class BossController : BaseBoss
 {
-    [Header("Base Stats")]
-    [SerializeField] BossHPBar bossHealthbar;
-
     [Header("Mortar")]
     public GameObject mortarProjectilePrefab;
     public Transform mortarFirePoint;
@@ -113,9 +110,6 @@ public class BossController : BaseBoss
         damagedFX = false;
         rb = GetComponent<Rigidbody2D>();
 
-        if (bossHealthbar != null)
-            bossHealthbar.UpdateHealth(health, maxHealth);
-
         BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
         if (indicator != null)
         {
@@ -146,15 +140,6 @@ public class BossController : BaseBoss
             broadsideLockTimer = 0f;
 
         damagedFX = health <= 40f;
-    }
-
-    public void SetBossHealthbar(BossHPBar hpBar)
-    {
-        bossHealthbar = hpBar;
-
-        // Immediately sync health
-        if (bossHealthbar != null)
-            bossHealthbar.UpdateHealth(health, maxHealth);
     }
 
     void Move()
@@ -454,23 +439,13 @@ public class BossController : BaseBoss
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage); // handles health + death
-
-        if (bossHealthbar != null)
-            bossHealthbar.UpdateHealth(health, maxHealth);
-
-        AudioManager.Instance.PlayHit();
-        GameManager.Instance.ShakeCamera(0.1f, 0.08f);
     }
 
     protected override void Die()
     {
         AudioManager.Instance.bossActive = false;
         EnemyShip.activeEnemiesInCombat--;
-        BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
-        if (indicator != null)
-        {
-            indicator.ClearBoss();
-        }
+        ClearBossIndicator();
 
         StartCoroutine(DeathSequence());
     }

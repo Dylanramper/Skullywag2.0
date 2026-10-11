@@ -9,6 +9,7 @@ public class GameUIManager : MonoBehaviour
     public GameObject gameOverMenu;
     public GameObject hud;
     private bool hasTapped = false;
+    private bool startupReady = false;
     private Coroutine blinkRoutine;
     private EnemySpawner spawner;
 
@@ -34,10 +35,10 @@ public class GameUIManager : MonoBehaviour
         StartCoroutine(StartupSequence());
     }
 
-
     void Update()
     {
-        if (hasTapped) return;
+        // Ignore taps while the loading screen is active.
+        if (!startupReady || hasTapped) return;
 
         if (IsTap())
         {
@@ -45,6 +46,7 @@ public class GameUIManager : MonoBehaviour
             OnFirstTap();
         }
     }
+
 
     private IEnumerator StartupLoadingRoutine()
     {
@@ -72,10 +74,16 @@ public class GameUIManager : MonoBehaviour
         spawner = FindFirstObjectByType<EnemySpawner>();
         spawner.enabled = false;
 
+
         continueTXT.gameObject.SetActive(true);
         blinkRoutine = StartCoroutine(BlinkLoop());
         hud.SetActive(false);
         pm = pm.GetComponent<PauseManager>();
+
+        // Allow taps only after startup is complete.
+        hasTapped = false;
+        startupReady = true;
+
     }
 
     void OnFirstTap()

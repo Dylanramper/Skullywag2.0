@@ -9,7 +9,8 @@ public class ShopItems : MonoBehaviour
         MaxSpeed,
         RepairKit,
         ExplosiveBarrel,
-        Shield
+        Shield,
+        MortarShot
     }
 
     [Header("Shop Item")]
@@ -129,6 +130,12 @@ public class ShopItems : MonoBehaviour
                 if (itemInventory != null)
                 {
                     itemInventory.AddShield(1);
+                }
+                break;
+            case UpgradeType.MortarShot:
+                if(itemInventory != null)
+                {
+                    itemInventory.AddMortarShot(1);
                 }
                 break;
         }

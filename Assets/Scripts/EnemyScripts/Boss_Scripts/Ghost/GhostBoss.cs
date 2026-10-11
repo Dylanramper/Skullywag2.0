@@ -320,6 +320,7 @@ public class GhostBoss : BaseBoss
 
     protected override void Die()
     {
+        ClearBossIndicator();
         Destroy(gameObject);
     }
 }

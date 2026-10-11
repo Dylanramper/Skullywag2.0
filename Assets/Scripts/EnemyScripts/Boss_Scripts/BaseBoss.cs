@@ -1,9 +1,13 @@
+
 using UnityEngine;
 
 public abstract class BaseBoss : MonoBehaviour
 {
     public float health;
     protected float maxHealth = 100f;
+
+    [Header("Boss UI")]
+    [SerializeField] private BossHPBar bossHealthbar;
 
     protected int currentPhase = 1;
     protected int previousPhase = 1;
@@ -13,6 +17,34 @@ public abstract class BaseBoss : MonoBehaviour
     protected virtual void Start()
     {
         health = maxHealth;
+
+        // Find the shared boss indicator.
+        BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
+
+        if (indicator != null)
+            indicator.SetBoss(transform);
+
+        UpdateHealthBar();
+    }
+
+    public void SetBossHealthbar(BossHPBar hpBar)
+    {
+        bossHealthbar = hpBar;
+        UpdateHealthBar();
+    }
+
+    protected void UpdateHealthBar()
+    {
+        if (bossHealthbar != null)
+            bossHealthbar.UpdateHealth(health, maxHealth);
+    }
+
+    protected void ClearBossIndicator()
+    {
+        BossIndicator indicator = FindFirstObjectByType<BossIndicator>();
+
+        if (indicator != null && indicator.boss == transform)
+            indicator.ClearBoss();
     }
 
     protected virtual void Update()
@@ -49,19 +81,25 @@ public abstract class BaseBoss : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        health -= damage;
+        health = Mathf.Max(0f, health - damage);
 
-        if (health <= 0)
+        UpdateHealthBar();
+        AudioManager.Instance.PlayHit();
+        GameManager.Instance.ShakeCamera(0.1f, 0.08f);
+
+
+        if (health <= 0f)
             Die();
     }
 
     protected virtual void Die()
     {
+        ClearBossIndicator();
         Destroy(gameObject);
     }
 
     public float GetHealthPercent()
     {
-        return health / maxHealth;
+        return maxHealth > 0f ? health / maxHealth : 0f;
     }
 }

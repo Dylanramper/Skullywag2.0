@@ -16,29 +16,30 @@ public class ItemInventory : MonoBehaviour
     [SerializeField] private Sprite repairKitIcon;
     [SerializeField] private Sprite barrelIcon;
     [SerializeField] private Sprite shieldIcon;
-
-    [Header("Old Repair Kit UI - Temporary")]
-    [SerializeField] private Button repairKitButton;
-    [SerializeField] private TMP_Text repairKitCountText;
+    [SerializeField] private Sprite mortarIcon;
 
     private int repairAmount = 20;
 
     private const string RepairKitKey = "RepairKitCount";
     private const string BarrelKey = "BarrelCount";
     private const string ShieldKey = "ShieldCount";
+    private const string MortarKey = "MortarCount";
 
     [SerializeField] private int barrelCount = 0;
     [SerializeField] private int repairKitCount = 0;
     [SerializeField] private int shieldCount = 0;
+    [SerializeField] private int mortarCount = 0;
 
     private PlayerHealth playerHealth;
     private PlayerCannons playerCannons;
+    private PlayerMortarController playerMortarController;
 
     private enum ItemType
     {
         RepairKit,
         Barrel,
-        Shield
+        Shield,
+        MortarShot
     }
 
     private ItemType selectedItem = ItemType.RepairKit;
@@ -48,18 +49,15 @@ public class ItemInventory : MonoBehaviour
         barrelCount = PlayerPrefs.GetInt(BarrelKey, 0);
         repairKitCount = PlayerPrefs.GetInt(RepairKitKey, 0);
         shieldCount = PlayerPrefs.GetInt(ShieldKey, 0);
+        mortarCount = PlayerPrefs.GetInt(MortarKey, 0);
 
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerCannons = FindAnyObjectByType<PlayerCannons>();
+        playerMortarController = FindAnyObjectByType<PlayerMortarController>();
     }
 
     private void Start()
     {
-        // Keep the old repair kit button working temporarily.
-        if (repairKitButton != null)
-        {
-            repairKitButton.onClick.AddListener(OnRepairKitButtonClicked);
-        }
 
         if (nextItemButton != null)
         {
@@ -78,15 +76,6 @@ public class ItemInventory : MonoBehaviour
 
         UpdateSelectedItemUI();
     }
-
-    private void OnRepairKitButtonClicked()
-    {
-        UseRepairKit();
-    }
-
-    // =========================
-    // ITEM SELECTION
-    // =========================
 
     private void SelectNextItem()
     {
@@ -129,6 +118,9 @@ public class ItemInventory : MonoBehaviour
                 case ItemType.Shield:
                     itemButtonImage.sprite = shieldIcon;
                     break;
+                case ItemType.MortarShot:
+                    itemButtonImage.sprite = mortarIcon;
+                    break;
             }
         }
 
@@ -153,6 +145,9 @@ public class ItemInventory : MonoBehaviour
             case ItemType.Shield:
                 itemCountText.text = "x" + shieldCount;
                 break;
+            case ItemType.MortarShot:
+                itemCountText.text = "x" + mortarCount;
+                break;
         }
     }
 
@@ -175,7 +170,29 @@ public class ItemInventory : MonoBehaviour
             case ItemType.Shield:
                 UseShield();
                 break;
+            case ItemType.MortarShot:
+                UseMortarShot();
+                break;
         }
+    }
+
+    private void UseMortarShot()
+    {
+        Debug.Log("Mortar Shot button pressed.");
+
+        if (mortarCount <= 0)
+        {
+            Debug.Log("No Mortar Shots available.");
+            return;
+        }
+
+        if (playerMortarController == null)
+        {
+            Debug.LogError("PlayerMortarController not found.");
+            return;
+        }
+
+        playerMortarController.BeginTargeting();
     }
 
     private void UseBarrel()
@@ -243,6 +260,26 @@ public class ItemInventory : MonoBehaviour
         Debug.Log("Shield used. Remaining: " + shieldCount);
     }
 
+    public bool ConsumeMortarShot()
+    {
+        if (mortarCount <= 0)
+        {
+            Debug.Log("No Mortar Shots available.");
+            return false;
+        }
+
+        mortarCount--;
+
+        PlayerPrefs.SetInt(MortarKey, mortarCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Mortar Shot used. Remaining: " + mortarCount);
+
+        return true;
+    }
+
     // =========================
     // INVENTORY
     // =========================
@@ -260,6 +297,26 @@ public class ItemInventory : MonoBehaviour
     public int GetShieldCount()
     {
         return shieldCount;
+    }
+
+    public int GetMortarShotCount()
+    {
+        return mortarCount;
+    }
+
+    public void AddMortarShot(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        mortarCount += amount;
+
+        PlayerPrefs.SetInt(MortarKey, mortarCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Mortar Shots added: " + mortarCount);
     }
 
     public void AddBarrel(int amount)
@@ -286,12 +343,6 @@ public class ItemInventory : MonoBehaviour
 
         PlayerPrefs.SetInt(RepairKitKey, repairKitCount);
         PlayerPrefs.Save();
-
-        // Keep old repair kit UI updated while it still exists.
-        if (repairKitCountText != null)
-        {
-            repairKitCountText.text = "x" + repairKitCount;
-        }
 
         UpdateItemCountUI();
 
@@ -336,11 +387,6 @@ public class ItemInventory : MonoBehaviour
 
         // Only consume the Repair Kit if the repair was successful.
         repairKitCount--;
-
-        if (repairKitCountText != null)
-        {
-            repairKitCountText.text = "x" + repairKitCount;
-        }
 
         PlayerPrefs.SetInt(RepairKitKey, repairKitCount);
         PlayerPrefs.Save();

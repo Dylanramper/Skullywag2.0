@@ -8,7 +8,10 @@ public class BossHPBar : MonoBehaviour
 
     public void UpdateHealth(float current, float max)
     {
-        fillImage.fillAmount = current / max;
+        if(max <= 0)
+            return;
+
+        fillImage.fillAmount = Mathf.Clamp01(current / max);
     }
     public void Hide()
     {
