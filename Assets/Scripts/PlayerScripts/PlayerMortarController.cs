@@ -3,19 +3,28 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class PlayerMortarController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform mortarFirePoint;
     [SerializeField] private GameObject mortarProjectilePrefab;
+    [SerializeField] private GameObject chainShotProjectilePrefab;
     [SerializeField] private GameObject targetReticlePrefab;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private ItemInventory itemInventory;
 
     [Header("Targeting UI")]
     [SerializeField] private GameObject targetingPrompt;
+
+    private enum TargetingType
+    {
+        None,
+        Mortar,
+        ChainShot
+    }
+
+    private TargetingType currentTargetingType = TargetingType.None;
 
     private bool isTargeting;
     private bool waitingForRelease;
@@ -72,6 +81,7 @@ public class PlayerMortarController : MonoBehaviour
         }
     }
 
+    // Existing Mortar Shot targeting
     public void BeginTargeting()
     {
         if (isTargeting)
@@ -90,17 +100,58 @@ public class PlayerMortarController : MonoBehaviour
             mainCamera == null)
         {
             Debug.LogError(
-                "PlayerMortarController is missing required references.");
+                "PlayerMortarController is missing required Mortar references.");
             return;
         }
 
+        currentTargetingType = TargetingType.Mortar;
+        StartTargeting();
+
+        Debug.Log("Tap a location to fire the Mortar Shot.");
+    }
+
+    // New Chain Shot targeting
+    public void BeginChainShotTargeting()
+    {
+        if (isTargeting)
+            return;
+
+        if (itemInventory == null ||
+            itemInventory.GetChainShotCount() <= 0)
+        {
+            Debug.Log("No Chain Shots available.");
+            return;
+        }
+
+        if (mortarFirePoint == null ||
+            chainShotProjectilePrefab == null ||
+            mainCamera == null)
+        {
+            Debug.LogError(
+                "PlayerMortarController is missing required Chain Shot references.");
+            return;
+        }
+
+        if (chainShotProjectilePrefab.GetComponent<ChainShotProjectile>() == null)
+        {
+            Debug.LogError(
+                "Chain Shot prefab needs a ChainShotProjectile component.");
+            return;
+        }
+
+        currentTargetingType = TargetingType.ChainShot;
+        StartTargeting();
+
+        Debug.Log("Tap a location to fire the Chain Shot.");
+    }
+
+    private void StartTargeting()
+    {
         isTargeting = true;
         waitingForRelease = true;
 
         if (targetingPrompt != null)
             targetingPrompt.SetActive(false);
-
-        Debug.Log("Tap a location to fire the Mortar Shot.");
     }
 
     private void TrySelectTarget(
@@ -119,13 +170,50 @@ public class PlayerMortarController : MonoBehaviour
 
         Vector3 worldPosition =
             mainCamera.ScreenToWorldPoint(
-                new Vector3(screenPosition.x,
-                            screenPosition.y,
-                            -mainCamera.transform.position.z));
+                new Vector3(
+                    screenPosition.x,
+                    screenPosition.y,
+                    -mainCamera.transform.position.z));
 
         Vector2 targetPosition = worldPosition;
 
+        // Save the selected type before CancelTargeting resets it.
+        TargetingType selectedType = currentTargetingType;
+
         CancelTargeting();
+
+        // Chain Shot path
+        if (selectedType == TargetingType.ChainShot)
+        {
+            if (!itemInventory.ConsumeChainShot())
+                return;
+
+            GameObject projectile = Instantiate(
+                chainShotProjectilePrefab,
+                mortarFirePoint.position,
+                Quaternion.identity);
+
+            ChainShotProjectile chainShot =
+                projectile.GetComponent<ChainShotProjectile>();
+
+            if (chainShot == null)
+            {
+                Debug.LogError(
+                    "Chain Shot prefab needs ChainShotProjectile.");
+                Destroy(projectile);
+                return;
+            }
+
+            chainShot.Launch(
+                mortarFirePoint.position,
+                targetPosition);
+
+            return;
+        }
+
+        // Existing Mortar Shot path
+        if (selectedType != TargetingType.Mortar)
+            return;
 
         if (!itemInventory.ConsumeMortarShot())
             return;
@@ -135,25 +223,27 @@ public class PlayerMortarController : MonoBehaviour
             targetPosition,
             Quaternion.identity);
 
-        GameObject projectile = Instantiate(
+        GameObject mortarProjectile = Instantiate(
             mortarProjectilePrefab,
             mortarFirePoint.position,
             Quaternion.identity);
 
         MortarProjectile mortar =
-            projectile.GetComponent<MortarProjectile>();
+            mortarProjectile.GetComponent<MortarProjectile>();
 
         if (mortar == null)
         {
             Debug.LogError(
                 "Mortar projectile prefab needs MortarProjectile.");
-            Destroy(projectile);
+            Destroy(mortarProjectile);
             Destroy(activeReticle);
             activeReticle = null;
             return;
         }
 
-        mortar.Launch(mortarFirePoint.position, targetPosition);
+        mortar.Launch(
+            mortarFirePoint.position,
+            targetPosition);
 
         StartCoroutine(RemoveReticleAfterTravel(
             mortar.travelTime));
@@ -173,6 +263,7 @@ public class PlayerMortarController : MonoBehaviour
     {
         isTargeting = false;
         waitingForRelease = false;
+        currentTargetingType = TargetingType.None;
 
         if (targetingPrompt != null)
             targetingPrompt.SetActive(true);

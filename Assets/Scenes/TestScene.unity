@@ -265,14 +265,16 @@ MonoBehaviour:
   previousItemButton: {fileID: 810744601}
   itemButtonImage: {fileID: 1215689763}
   itemCountText: {fileID: 1969665966}
-  repairKitIcon: {fileID: -8196942183158305568, guid: 8dca60b6f7c185e4e8d37e498892261b, type: 3}
+  repairKitIcon: {fileID: -684512690513382889, guid: 703500c80159e6042886046689a8838c, type: 3}
   barrelIcon: {fileID: 2314486818509658787, guid: 29e28607fb013c34c9e4fbebfc61dc3a, type: 3}
   shieldIcon: {fileID: -7947067082740497745, guid: 76692340afcc33c4aa31a93dc7125fd7, type: 3}
   mortarIcon: {fileID: 1939561546804190385, guid: 78276385192f96244a583a7b9c17ddcb, type: 3}
+  chainShotIcon: {fileID: -3292550685940627065, guid: 01adcfef975d35e4d901318f1c4342c3, type: 3}
   barrelCount: 0
   repairKitCount: 1
   shieldCount: 0
   mortarCount: 0
+  chainShotCount: 0
 --- !u!4 &30011860
 Transform:
   m_ObjectHideFlags: 0
@@ -833,8 +835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - rowboats: 6
-    brigs: 0
+  - rowboats: 0
+    brigs: 5
     galleons: 0
   - rowboats: 5
     brigs: 1
@@ -3141,6 +3143,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2720096926888972335, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 49
+      objectReference: {fileID: 0}
     - target: {fileID: 2821760769609660983, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.4724598
@@ -3309,6 +3315,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8740181715835212891, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 49
+      objectReference: {fileID: 0}
     - target: {fileID: 9163510731685908936, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -3343,6 +3353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mortarFirePoint: {fileID: 1677715902}
   mortarProjectilePrefab: {fileID: 3606931892842474823, guid: cd5c2d605cc623644b635a673de2937f, type: 3}
+  chainShotProjectilePrefab: {fileID: 3606931892842474823, guid: 307ed62facf0c63448dabb8697eebdaa, type: 3}
   targetReticlePrefab: {fileID: 9074132819785736204, guid: 30708273a804d6c4bbd53df2d43cbe4c, type: 3}
   mainCamera: {fileID: 1426009562}
   itemInventory: {fileID: 30011859}
@@ -4190,8 +4201,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 8855964598952731768, guid: 2a3ef8ccbffc6634883eb97fe5624242, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4282,6 +4293,7 @@ RectTransform:
   - {fileID: 6137136246083178494}
   - {fileID: 386266810856005384}
   - {fileID: 386266811847128446}
+  - {fileID: 1231796595}
   m_Father: {fileID: 2059586827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5381,8 +5393,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 2154907353188646362, guid: 18f8d79b9cc99364c9cfcf156190b98a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6520,6 +6532,146 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1231796594
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 833075547}
+    m_Modifications:
+    - target: {fileID: 4493799871965747022, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_text
+      value: 'When selected: Tap anywhere on screen to launch a chain shot that slows
+        enemies.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493799871965747022, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_fontSize
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493799871965747022, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841814222566762733, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: price
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841814222566762733, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: itemName
+      value: Chain Shot Ammo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841814222566762733, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: description
+      value: 'When selected: Tap anywhere on screen to launch a chain shot that slows
+        enemies.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841814222566762733, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: upgradeType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344732125275774757, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_text
+      value: 5 Coins
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 381.83997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 261.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957397296704785279, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_Name
+      value: ChainShotItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012453978522080661, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+      propertyPath: m_text
+      value: Chain Shot Ammo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+--- !u!224 &1231796595 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8956099163407258045, guid: 805aa6d182387d74584cf6ba30a7dcf9, type: 3}
+  m_PrefabInstance: {fileID: 1231796594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!96 &1232599726 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 2821760769609660983, guid: 5522679c003a37c4a8ce78a2169e582f, type: 3}
@@ -15576,6 +15728,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 833075547}
     m_Modifications:
+    - target: {fileID: 4493799871965747022, guid: d598e69282a963e4c8ecddb09ce4e7cd, type: 3}
+      propertyPath: m_fontSize
+      value: 24.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493799871965747022, guid: d598e69282a963e4c8ecddb09ce4e7cd, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24.57
+      objectReference: {fileID: 0}
     - target: {fileID: 8956099163407258045, guid: d598e69282a963e4c8ecddb09ce4e7cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0

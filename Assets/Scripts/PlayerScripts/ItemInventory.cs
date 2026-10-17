@@ -17,6 +17,7 @@ public class ItemInventory : MonoBehaviour
     [SerializeField] private Sprite barrelIcon;
     [SerializeField] private Sprite shieldIcon;
     [SerializeField] private Sprite mortarIcon;
+    [SerializeField] private Sprite chainShotIcon;
 
     private int repairAmount = 20;
 
@@ -24,11 +25,13 @@ public class ItemInventory : MonoBehaviour
     private const string BarrelKey = "BarrelCount";
     private const string ShieldKey = "ShieldCount";
     private const string MortarKey = "MortarCount";
+    private const string ChainShotKey = "ChainShotKey";
 
     [SerializeField] private int barrelCount = 0;
     [SerializeField] private int repairKitCount = 0;
     [SerializeField] private int shieldCount = 0;
     [SerializeField] private int mortarCount = 0;
+    [SerializeField] private int chainShotCount = 0;
 
     private PlayerHealth playerHealth;
     private PlayerCannons playerCannons;
@@ -39,7 +42,8 @@ public class ItemInventory : MonoBehaviour
         RepairKit,
         Barrel,
         Shield,
-        MortarShot
+        MortarShot,
+        ChainShot
     }
 
     private ItemType selectedItem = ItemType.RepairKit;
@@ -50,6 +54,7 @@ public class ItemInventory : MonoBehaviour
         repairKitCount = PlayerPrefs.GetInt(RepairKitKey, 0);
         shieldCount = PlayerPrefs.GetInt(ShieldKey, 0);
         mortarCount = PlayerPrefs.GetInt(MortarKey, 0);
+        chainShotCount = PlayerPrefs.GetInt(ChainShotKey, 0);
 
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerCannons = FindAnyObjectByType<PlayerCannons>();
@@ -95,7 +100,7 @@ public class ItemInventory : MonoBehaviour
 
         if ((int)selectedItem < 0)
         {
-            selectedItem = ItemType.Shield;
+            selectedItem = (ItemType)(System.Enum.GetValues(typeof(ItemType)).Length - 1);
         }
 
         UpdateSelectedItemUI();
@@ -120,6 +125,9 @@ public class ItemInventory : MonoBehaviour
                     break;
                 case ItemType.MortarShot:
                     itemButtonImage.sprite = mortarIcon;
+                    break;
+                case ItemType.ChainShot:
+                    itemButtonImage.sprite = chainShotIcon;
                     break;
             }
         }
@@ -148,6 +156,9 @@ public class ItemInventory : MonoBehaviour
             case ItemType.MortarShot:
                 itemCountText.text = "x" + mortarCount;
                 break;
+            case ItemType.ChainShot:
+                itemCountText.text = "x" + chainShotCount;
+                break;
         }
     }
 
@@ -173,6 +184,9 @@ public class ItemInventory : MonoBehaviour
             case ItemType.MortarShot:
                 UseMortarShot();
                 break;
+            case ItemType.ChainShot:
+                UseChainShot();
+                break;
         }
     }
 
@@ -194,6 +208,27 @@ public class ItemInventory : MonoBehaviour
 
         playerMortarController.BeginTargeting();
     }
+
+
+    private void UseChainShot()
+    {
+        Debug.Log("Chain Shot button pressed.");
+
+        if (chainShotCount <= 0)
+        {
+            Debug.Log("No Chain Shots available.");
+            return;
+        }
+
+        if (playerMortarController == null)
+        {
+            Debug.LogError("PlayerMortarController not found.");
+            return;
+        }
+
+        playerMortarController.BeginChainShotTargeting();
+    }
+
 
     private void UseBarrel()
     {
@@ -277,6 +312,45 @@ public class ItemInventory : MonoBehaviour
 
         Debug.Log("Mortar Shot used. Remaining: " + mortarCount);
 
+        return true;
+    }
+
+    public int GetChainShotCount()
+    {
+        return chainShotCount;
+    }
+
+    public void AddChainShot(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        chainShotCount += amount;
+
+        PlayerPrefs.SetInt(ChainShotKey, chainShotCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Chain Shots added. Total: " + chainShotCount);
+    }
+
+    public bool ConsumeChainShot()
+    {
+        if (chainShotCount <= 0)
+        {
+            Debug.Log("No Chain Shots available.");
+            return false;
+        }
+
+        chainShotCount--;
+
+        PlayerPrefs.SetInt(ChainShotKey, chainShotCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Chain Shot used. Remaining: " + chainShotCount);
         return true;
     }
 

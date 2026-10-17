@@ -10,7 +10,8 @@ public class ShopItems : MonoBehaviour
         RepairKit,
         ExplosiveBarrel,
         Shield,
-        MortarShot
+        MortarShot,
+        Chainshot
     }
 
     [Header("Shop Item")]
@@ -136,6 +137,12 @@ public class ShopItems : MonoBehaviour
                 if(itemInventory != null)
                 {
                     itemInventory.AddMortarShot(1);
+                }
+                break;
+            case UpgradeType.Chainshot:
+                if(itemInventory != null)
+                {
+                    itemInventory.AddChainShot(1);
                 }
                 break;
         }
