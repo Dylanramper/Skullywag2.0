@@ -126,7 +126,6 @@ public class GalleonEnemy : EnemyShip
         currentState = GalleonState.Charging;
         chargeTimer = chargeDuration;
         nextChargeTime = Time.time + chargeCooldown;
-        Debug.Log("Charging!");
     }
 
     private void ChargeBehavior()
@@ -144,7 +143,6 @@ public class GalleonEnemy : EnemyShip
     //Broadside (Line up side cannons toward player)
     private void BroadsideBehavior(Vector2 toPlayer)
     {
-        Debug.Log("Lining up shot!");
         float angleToPlayer = Vector2.SignedAngle(transform.up, toPlayer);
 
         float sideAngle = angleToPlayer > 0f ? broadsideAngle : -broadsideAngle;

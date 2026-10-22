@@ -836,8 +836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - rowboats: 0
-    brigs: 5
-    galleons: 0
+    brigs: 3
+    galleons: 2
   - rowboats: 5
     brigs: 1
     galleons: 0

@@ -9,8 +9,8 @@ public class ChainShotProjectile : MonoBehaviour
     [SerializeField] private float rotationSpeed = 720f;
 
     [Header("Slow Effect")]
-    [SerializeField] private float slowAmount = 1f;
-    [SerializeField] private float slowDuration = 5f;
+    [SerializeField] private float slowAmount = 0.7f;
+    [SerializeField] private float slowDuration = 3f;
 
     private Vector2 startPos;
     private Vector2 targetPos;
@@ -58,8 +58,9 @@ public class ChainShotProjectile : MonoBehaviour
 
         EnemyShip enemy = collision.GetComponent<EnemyShip>();
         BaseBoss boss = collision.GetComponent<BaseBoss>();
+        BrigEnemy brig = collision.GetComponent<BrigEnemy>();
 
-        if (enemy == null && boss == null)
+        if (enemy == null && boss == null && brig == null)
             return;
 
         hasHit = true;
@@ -70,20 +71,40 @@ public class ChainShotProjectile : MonoBehaviour
         {
             enemy.TakeDamage(damageAmount);
 
-            enemy.StartCoroutine(ApplySlow(enemy));
+            enemy.StartCoroutine(ApplySlow(enemy, brig));
         }
-        if(boss != null)
+        if (boss != null)
         {
             boss.TakeDamage(damageAmount);
         }
         Destroy(gameObject);
     }
 
-    private IEnumerator ApplySlow(EnemyShip enemy)
+    private IEnumerator ApplySlow(EnemyShip enemy, BrigEnemy brig)
     {
-        float originalSpeed = enemy.moveSpeed;
-        enemy.moveSpeed -= slowAmount;
+        float originalSpeed = 0f;
+        float brigOriginalSpeed = 0f;
+
+        if (enemy != null)
+        {
+            originalSpeed = enemy.moveSpeed;
+            enemy.moveSpeed = originalSpeed * (1f - slowAmount);
+        }
+
+        if (brig != null)
+        {
+            brigOriginalSpeed = brig.broadsideSpeed;
+            brig.broadsideSpeed = brigOriginalSpeed * (1f - slowAmount);
+        }
+
         yield return new WaitForSeconds(slowDuration);
-        enemy.moveSpeed = originalSpeed;
+
+        if (enemy != null)
+            enemy.moveSpeed = originalSpeed;
+
+        if (brig != null)
+            brig.broadsideSpeed = brigOriginalSpeed;
     }
+
+
 }

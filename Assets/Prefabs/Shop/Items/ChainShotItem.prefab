@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 7887841118714479710}
   - component: {fileID: 8018187564559073719}
   - component: {fileID: 4841814222566762733}
+  - component: {fileID: -2012613118101286582}
   m_Layer: 5
   m_Name: ChainShotItem
   m_TagString: Untagged
@@ -934,3 +935,20 @@ MonoBehaviour:
   description: 'When selected: Tap anywhere on screen to launch a mortar shot.'
   price: 10
   upgradeType: 6
+--- !u!114 &-2012613118101286582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957397296704785279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0545413a96e7adb45ad4534fadc6e49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelTime: 1
+  damage: 15
+  rotationSpeed: 720
+  slowAmount: 0.3
+  slowDuration: 5
