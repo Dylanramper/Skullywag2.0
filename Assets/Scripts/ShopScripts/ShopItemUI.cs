@@ -73,6 +73,12 @@ public class ShopItemUI : MonoBehaviour
             case ShopItems.UpgradeType.MortarShot:
                 currentStatText.text = "Mortar Shots: " + itemInventory.GetMortarShotCount();
                 break;
+            case ShopItems.UpgradeType.ChainShot:
+                currentStatText.text = "Chain Shots: " + itemInventory.GetChainShotCount();
+                break;
+            case ShopItems.UpgradeType.HomingRocket:
+                currentStatText.text = "Homing Rockets: " + itemInventory.GetHomingRocketCount();
+                break;
         }
     }
 

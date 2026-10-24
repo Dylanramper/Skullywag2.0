@@ -18,6 +18,7 @@ public class ItemInventory : MonoBehaviour
     [SerializeField] private Sprite shieldIcon;
     [SerializeField] private Sprite mortarIcon;
     [SerializeField] private Sprite chainShotIcon;
+    [SerializeField] private Sprite homingRocketIcon;
 
     private int repairAmount = 20;
 
@@ -26,12 +27,14 @@ public class ItemInventory : MonoBehaviour
     private const string ShieldKey = "ShieldCount";
     private const string MortarKey = "MortarCount";
     private const string ChainShotKey = "ChainShotKey";
+    private const string HomingRocketKey = "HomingRocketKey";
 
     [SerializeField] private int barrelCount = 0;
     [SerializeField] private int repairKitCount = 0;
     [SerializeField] private int shieldCount = 0;
     [SerializeField] private int mortarCount = 0;
     [SerializeField] private int chainShotCount = 0;
+    [SerializeField] private int homingRocketCount = 0;
 
     private PlayerHealth playerHealth;
     private PlayerCannons playerCannons;
@@ -43,7 +46,8 @@ public class ItemInventory : MonoBehaviour
         Barrel,
         Shield,
         MortarShot,
-        ChainShot
+        ChainShot,
+        HomingRocket
     }
 
     private ItemType selectedItem = ItemType.RepairKit;
@@ -55,6 +59,7 @@ public class ItemInventory : MonoBehaviour
         shieldCount = PlayerPrefs.GetInt(ShieldKey, 0);
         mortarCount = PlayerPrefs.GetInt(MortarKey, 0);
         chainShotCount = PlayerPrefs.GetInt(ChainShotKey, 0);
+        homingRocketCount = PlayerPrefs.GetInt(HomingRocketKey, 0);
 
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerCannons = FindAnyObjectByType<PlayerCannons>();
@@ -129,6 +134,9 @@ public class ItemInventory : MonoBehaviour
                 case ItemType.ChainShot:
                     itemButtonImage.sprite = chainShotIcon;
                     break;
+                case ItemType.HomingRocket:
+                    itemButtonImage.sprite = homingRocketIcon;
+                    break;  
             }
         }
 
@@ -159,6 +167,9 @@ public class ItemInventory : MonoBehaviour
             case ItemType.ChainShot:
                 itemCountText.text = "x" + chainShotCount;
                 break;
+            case ItemType.HomingRocket:
+                itemCountText.text = "x" + homingRocketCount;
+                break;
         }
     }
 
@@ -186,6 +197,9 @@ public class ItemInventory : MonoBehaviour
                 break;
             case ItemType.ChainShot:
                 UseChainShot();
+                break;
+            case ItemType.HomingRocket:
+                UseHomingRocket();
                 break;
         }
     }
@@ -229,6 +243,22 @@ public class ItemInventory : MonoBehaviour
         playerMortarController.BeginChainShotTargeting();
     }
 
+    private void UseHomingRocket()
+    {
+        if (homingRocketCount <= 0)
+        {
+            Debug.Log("No Homing Rockets available.");
+            return;
+        }
+
+        if (playerMortarController == null)
+        {
+            Debug.LogError("PlayerMortarController not found.");
+            return;
+        }
+
+        playerMortarController.BeginHomingRocketTargeting();
+    }
 
     private void UseBarrel()
     {
@@ -315,11 +345,6 @@ public class ItemInventory : MonoBehaviour
         return true;
     }
 
-    public int GetChainShotCount()
-    {
-        return chainShotCount;
-    }
-
     public void AddChainShot(int amount)
     {
         if (amount <= 0)
@@ -354,6 +379,25 @@ public class ItemInventory : MonoBehaviour
         return true;
     }
 
+    public bool ConsumeHomingRocket()
+    {
+        if (homingRocketCount <= 0)
+        {
+            Debug.Log("No Homing Rockets available.");
+            return false;
+        }
+
+        homingRocketCount--;
+
+        PlayerPrefs.SetInt(HomingRocketKey, homingRocketCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Homing Rocket used. Remaining: " + homingRocketCount);
+        return true;
+    }
+
     // =========================
     // INVENTORY
     // =========================
@@ -376,6 +420,16 @@ public class ItemInventory : MonoBehaviour
     public int GetMortarShotCount()
     {
         return mortarCount;
+    }
+
+    public int GetChainShotCount()
+    {
+        return chainShotCount;
+    }
+
+    public int GetHomingRocketCount()
+    {
+        return homingRocketCount;
     }
 
     public void AddMortarShot(int amount)
@@ -436,6 +490,21 @@ public class ItemInventory : MonoBehaviour
         UpdateItemCountUI();
 
         Debug.Log("Shields added: " + shieldCount);
+    }
+
+    public void AddHomingRocket(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        homingRocketCount += amount;
+
+        PlayerPrefs.SetInt(HomingRocketKey, homingRocketCount);
+        PlayerPrefs.Save();
+
+        UpdateItemCountUI();
+
+        Debug.Log("Homing Rockets added. Total: " + homingRocketCount);
     }
 
     public bool UseRepairKit()

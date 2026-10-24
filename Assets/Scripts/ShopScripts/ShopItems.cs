@@ -11,7 +11,8 @@ public class ShopItems : MonoBehaviour
         ExplosiveBarrel,
         Shield,
         MortarShot,
-        Chainshot
+        ChainShot,
+        HomingRocket
     }
 
     [Header("Shop Item")]
@@ -139,10 +140,16 @@ public class ShopItems : MonoBehaviour
                     itemInventory.AddMortarShot(1);
                 }
                 break;
-            case UpgradeType.Chainshot:
+            case UpgradeType.ChainShot:
                 if(itemInventory != null)
                 {
                     itemInventory.AddChainShot(1);
+                }
+                break;
+            case UpgradeType.HomingRocket:
+                if(itemInventory != null)
+                {
+                    itemInventory.AddHomingRocket(1);
                 }
                 break;
         }
