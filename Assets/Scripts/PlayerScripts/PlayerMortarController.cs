@@ -232,11 +232,7 @@ public class PlayerMortarController : MonoBehaviour
                 return;
         }
 
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(
-                screenPosition.x,
-                screenPosition.y,
-                -mainCamera.transform.position.z));
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, -mainCamera.transform.position.z));
 
         Vector2 targetPosition = worldPosition;
 
@@ -259,18 +255,13 @@ public class PlayerMortarController : MonoBehaviour
             if (!itemInventory.ConsumeHomingRocket())
                 return;
 
-            GameObject rocketObject = Instantiate(
-                homingRocketPrefab,
-                mortarFirePoint.position,
-                mortarFirePoint.rotation);
+            GameObject rocketObject = Instantiate(homingRocketPrefab, mortarFirePoint.position, mortarFirePoint.rotation);
 
-            HomingRocketProjectile rocket =
-                rocketObject.GetComponent<HomingRocketProjectile>();
+            HomingRocketProjectile rocket = rocketObject.GetComponent<HomingRocketProjectile>();
 
             if (rocket == null)
             {
-                Debug.LogError(
-                    "Homing Rocket prefab needs HomingRocketProjectile.");
+                Debug.LogError("Homing Rocket prefab needs HomingRocketProjectile.");
                 Destroy(rocketObject);
                 return;
             }
@@ -289,18 +280,13 @@ public class PlayerMortarController : MonoBehaviour
             if (!itemInventory.ConsumeChainShot())
                 return;
 
-            GameObject projectile = Instantiate(
-                chainShotProjectilePrefab,
-                mortarFirePoint.position,
-                Quaternion.identity);
+            GameObject projectile = Instantiate(chainShotProjectilePrefab, mortarFirePoint.position, Quaternion.identity);
 
-            ChainShotProjectile chainShot =
-                projectile.GetComponent<ChainShotProjectile>();
+            ChainShotProjectile chainShot = projectile.GetComponent<ChainShotProjectile>();
 
             if (chainShot == null)
             {
-                Debug.LogError(
-                    "Chain Shot prefab needs a ChainShotProjectile.");
+                Debug.LogError("Chain Shot prefab needs a ChainShotProjectile.");
                 Destroy(projectile);
                 return;
             }
@@ -316,23 +302,15 @@ public class PlayerMortarController : MonoBehaviour
         if (!itemInventory.ConsumeMortarShot())
             return;
 
-        activeReticle = Instantiate(
-            targetReticlePrefab,
-            targetPosition,
-            Quaternion.identity);
+        activeReticle = Instantiate(targetReticlePrefab, targetPosition, Quaternion.identity);
 
-        GameObject mortarProjectile = Instantiate(
-            mortarProjectilePrefab,
-            mortarFirePoint.position,
-            Quaternion.identity);
+        GameObject mortarProjectile = Instantiate(mortarProjectilePrefab, mortarFirePoint.position, Quaternion.identity);
 
-        MortarProjectile mortar =
-            mortarProjectile.GetComponent<MortarProjectile>();
+        MortarProjectile mortar = mortarProjectile.GetComponent<MortarProjectile>();
 
         if (mortar == null)
         {
-            Debug.LogError(
-                "Mortar projectile prefab needs MortarProjectile.");
+            Debug.LogError("Mortar projectile prefab needs MortarProjectile.");
 
             Destroy(mortarProjectile);
             Destroy(activeReticle);
@@ -373,8 +351,7 @@ public class PlayerMortarController : MonoBehaviour
         if (cameraZoomCoroutine != null)
             StopCoroutine(cameraZoomCoroutine);
 
-        cameraZoomCoroutine = StartCoroutine(
-            AnimateCameraZoom(targetSize));
+        cameraZoomCoroutine = StartCoroutine(AnimateCameraZoom(targetSize));
     }
 
     private IEnumerator AnimateCameraZoom(float targetSize)
@@ -386,12 +363,9 @@ public class PlayerMortarController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
 
-            float t = zoomDuration > 0f
-                ? Mathf.Clamp01(elapsed / zoomDuration)
-                : 1f;
+            float t = zoomDuration > 0f ? Mathf.Clamp01(elapsed / zoomDuration) : 1f;
 
-            mainCamera.orthographicSize =
-                Mathf.Lerp(startSize, targetSize, t);
+            mainCamera.orthographicSize = Mathf.Lerp(startSize, targetSize, t);
 
             yield return null;
         }
@@ -412,8 +386,7 @@ public class PlayerMortarController : MonoBehaviour
 
     public void CancelTargeting()
     {
-        bool wasHomingRocket =
-            currentTargetingType == TargetingType.HomingRocket;
+        bool wasHomingRocket = currentTargetingType == TargetingType.HomingRocket;
 
         isTargeting = false;
         waitingForRelease = false;
@@ -425,10 +398,16 @@ public class PlayerMortarController : MonoBehaviour
         if (homingTargetPrompt != null)
             homingTargetPrompt.SetActive(false);
 
-        if (wasHomingRocket && mainCamera != null &&
-            mainCamera.orthographic)
+        if (wasHomingRocket && mainCamera != null && mainCamera.orthographic)
         {
             SetCameraZoom(originalCameraSize);
         }
+    }
+    public void CancelHomingRocketTargeting()
+    {
+        if (currentTargetingType != TargetingType.HomingRocket)
+            return;
+
+        CancelTargeting();
     }
 }
