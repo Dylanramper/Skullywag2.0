@@ -1,61 +1,98 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CursedBoss : MonoBehaviour
 {
     [Header("Animation")]
     [SerializeField] private Animator animator;
 
-    private void Start()
+    private bool[] tentacleNearby = new bool[6];
+    private bool[] tentacleAttacking = new bool[6];
+
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        AnimationTest();
-    }
+        for (int i = 0; i < tentacleNearby.Length; i++)
+        {
+            int layer = i + 1;
 
-    private void AnimationTest()
-    {
-        if(Keyboard.current.digit1Key.isPressed)
-        {
-            animator.SetBool("RT", true);
-        }
-        if(Keyboard.current.digit2Key.isPressed)
-        {
-            animator.SetBool("RM", true);
-        }
-        if(Keyboard.current.digit3Key.isPressed)
-        {
-            animator.SetBool("RB", true);
-        }
-        if(Keyboard.current.digit4Key.isPressed)
-        {
-            animator.SetBool("LT", true);
-        }
-        if(Keyboard.current.digit5Key.isPressed)
-        {
-            animator.SetBool("LM", true);
-        }
-        if(Keyboard.current.digit6Key.isPressed)
-        {
-            animator.SetBool("LB", true);
-        }
-        if(Keyboard.current.digit7Key.isPressed)
-        {
-            animator.SetBool("Slingshot", true);
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(layer);
+
+            // Check if the attack animation is playing.
+            if (!state.IsTag("Idle"))
+            {
+                tentacleAttacking[i] = true;
+            }
+
+            // If the tentacle has finished attacking, allow another attack.
+            if (tentacleAttacking[i] &&
+                state.IsTag("Idle") &&
+                !animator.IsInTransition(layer))
+            {
+                tentacleAttacking[i] = false;
+
+                if (tentacleNearby[i])
+                {
+                    animator.SetTrigger(GetTriggerName(i));
+                }
+            }
         }
     }
 
-    public void AnimationEndTest()
+    private string GetTriggerName(int index)
     {
-        animator.SetBool("RT", false);
-        animator.SetBool("RM", false);
-        animator.SetBool("RB", false);
-        animator.SetBool("LT", false);
-        animator.SetBool("LM", false);
-        animator.SetBool("LB", false);
-        animator.SetBool("Slingshot", false);
+        string[] triggers = { "RT", "RM", "RB", "LT", "LM", "LB" };
+        return triggers[index];
     }
+
+    //Detect where the player's position is, relative to the boss.
+
+    public void SetTentacleNearby(TentacleDetection.TentacleSide side, bool nearby)
+    {
+        int index = (int)side;
+
+        tentacleNearby[index] = nearby;
+
+        if (nearby && !tentacleAttacking[index])
+        {
+            animator.SetTrigger(side.ToString());
+            tentacleAttacking[index] = true;
+        }
+        else if (!nearby)
+        {
+            animator.ResetTrigger(side.ToString());
+        }
+    }
+
+    public void OnTentacleAttackFinished(string tentacle)
+    {
+        int index = System.Array.IndexOf(
+            new string[] { "RT", "RM", "RB", "LT", "LM", "LB" }, tentacle);
+
+        if (index == -1)
+            return;
+
+        tentacleAttacking[index] = false;
+
+        // Attack again if the player is still nearby.
+        if (tentacleNearby[index])
+        {
+            animator.SetTrigger(tentacle);
+            tentacleAttacking[index] = true;
+        }
+    }
+    public void EnableTentacleDamage(int index)
+    {
+        // Enable the corresponding tentacle collider.
+    }
+
+    public void DisableTentacleDamage(int index)
+    {
+        // Disable the corresponding tentacle collider.
+    }
+
 }

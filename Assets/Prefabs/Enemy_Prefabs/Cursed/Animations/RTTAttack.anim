@@ -3684,7 +3684,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2.95
-    functionName: AnimationEndTest
+    functionName: OnTentacleAttackFinished
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
