@@ -8,10 +8,57 @@ public class CursedBoss : MonoBehaviour
     private bool[] tentacleNearby = new bool[6];
     private bool[] tentacleAttacking = new bool[6];
 
+    [Header("Tentacle Colliders")]
+    [SerializeField] private Transform RT;
+    [SerializeField] private Transform RM;
+    [SerializeField] private Transform RB;
+    [SerializeField] private Transform LT;
+    [SerializeField] private Transform LM;
+    [SerializeField] private Transform LB;
+
+    private BoxCollider2D[] rtColliders;
+    private BoxCollider2D[] rmColliders;
+    private BoxCollider2D[] rbColliders;
+    private BoxCollider2D[] ltColliders;
+    private BoxCollider2D[] lmColliders;
+    private BoxCollider2D[] lbColliders;
+
     private void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        rtColliders = RT.GetComponentsInChildren<BoxCollider2D>(true);
+        rmColliders = RM.GetComponentsInChildren<BoxCollider2D>(true);
+        rbColliders = RB.GetComponentsInChildren<BoxCollider2D>(true);
+        ltColliders = LT.GetComponentsInChildren<BoxCollider2D>(true);
+        lmColliders = LM.GetComponentsInChildren<BoxCollider2D>(true);
+        lbColliders = LB.GetComponentsInChildren<BoxCollider2D>(true);
+
+        foreach (BoxCollider2D col in rtColliders)
+        {
+            col.enabled = false;
+        }
+        foreach (BoxCollider2D col in rmColliders)
+        {
+            col.enabled = false;
+        }
+        foreach (BoxCollider2D col in rbColliders)
+        {
+            col.enabled = false;
+        }
+        foreach (BoxCollider2D col in ltColliders)
+        {
+            col.enabled = false;
+        }
+        foreach (BoxCollider2D col in lmColliders)
+        {
+            col.enabled = false;
+        }
+        foreach (BoxCollider2D col in lbColliders)
+        {
+            col.enabled = false;
+        }
     }
 
     private void Update()
@@ -93,6 +140,103 @@ public class CursedBoss : MonoBehaviour
     public void DisableTentacleDamage(int index)
     {
         // Disable the corresponding tentacle collider.
+    }
+
+    //Enabling and disabling tentacle colliders for premade animations (Animation Events
+    //Right-Top Tentacle
+    public void RTColEnable()
+    {
+        foreach (BoxCollider2D col in rtColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void RTColDisable()
+    {
+        foreach (BoxCollider2D col in rtColliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    //Right-Middle Tentacle
+    public void RMColEnable()
+    {
+        foreach (BoxCollider2D col in rmColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void RMColDisable()
+    {
+        foreach (BoxCollider2D col in rmColliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    //Right-Bottom Tentacle
+    public void RBColEnable()
+    {
+        foreach (BoxCollider2D col in rbColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void RBColDisable()
+    {
+        foreach (BoxCollider2D col in rbColliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    //Left-Top Tentacle
+    public void LTColEnable()
+    {
+        foreach (BoxCollider2D col in ltColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void LTColDisable()
+    {
+        foreach (BoxCollider2D col in ltColliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    //Left-Middle Tentacle
+    public void LMColEnable()
+    {
+        foreach (BoxCollider2D col in lmColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void LMColDisable()
+    {
+        foreach (BoxCollider2D col in lmColliders)
+        {
+            col.enabled = false;
+        }
+    }
+
+    //Left-Bottom Tentacle
+    public void LBColEnable()
+    {
+        foreach (BoxCollider2D col in lbColliders)
+        {
+            col.enabled = true;
+        }
+    }
+    public void LBColDisable()
+    {
+        foreach (BoxCollider2D col in lbColliders)
+        {
+            col.enabled = false;
+        }
     }
 
 }
