@@ -3690,7 +3690,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4
+  - time: 1.5
     functionName: RTColDisable
     data: 
     objectReferenceParameter: {fileID: 0}

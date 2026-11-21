@@ -3616,7 +3616,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3628,7 +3628,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3640,7 +3640,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3760,7 +3760,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3772,7 +3772,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3784,43 +3784,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3857,6 +3821,42 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: bone_1/bone_38/bone_39
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3976,7 +3976,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3988,7 +3988,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -4000,13 +4000,27 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46/bone_47/bone_48/bone_49
+    path: bone_1/bone_38/bone_39/bone_40/bone_41/bone_42/bone_43/bone_44/bone_45/bone_46
     classID: 4
     script: {fileID: 0}
     flags: 0
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 1.1833333
+    functionName: RBColEnable
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.9166666
+    functionName: RBColDisable
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.1666667
     functionName: OnTentacleAttackFinished
     data: 

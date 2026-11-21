@@ -15,7 +15,6 @@ public class CursedBoss : MonoBehaviour
     [SerializeField] private Transform LT;
     [SerializeField] private Transform LM;
     [SerializeField] private Transform LB;
-
     private BoxCollider2D[] rtColliders;
     private BoxCollider2D[] rmColliders;
     private BoxCollider2D[] rbColliders;
@@ -23,8 +22,18 @@ public class CursedBoss : MonoBehaviour
     private BoxCollider2D[] lmColliders;
     private BoxCollider2D[] lbColliders;
 
+    [Header("Damage settings")]
+    [SerializeField] private int tentacleDamage = 15;
+
+    private PlayerHealth playerHealth;
+    private bool[] tentacleHitPlayer = new bool[6];
+
+
+
     private void Awake()
     {
+        playerHealth = FindFirstObjectByType<PlayerHealth>();
+
         if (animator == null)
             animator = GetComponent<Animator>();
 
@@ -142,12 +151,23 @@ public class CursedBoss : MonoBehaviour
         // Disable the corresponding tentacle collider.
     }
 
+    public void TentacleHitPlayer()
+    {
+        if (tentacleHitPlayer[0])
+            return;
+
+        tentacleHitPlayer[0] = true;
+
+        playerHealth.TakeDamage(tentacleDamage);
+    }
+
     //Enabling and disabling tentacle colliders for premade animations (Animation Events
     //Right-Top Tentacle
     public void RTColEnable()
     {
         foreach (BoxCollider2D col in rtColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
@@ -164,6 +184,7 @@ public class CursedBoss : MonoBehaviour
     {
         foreach (BoxCollider2D col in rmColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
@@ -180,6 +201,7 @@ public class CursedBoss : MonoBehaviour
     {
         foreach (BoxCollider2D col in rbColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
@@ -196,6 +218,7 @@ public class CursedBoss : MonoBehaviour
     {
         foreach (BoxCollider2D col in ltColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
@@ -212,6 +235,7 @@ public class CursedBoss : MonoBehaviour
     {
         foreach (BoxCollider2D col in lmColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
@@ -228,6 +252,7 @@ public class CursedBoss : MonoBehaviour
     {
         foreach (BoxCollider2D col in lbColliders)
         {
+            tentacleHitPlayer[0] = false;
             col.enabled = true;
         }
     }
